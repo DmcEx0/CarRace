@@ -661,27 +661,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.TrackBuilder
   _partsTrackData:
-  - <PartTrack>k__BackingField: {fileID: -318792088742944619, guid: b7418d1052487a243a3b5087aefefe45, type: 3}
-    <Type>k__BackingField: 1
-    <UseInclude>k__BackingField: 0
-    <Include>k__BackingField: 0
-    <UseExclude>k__BackingField: 0
-    <Exclude>k__BackingField: 0
-  - <PartTrack>k__BackingField: {fileID: 1780948657035486606, guid: 38ff4e1815c3bcf42b4cb3b124870f47, type: 3}
-    <Type>k__BackingField: 2
-    <UseInclude>k__BackingField: 0
-    <Include>k__BackingField: 0
-    <UseExclude>k__BackingField: 1
-    <Exclude>k__BackingField: 2
-  - <PartTrack>k__BackingField: {fileID: 181654772978916607, guid: 363b182bab2b8a0488af9a3327a77edd, type: 3}
-    <Type>k__BackingField: 4
-    <UseInclude>k__BackingField: 0
-    <Include>k__BackingField: 0
-    <UseExclude>k__BackingField: 1
-    <Exclude>k__BackingField: 4
-  _length: 50
+  - {fileID: -6362656086779416251, guid: b7418d1052487a243a3b5087aefefe45, type: 3}
+  - {fileID: -4835747767267819763, guid: 38ff4e1815c3bcf42b4cb3b124870f47, type: 3}
+  - {fileID: 3259459439512863562, guid: 363b182bab2b8a0488af9a3327a77edd, type: 3}
+  _length: 30
+  _maxIterationForSpawnOne: 0
   _useSeed: 0
-  _seed: -1
+  _seed: 7
 --- !u!4 &1780549761
 Transform:
   m_ObjectHideFlags: 0

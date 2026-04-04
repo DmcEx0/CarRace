@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace CarRace
 {
-    [Serializable]
-    public class PartTrackData
+    public class PartTrackData : MonoBehaviour
     {
-        [field: SerializeField] public PartTrack PartTrack { get; private set; }
+        [field: SerializeField] public Transform EndPoint { get; private set; }
+        
         [field: SerializeField] public PartTrackType Type { get; private set; }
 
         [field: SerializeField] public bool UseInclude { get; private set; }

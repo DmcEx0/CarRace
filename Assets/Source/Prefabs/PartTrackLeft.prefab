@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3910560690229439630}
-  - component: {fileID: 1780948657035486606}
+  - component: {fileID: -4835747767267819763}
   m_Layer: 0
   m_Name: PartTrackLeft
   m_TagString: Untagged
@@ -34,7 +34,7 @@ Transform:
   - {fileID: 8735865945672484318}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1780948657035486606
+--- !u!114 &-4835747767267819763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4137152763693060296}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af0c8706a2ff9e4459c7f1d7d34eaca0, type: 3}
+  m_Script: {fileID: 11500000, guid: 366cfbea6c6581644b34a8d4778f0b6b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarRace.PartTrack
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.PartTrackData
   <EndPoint>k__BackingField: {fileID: 8735865945672484318}
+  <Type>k__BackingField: 2
+  <UseInclude>k__BackingField: 0
+  <Include>k__BackingField: 0
+  <UseExclude>k__BackingField: 1
+  <Exclude>k__BackingField: 2
 --- !u!1 &6367363771719415482
 GameObject:
   m_ObjectHideFlags: 0
