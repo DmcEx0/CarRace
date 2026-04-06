@@ -15,7 +15,9 @@ namespace CarRace
         
         [SerializeField, ShowIf("_useSeed")] private int _seed;
         
-        private readonly List<PartTrackData> _spawnedParts = new List<PartTrackData>();
+        private readonly List<PartTrack> _spawnedParts = new List<PartTrack>();
+        
+        private PartTrackData _lastSpawnedPart;
 
         [Button]
         private void Build()
@@ -29,56 +31,57 @@ namespace CarRace
 
             for (int i = 0; i < _length; i++)
             {
-                PartTrackData nextPart = null;
+                PartTrackData nextPartData = null;
                 
                 if(i == 0)
                 {
-                    nextPart = _partsTrackData.Find(prt => prt.Type == PartTrackType.Forward);
-                    SpawnPart(nextPart, Vector3.zero, Quaternion.identity);
-                    
+                    // nextPartData = _partsTrackData.Find(prt => prt.Type == PartTrackType.Forward);
+                    SpawnPart(nextPartData, Vector3.zero, Quaternion.identity);
+
                     continue;
                 }
 
                 bool cantConnect = false;
                 int currentIteration = 0;
                 
-                var previousPart = _spawnedParts[^1];
                 
                 while (cantConnect == false || _maxIterationForSpawnOne == currentIteration)
                 {
                     currentIteration++;
                     
-                    nextPart = _partsTrackData[Random.Range(0, _partsTrackData.Count)];
+                    nextPartData = _partsTrackData[Random.Range(0, _partsTrackData.Count)];
                     
-                    if(previousPart.UseExclude)
+                    if(_lastSpawnedPart.UseExclude)
                     {
-                        if(previousPart.Exclude.HasFlag(nextPart.Type) == false)
-                        {
-                            cantConnect = true;
-                        }
+                        // if(_lastSpawnedPart.Exclude.HasFlag(nextPartData.Type) == false)
+                        // {
+                        //     cantConnect = true;
+                        // }
                     }
                     
-                    if(previousPart.UseInclude)
+                    if(_lastSpawnedPart.UseInclude)
                     {
-                        if(previousPart.Include.HasFlag(nextPart.Type) == false)
-                        {
-                            cantConnect = true;
-                        }
+                        // if(_lastSpawnedPart.Include.HasFlag(nextPartData.Type) == false)
+                        // {
+                        //     cantConnect = true;
+                        // }
                     }
                 }
                 
-                SpawnPart(nextPart, _spawnedParts[^1].EndPoint.position, _spawnedParts[^1].EndPoint.rotation);
+                SpawnPart(nextPartData, _lastSpawnedPart.Prefab.EndPoint.position, _spawnedParts[^1].EndPoint.rotation);
             }
         }
         
         private void SpawnPart(PartTrackData partTrack, Vector3 position, Quaternion rotation)
         {
-            var nextPartInstance = Instantiate(partTrack, transform, true);
+            var nextPartInstance = Instantiate(partTrack.Prefab, transform, true);
             
             nextPartInstance.transform.position = position;
             nextPartInstance.transform.rotation = rotation;
 
             _spawnedParts.Add(nextPartInstance);
+
+            _lastSpawnedPart = partTrack;
         }
 
         [Button]

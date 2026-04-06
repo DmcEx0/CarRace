@@ -14,4 +14,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.PartTrackTypeRegistry
   _types:
   - Forward
-  - Forward1

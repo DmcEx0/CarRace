@@ -338,6 +338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390776698}
+  - component: {fileID: 390776699}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -360,6 +361,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &390776699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 390776697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6423123c1661e843bc15129503f28b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.PartTrack2
+  _typeRegistry: {fileID: 11400000, guid: 6eb76d98f28779a4d89a3630f79f5101, type: 2}
+  _typeName: Forward
+  _includeMask: 0
+  _excludeMask: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -386,7 +403,7 @@ Light:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   m_Enabled: 1
-  serializedVersion: 13
+  serializedVersion: 12
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 2
@@ -438,7 +455,7 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ForceVisible: 0
-  m_ShapeRadius: 0
+  m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_LightUnit: 1
   m_LuxAtDistance: 1
@@ -2044,9 +2061,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.TrackBuilder
   _partsTrackData:
-  - {fileID: -6362656086779416251, guid: b7418d1052487a243a3b5087aefefe45, type: 3}
-  - {fileID: -4835747767267819763, guid: 38ff4e1815c3bcf42b4cb3b124870f47, type: 3}
-  - {fileID: 3259459439512863562, guid: 363b182bab2b8a0488af9a3327a77edd, type: 3}
+  - _prefab: {fileID: 0}
+    _type: 
+    _useInclude: 0
+    _include: 
+    _useExclude: 0
+    _exclude: 
+  - _prefab: {fileID: 0}
+    _type: 
+    _useInclude: 0
+    _include: 
+    _useExclude: 0
+    _exclude: 
+  - _prefab: {fileID: 0}
+    _type: 
+    _useInclude: 0
+    _include: 
+    _useExclude: 0
+    _exclude: 
   _length: 30
   _maxIterationForSpawnOne: 0
   _useSeed: 0
