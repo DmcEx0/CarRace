@@ -5806,7 +5806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.TrackBuilder
   _partsTracks: {fileID: 11400000, guid: 84da4cef4839a4d43b44c24f2b534f62, type: 2}
-  _length: 10
+  _length: 32
   _maxIterationForSpawnOne: 124
   _useSeed: 0
   _seed: 0
