@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.PartTracksConfig
   _partTracksData:
   - _prefab: {fileID: 2712988428808464169, guid: 0e1ecc61999e7f045b597631ca388cca, type: 3}
-    _type: 64
+    _type: 0
     _useInclude: 0
     _include: 66
     _useExclude: 1
@@ -38,7 +38,7 @@ MonoBehaviour:
     _useExclude: 0
     _exclude: 0
   - _prefab: {fileID: 7968090695773456915, guid: 1c2cb404f91576d4f8246c684527d6b9, type: 3}
-    _type: 128
+    _type: 0
     _useInclude: 0
     _include: 0
     _useExclude: 1
