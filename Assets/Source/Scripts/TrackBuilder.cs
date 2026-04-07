@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Alchemy.Inspector;
 using UnityEngine;
 
@@ -6,7 +7,7 @@ namespace CarRace
 {
     public class TrackBuilder : MonoBehaviour
     {
-        [SerializeField] private List<PartTrackData> _partsTrackData;
+        [SerializeField] private PartTracksConfig _partsTracks;
         [SerializeField] private int _length;
         
         [SerializeField] private int _maxIterationForSpawnOne;
@@ -29,13 +30,15 @@ namespace CarRace
                 Random.InitState(_seed);
             }
 
+            var dataToList = _partsTracks.PartTracksData.ToList();
+            
             for (int i = 0; i < _length; i++)
             {
                 PartTrackData nextPartData = null;
                 
                 if(i == 0)
                 {
-                    // nextPartData = _partsTrackData.Find(prt => prt.Type == PartTrackType.Forward);
+                    nextPartData =  dataToList.Find(prt => prt.Type == PartTrackType.Forward);
                     SpawnPart(nextPartData, Vector3.zero, Quaternion.identity);
 
                     continue;
@@ -49,22 +52,22 @@ namespace CarRace
                 {
                     currentIteration++;
                     
-                    nextPartData = _partsTrackData[Random.Range(0, _partsTrackData.Count)];
+                    nextPartData = _partsTracks.PartTracksData[Random.Range(0, _partsTracks.PartTracksData.Count)];
                     
                     if(_lastSpawnedPart.UseExclude)
                     {
-                        // if(_lastSpawnedPart.Exclude.HasFlag(nextPartData.Type) == false)
-                        // {
-                        //     cantConnect = true;
-                        // }
+                        if(_lastSpawnedPart.Exclude.HasFlag(nextPartData.Type) == false)
+                        {
+                            cantConnect = true;
+                        }
                     }
                     
                     if(_lastSpawnedPart.UseInclude)
                     {
-                        // if(_lastSpawnedPart.Include.HasFlag(nextPartData.Type) == false)
-                        // {
-                        //     cantConnect = true;
-                        // }
+                        if(_lastSpawnedPart.Include.HasFlag(nextPartData.Type) == false)
+                        {
+                            cantConnect = true;
+                        }
                     }
                 }
                 

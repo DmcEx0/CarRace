@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CarRace
@@ -6,8 +7,8 @@ namespace CarRace
     [CreateAssetMenu(fileName = "PartTracksConfig", menuName = "Tracks/Part Tracks Config")]
     public class PartTracksConfig : ScriptableObject
     {
-        [SerializeField] private List<PartTrackData> _partTracksData;
-        
+        [SerializeField] private List<PartTrackData> _partTracksData = new();
+
         public IReadOnlyList<PartTrackData> PartTracksData => _partTracksData;
     }
 }

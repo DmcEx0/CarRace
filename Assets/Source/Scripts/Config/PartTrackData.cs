@@ -8,20 +8,20 @@ namespace CarRace
     public class PartTrackData
     {
         [SerializeField] private PartTrack _prefab;
-        [SerializeField] private string _type;
+        [SerializeField] private PartTrackType _type;
 
         [SerializeField] private bool _useInclude;
-        [SerializeField] private string _include;
+        [SerializeField, ShowIf("_useInclude")] private PartTrackType _include;
 
         [SerializeField] private bool _useExclude;
-        [SerializeField] private string _exclude;
+        [SerializeField, ShowIf("_useExclude")] private PartTrackType _exclude;
 
         public PartTrack Prefab => _prefab;
-        public string Type => _type;
+        public PartTrackType Type => _type;
         public bool UseInclude => _useInclude;
-        public string Include => _include;
+        public PartTrackType Include => _include;
         public bool UseExclude => _useExclude;
-        public string Exclude => _exclude;
+        public PartTrackType Exclude => _exclude;
         
         // [field: SerializeField] public PartTrack Prefab { get; private set; }
         //
