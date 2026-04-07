@@ -125,7 +125,7 @@ namespace PG
                         }
                     }
 
-                    if (!MainCamera)
+                    if (!MainCamera || MainCamera.isActiveAndEnabled == false)
                     {
                         //Create Camera
                         MainCamera = Instantiate (B.ResourcesSettings.UVCMainCamera);
