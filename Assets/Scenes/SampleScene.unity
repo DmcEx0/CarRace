@@ -2475,6 +2475,8 @@ MonoBehaviour:
   _verticalAxis: Vertical
   _carTransform: {fileID: 5906897102682222503}
   _deadZone: 0.15
+  _enterBackAngle: 120
+  _exitBackAngle: 30
 --- !u!1001 &1693280561
 PrefabInstance:
   m_ObjectHideFlags: 0
