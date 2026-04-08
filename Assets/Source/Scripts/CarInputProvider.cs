@@ -22,7 +22,8 @@ namespace CarRace
 
         private void Start()
         {
-            // Application.targetFrameRate = 60;
+            Application.targetFrameRate = 60;
+            QualitySettings.vSyncCount = 0;
         }
 
         private void Update()

@@ -74,6 +74,7 @@ MonoBehaviour:
       - rid: 3406933733544034318
       - rid: 3406933733544034319
       - rid: 3406933733544034322
+      - rid: 3406933733544034323
       - rid: 3406933733544034324
       - rid: 3406933733544034325
       - rid: 3406933733544034326
@@ -146,7 +147,7 @@ MonoBehaviour:
       type: {class: URPDefaultVolumeProfileSettings, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_Version: 0
-        m_VolumeProfile: {fileID: 11400000, guid: 0d0d0567e1cbbcd4b8ae46181cb1a46a, type: 2}
+        m_VolumeProfile: {fileID: 11400000, guid: ab09877e2e707104187f6f83e2f62510, type: 2}
     - rid: 3406933733544034308
       type: {class: ScreenSpaceAmbientOcclusionDynamicResources, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
@@ -217,7 +218,7 @@ MonoBehaviour:
       type: {class: URPReflectionProbeSettings, ns: UnityEngine.Rendering, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         version: 1
-        useReflectionProbeRotation: 1
+        useReflectionProbeRotation: 0
     - rid: 3406933733544034316
       type: {class: UniversalRenderPipelineEditorShaders, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
