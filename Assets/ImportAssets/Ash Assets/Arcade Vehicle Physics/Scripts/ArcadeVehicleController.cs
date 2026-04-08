@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using CarRace;
 using UnityEngine;
 
 namespace ArcadeVP
 {
     public class ArcadeVehicleController : MonoBehaviour
     {
+        [SerializeField] private CarInputProvider _carInputProvider;
         public enum groundCheck { rayCast, sphereCaste };
         public enum MovementMode { Velocity, AngularVelocity };
         public MovementMode movementMode;
@@ -61,8 +63,11 @@ namespace ArcadeVP
         }
         private void Update()
         {
-            horizontalInput = Input.GetAxis("Horizontal"); //turning input
-            verticalInput = Input.GetAxis("Vertical");     //accelaration input
+            // horizontalInput = Input.GetAxis("Horizontal"); //turning input
+            // verticalInput = Input.GetAxis("Vertical"); //accelaration input
+            
+            horizontalInput = _carInputProvider.SteerInput;
+            verticalInput = _carInputProvider.MoveInput;
             Visuals();
             AudioManager();
 
