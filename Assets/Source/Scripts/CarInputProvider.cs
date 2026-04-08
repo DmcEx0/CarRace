@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace CarRace
@@ -19,6 +20,11 @@ namespace CarRace
 
         private bool _isReversing;
 
+        private void Start()
+        {
+            // Application.targetFrameRate = 60;
+        }
+
         private void Update()
         {
             float rawX = SimpleInput.GetAxis(_horizontalAxis);
@@ -34,6 +40,8 @@ namespace CarRace
                 return;
             }
 
+            stickWorld /= magnitude;
+            
             Vector3 localStick = _carTransform.InverseTransformDirection(stickWorld);
 
             // Угол относительно forward машины:
