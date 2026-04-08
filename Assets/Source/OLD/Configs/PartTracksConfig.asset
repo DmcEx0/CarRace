@@ -26,7 +26,7 @@ MonoBehaviour:
     _useExclude: 0
     _exclude: 0
   - _prefab: {fileID: 2109333175401588627, guid: 1ba95bb352ab77f4abcc7b38bec30656, type: 3}
-    _type: 8
+    _type: 0
     _useInclude: 0
     _include: 0
     _useExclude: 0

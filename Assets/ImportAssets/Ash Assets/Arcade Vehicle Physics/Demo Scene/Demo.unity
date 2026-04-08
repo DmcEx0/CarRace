@@ -5587,8 +5587,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.3655274, y: 1.6393872, z: 4.968237}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.3655274, y: 1.1447291, z: 4.968237}
+  m_Center: {x: 0, y: 0.247329, z: 0}
 --- !u!4 &279592048
 Transform:
   m_ObjectHideFlags: 0
@@ -5806,7 +5806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.TrackBuilder
   _partsTracks: {fileID: 11400000, guid: 84da4cef4839a4d43b44c24f2b534f62, type: 2}
-  _length: 32
+  _length: 75
   _maxIterationForSpawnOne: 124
   _useSeed: 0
   _seed: 0
