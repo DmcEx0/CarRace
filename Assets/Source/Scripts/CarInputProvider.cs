@@ -22,8 +22,7 @@ namespace CarRace
 
         private void Start()
         {
-            Application.targetFrameRate = 60;
-            QualitySettings.vSyncCount = 0;
+            Application.targetFrameRate = 120;
         }
 
         private void Update()
@@ -68,8 +67,8 @@ namespace CarRace
             SteerInput = localStick.x;
 
             // Для естественного руля при движении назад
-            if (_isReversing)
-                SteerInput = -SteerInput;
+            // if (_isReversing)
+            //     SteerInput = -SteerInput;
 
             SteerInput = Mathf.Clamp(SteerInput, -1f, 1f);
         }
