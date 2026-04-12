@@ -40,7 +40,10 @@ namespace CarRace
                     nearest = t;
                 }
                 
-                if (Vector3.Distance(t.transform.position, position) <= Vector3.Distance(nearest.transform.position, position))
+                var nearestDistance = (position - nearest.transform.position).sqrMagnitude;
+                var tDistance = (position - t.transform.position).sqrMagnitude;
+                
+                if (tDistance <= nearestDistance)
                 {
                     nearest = t;
                 }
