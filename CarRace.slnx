@@ -1,0 +1,16 @@
+﻿<Solution>
+  <Project Path="SimpleInput.Runtime.csproj" />
+  <Project Path="Dreamteck.Splines.csproj" />
+  <Project Path="Dreamteck.Splines.Editor.csproj" />
+  <Project Path="Unity.RenderPipelines.Universal.Runtime.csproj" />
+  <Project Path="Assembly-CSharp.csproj" />
+  <Project Path="SimpleInput.Editor.csproj" />
+  <Project Path="Assembly-CSharp-Editor.csproj" />
+  <Project Path="Unity.UI.TestFramework.DocCodeSamples.Editor.Tests.csproj" />
+  <Project Path="Unity.UI.TestFramework.DocCodeSamples.Runtime.Tests.csproj" />
+  <Project Path="ExternAttributes.Editor.csproj" />
+  <Project Path="FlatKit.Utils.Editor.csproj" />
+  <Project Path="Dreamteck.Utilities.Editor.csproj" />
+  <Project Path="Dreamteck.Utilities.csproj" />
+  <Project Path="Polyperfect.Common.csproj" />
+</Solution>
