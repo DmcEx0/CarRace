@@ -263142,6 +263142,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1537331143837624724, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
+      propertyPath: m_TaaSettings.m_FrameInfluence
+      value: 0.100000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537331143837624724, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
       propertyPath: m_VolumeFrameworkUpdateModeOption
       value: 2
       objectReference: {fileID: 0}
