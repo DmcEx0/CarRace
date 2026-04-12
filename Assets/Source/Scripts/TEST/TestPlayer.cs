@@ -24,12 +24,12 @@ namespace CarRace
             if (hasTarget == false)
             {
                 _target = null;
-                Debug.Log("No target found");
+                GameDebug.Log("No target found");
             }
             else
             {
                 _target = target;
-                Debug.Log("Target found");
+                GameDebug.Log("Target found");
             }
         }
 
