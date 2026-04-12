@@ -1,6 +1,7 @@
+using CarRace.Utils;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Test
 {
     public class TestPlayer : MonoBehaviour
     {

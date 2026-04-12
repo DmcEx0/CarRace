@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Helpers
 {
     public class TargetSystem<T>
     {

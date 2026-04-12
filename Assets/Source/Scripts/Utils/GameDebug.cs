@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
-namespace CarRace
+namespace CarRace.Utils
 {
     public static class GameDebug
     {
