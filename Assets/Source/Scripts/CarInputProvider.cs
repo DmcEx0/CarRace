@@ -15,6 +15,8 @@ namespace CarRace
         [SerializeField, Range(0f, 180f)] private float _enterBackAngle = 120f;
         [SerializeField, Range(0f, 180f)] private float _exitBackAngle = 60f;
 
+        public bool AbsoluteDirectionSteering;
+
         public float SteerInput { get; private set; }
         public float MoveInput { get; private set; }
 
@@ -39,38 +41,49 @@ namespace CarRace
                 MoveInput = 0f;
                 return;
             }
-
             stickWorld /= magnitude;
-            
-            Vector3 localStick = _carTransform.InverseTransformDirection(stickWorld);
 
-            // Угол относительно forward машины:
-            // 0 = строго вперед, 180 = строго назад
-            float absAngle = Mathf.Abs(Mathf.Atan2(localStick.x, localStick.z) * Mathf.Rad2Deg);
-
-            // Hysteresis:
-            // В задний ход входим только если угол явно в задней полусфере.
-            // Выходим из заднего хода только если угол снова явно спереди.
-            if (_isReversing)
+            if (AbsoluteDirectionSteering)
             {
-                if (absAngle < _exitBackAngle)
-                    _isReversing = false;
+                Vector3 localStick = _carTransform.InverseTransformDirection(stickWorld);
+
+                // Угол относительно forward машины:
+                // 0 = строго вперед, 180 = строго назад
+                float absAngle = Mathf.Abs(Mathf.Atan2(localStick.x, localStick.z) * Mathf.Rad2Deg);
+
+                // Hysteresis:
+                // В задний ход входим только если угол явно в задней полусфере.
+                // Выходим из заднего хода только если угол снова явно спереди.
+                if (_isReversing)
+                {
+                    if (absAngle < _exitBackAngle)
+                        _isReversing = false;
+                }
+                else
+                {
+                    if (absAngle > _enterBackAngle)
+                        _isReversing = true;
+                }
+
+                MoveInput = _isReversing ? -magnitude : magnitude;
+
+                SteerInput = localStick.x;
+
+                // Для естественного руля при движении назад
+                // if (_isReversing)
+                //     SteerInput = -SteerInput;
+
+                SteerInput = Mathf.Clamp(SteerInput, -1f, 1f);
             }
             else
             {
-                if (absAngle > _enterBackAngle)
-                    _isReversing = true;
+                MoveInput = rawY;
+                SteerInput = rawX;
             }
 
-            MoveInput = _isReversing ? -magnitude : magnitude;
 
-            SteerInput = localStick.x;
-
-            // Для естественного руля при движении назад
-            // if (_isReversing)
-            //     SteerInput = -SteerInput;
-
-            SteerInput = Mathf.Clamp(SteerInput, -1f, 1f);
         }
+
+        
     }
 }
