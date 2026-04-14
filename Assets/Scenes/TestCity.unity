@@ -10632,11 +10632,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4361854606638056, guid: cab42ffeac4dd5a4d87e025f3968f7f4, type: 3}
   m_PrefabInstance: {fileID: 236163714}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &237508398 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5258140021336355832, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-  m_PrefabInstance: {fileID: 990709866}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &237540360
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23901,7 +23896,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _playerTransform: {fileID: 237508398}
+  _playerTransform: {fileID: 0}
   _enemyViewPrefab: {fileID: -3576388164618959575, guid: 5b21ae8af6f8e824e973b16d83c53c4d, type: 3}
   _enemiesConfig: {fileID: 11400000, guid: 4c340bb4bbb35b84598a9dcdd2e0dbd2, type: 2}
   _enemySpawnPointContainer: {fileID: 1899866358}
@@ -46161,34 +46156,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 925326090035146222, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: turn
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 925326090035146222, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: MaxSpeed
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 925326090035146222, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: kartLike
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 925326090035146222, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: accelaration
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 1683474092491034297, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
       propertyPath: m_Name
       value: Startup
       objectReference: {fileID: 0}
-    - target: {fileID: 2360589592924590227, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
-    - target: {fileID: 3446496079004056270, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
     - target: {fileID: 3478993812611452398, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -92.3
@@ -46229,30 +46200,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3550221215324289105, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
-    - target: {fileID: 4593806058868880471, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
-    - target: {fileID: 5867379987462811526, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: _exitBackAngle
-      value: 35
-      objectReference: {fileID: 0}
-    - target: {fileID: 5867379987462811526, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: _enterBackAngle
-      value: 135
-      objectReference: {fileID: 0}
-    - target: {fileID: 6250283913579669430, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
-    - target: {fileID: 6733028513189200793, guid: adf8c6a2468918c48aaa049d1f7c042f, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

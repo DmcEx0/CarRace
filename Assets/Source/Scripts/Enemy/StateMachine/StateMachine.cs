@@ -42,7 +42,6 @@ public class StateMachine : IInitializable, IStartable, ITickable
 
     public void Tick()
     {
-        Debug.Log(View.transform.position);
         if (NextState != CurrentState)
         {
             ChangeState();
