@@ -281,7 +281,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c26cf0bfe31c4247ad0de127e8e305f, type: 2}
+  - {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5380,7 +5380,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 569d56bd8be49434a947c7238e1bf4e9, type: 2}
+  - {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5470,7 +5470,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c26cf0bfe31c4247ad0de127e8e305f, type: 2}
+  - {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15982,6 +15982,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2169752585204547354}
+  - {fileID: 6460243076709731346}
+  - {fileID: 7570488917548401632}
   m_Father: {fileID: 1184200856035800621}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6221460889764032750
@@ -16045,7 +16047,7 @@ Transform:
   m_GameObject: {fileID: 6405936042005105856}
   serializedVersion: 2
   m_LocalRotation: {x: 0.34518152, y: -0.23519385, z: 0.089791924, w: 0.90414107}
-  m_LocalPosition: {x: 11.83, y: 27, z: -22.7}
+  m_LocalPosition: {x: 11.830002, y: 27, z: -22.699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16256,7 +16258,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c26cf0bfe31c4247ad0de127e8e305f, type: 2}
+  - {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21195,6 +21197,37 @@ Transform:
   - {fileID: 5178603350886510441}
   m_Father: {fileID: 7082314759703510797}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7274356935861533591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7570488917548401632}
+  m_Layer: 0
+  m_Name: Slot (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7570488917548401632
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7274356935861533591}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.338, z: 1.736}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8310379807725071742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7772365640939862757
 GameObject:
   m_ObjectHideFlags: 0
@@ -21261,7 +21294,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c26cf0bfe31c4247ad0de127e8e305f, type: 2}
+  - {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21285,6 +21318,37 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &7842913214691103276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6460243076709731346}
+  m_Layer: 0
+  m_Name: Slot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6460243076709731346
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7842913214691103276}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.928, z: -0.534}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8310379807725071742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8871153428014973410
 GameObject:
   m_ObjectHideFlags: 0
@@ -21351,7 +21415,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c26cf0bfe31c4247ad0de127e8e305f, type: 2}
+  - {fileID: 2100000, guid: 68418d5b2cc79674a8abf42d451c328c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -21403,7 +21467,7 @@ Transform:
   m_GameObject: {fileID: 8973558830908121274}
   serializedVersion: 2
   m_LocalRotation: {x: 0.34518152, y: -0.23519382, z: 0.08979192, w: 0.90414107}
-  m_LocalPosition: {x: 11.83, y: 27, z: -22.7}
+  m_LocalPosition: {x: 11.830002, y: 27, z: -22.699997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -21515,6 +21579,7 @@ GameObject:
   - component: {fileID: 3893497155849401744}
   - component: {fileID: 7772125756132556538}
   - component: {fileID: 3374355793744558024}
+  - component: {fileID: 7546511362056592754}
   m_Layer: 7
   m_Name: Arcade_SM_Veh_Car_Medium_01
   m_TagString: Untagged
@@ -21555,8 +21620,9 @@ MonoBehaviour:
   _verticalAxis: Vertical
   _carTransform: {fileID: 5258140021336355832}
   _deadZone: 0.15
-  _enterBackAngle: 150.6
-  _exitBackAngle: 30
+  _enterBackAngle: 135
+  _exitBackAngle: 35
+  AbsoluteDirectionSteering: 0
 --- !u!65 &527492798119407494
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -21596,13 +21662,13 @@ MonoBehaviour:
   drivableSurface:
     serializedVersion: 2
     m_Bits: 64
-  MaxSpeed: 100
-  accelaration: 20
-  turn: 10
+  MaxSpeed: 70
+  accelaration: 10
+  turn: 13
   gravity: 5
   downforce: 5
   AirControl: 1
-  kartLike: 1
+  kartLike: 0
   driftMultiplier: 1.5
   rb: {fileID: 896208975506289665}
   carBody: {fileID: 3893497155849401744}
@@ -21908,6 +21974,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7546511362056592754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8982219494865156240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11bb390f1f7cbe342a4f01fd3439d0d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.Car
+  _weaponSlots:
+  - {fileID: 6460243076709731346}
+  - {fileID: 7570488917548401632}
+  carConfig: {fileID: 11400000, guid: 796b5693099c0c341a1454c7ff8b44af, type: 2}
 --- !u!1001 &8994821987278451292
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7,6 +7,7 @@ namespace CarRace
 {
     public class GameLifetimeScope : LifetimeScope
     {
+        [SerializeField] private Transform _playerTransform;
         [SerializeField] private EnemyView _enemyViewPrefab;
         [SerializeField] private EnemiesConfig _enemiesConfig;
         [SerializeField] private WeaponsConfig _weaponsConfig;
@@ -17,12 +18,20 @@ namespace CarRace
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterComponent(_enemyViewPrefab);
+            builder.RegisterInstance(_playerTransform).Keyed(TransformKey.PlayerTransform);
+            
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
             
-            builder.Register<ProjectilesFactory>(Lifetime.Singleton);
-            
+
+            builder.Register<IdleState>(Lifetime.Transient);
+            builder.Register<FollowState>(Lifetime.Transient);
+            builder.Register<AttackState>(Lifetime.Transient);
+            builder.Register<DieState>(Lifetime.Transient);
+            builder.RegisterEntryPoint<StateMachine>().AsSelf();
+
+            builder.RegisterComponent(_enemyViewPrefab);
+
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
             
             TestConfigure(builder);
@@ -38,4 +47,12 @@ namespace CarRace
             });
         }
     }
+
+    public enum TransformKey
+
+    {
+        PlayerTransform,
+        EnemySpawnPointTransform
+    }
 }
+
