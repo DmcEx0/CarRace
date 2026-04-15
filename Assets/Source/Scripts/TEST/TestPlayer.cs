@@ -8,7 +8,7 @@ namespace CarRace.Test
     public class TestPlayer : MonoBehaviour
     {
         [SerializeField] private WeaponsConfig _weaponsConfig;
-        [SerializeField] private int _weaponIndex = -1;
+        [SerializeField, Range(-1, 1)] private int _weaponIndex = -1;
 
         [Space] [SerializeField] private LayerMask _enemyLayer;
         [SerializeField] private float _radius;
@@ -17,34 +17,36 @@ namespace CarRace.Test
 
         private EnemyView _target;
 
-        private KeyValuePair<WeaponData, BaseWeaponView> _currentWeapon;
+        private KeyValuePair<WeaponData, WeaponView> _currentWeapon;
         private int _currentWeaponIndex;
 
         private void Start()
         {
             _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
+            _currentWeaponIndex = _weaponIndex;
         }
 
         private void Update()
         {
+            SpawnWeapon();
+
             var hasTarget =
                 _targetSystem.TryGetNearest(out var target, transform.position, _radius);
 
             if (hasTarget == false)
             {
                 _target = null;
-                GameDebug.Log("No target found");
             }
             else
             {
                 _target = target;
-                GameDebug.Log("Target found");
             }
         }
 
         private void SpawnWeapon()
         {
-            if (_weaponIndex <= -1 || _currentWeaponIndex == _weaponIndex)
+            if (_weaponIndex <= -1 || _currentWeaponIndex == _weaponIndex ||
+                _weaponIndex >= _weaponsConfig.WeaponsData.Count)
             {
                 return;
             }
@@ -57,11 +59,11 @@ namespace CarRace.Test
             _currentWeaponIndex = _weaponIndex;
 
             var data = _weaponsConfig.WeaponsData[_currentWeaponIndex];
-            
+
             var weapon = Instantiate(data.WeaponViewPrefab, transform.position + Vector3.up, Quaternion.identity,
                 transform);
 
-            _currentWeapon = new KeyValuePair<WeaponData, BaseWeaponView>(data, weapon);
+            _currentWeapon = new KeyValuePair<WeaponData, WeaponView>(data, weapon);
         }
 
         private void OnDrawGizmos()

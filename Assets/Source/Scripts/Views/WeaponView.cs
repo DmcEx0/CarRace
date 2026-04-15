@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CarRace
 {
-    public class BaseWeaponView : MonoBehaviour
+    public class WeaponView : MonoBehaviour
     {
         [SerializeField] private Transform[] _firePoints;
         

@@ -1952,6 +1952,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42cf43fe3efceac4598a6d082e551b66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.TestPlayer
+  _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}
+  _weaponIndex: -1
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 256
