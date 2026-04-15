@@ -4,15 +4,15 @@ namespace CarRace
 {
     public class ForwardProjectile : BaseProjectile
     {
-        public ForwardProjectile(ProjectileView view, float speed) : base(view, speed) { }
+        public ForwardProjectile(ProjectileView view, float speed, Vector3 endPosition) : base(view, speed, endPosition) { }
 
-        public override void OnMove(Vector3 endPosition,  float deltaTime)
+        public override void OnMove(float deltaTime)
         {
             var rb = View.Rb;
             
-            var direction = endPosition - rb.position;
+            var direction = TargetPosition - rb.position;
             
-            rb.MovePosition(rb.position + direction * Speed * deltaTime);
+            rb.MovePosition(rb.position + direction * (Speed * deltaTime));
         }
     }
 }

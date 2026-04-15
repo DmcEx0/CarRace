@@ -7,13 +7,13 @@ namespace CarRace
     {
         [field: SerializeField] public Rigidbody Rb { get; private set; }
         
-        public Action<EnemyView> DetectedEnemy { get; set; }
+        public Action<EnemyView, ProjectileView> DetectedEnemy { get; set; }
 
-        private void OnCollisionStay(Collision other)
+        private void OnTriggerStay(Collider other)
         {
-            if(other.collider.TryGetComponent(out EnemyView enemyView))
+            if(other.TryGetComponent(out EnemyView enemyView))
             {
-                DetectedEnemy?.Invoke(enemyView);
+                DetectedEnemy?.Invoke(enemyView, this);
             }
         }
     }

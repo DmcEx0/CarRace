@@ -4,15 +4,17 @@ namespace CarRace
 {
     public abstract class BaseProjectile
     {
-        protected ProjectileView View {get; private set;}
+        public ProjectileView View {get; private set;}
         protected float Speed {get; private set;}
+        protected Vector3 TargetPosition {get; private set;}
 
-        public BaseProjectile(ProjectileView view, float speed)
+        protected BaseProjectile(ProjectileView view, float speed, Vector3 targetPosition)
         {
             View = view;
             Speed = speed;
+            TargetPosition = targetPosition;
         }
         
-        public abstract void OnMove(Vector3 endPosition, float deltaTime);
+        public abstract void OnMove(float deltaTime);
     }
 }

@@ -19,7 +19,7 @@ namespace CarRace
         
         [field: Space]
         [field: SerializeField] public float BaseDamage { get; private set; }
-        [field: SerializeField] public float BaseFireRatePerSeconds { get; private set; }
+        [field: SerializeField] public float BaseFireRate { get; private set; }
         [field: SerializeField] public float BaseRange { get; private set; }
     }
 }
