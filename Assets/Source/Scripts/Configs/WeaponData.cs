@@ -1,0 +1,23 @@
+using System;
+using UnityEngine;
+
+namespace CarRace
+{
+    [Serializable]
+    public class WeaponData
+    {
+        [field: SerializeField] public BaseWeaponView WeaponViewPrefab { get; private set; }
+        [field: SerializeField] public BaseProjectileView ProjectileViewPrefab { get; private set; }
+        
+        [field: Space]
+        [field: SerializeField] public WeaponType Type { get; private set; }
+        
+        [field: Space]
+        [field: SerializeField] public int Level { get; private set; }
+        
+        [field: Space]
+        [field: SerializeField] public float BaseDamage { get; private set; }
+        [field: SerializeField] public float BaseFireRatePerSeconds { get; private set; }
+        [field: SerializeField] public float BaseRange { get; private set; }
+    }
+}

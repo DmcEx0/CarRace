@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01c130ec8f0daad4688b4fb6c469e181, type: 3}
+  m_Name: WeaponsConfig
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.WeaponsConfig
+  _weaponsData:
+  - <WeaponViewPrefab>k__BackingField: {fileID: 7791210905474217404, guid: 96ed9af993718674bbf211eb4cd7ef01, type: 3}
+    <ProjectileViewPrefab>k__BackingField: {fileID: 8880717970514450129, guid: 3fbe3238aea26b74098ef7708b4391ec, type: 3}
+    <Type>k__BackingField: 1
+    <Level>k__BackingField: 0
+    <BaseDamage>k__BackingField: 1
+    <BaseFireRatePerSeconds>k__BackingField: 10
+    <BaseRange>k__BackingField: 7
+  - <WeaponViewPrefab>k__BackingField: {fileID: 564345519444374367, guid: 82fe90afe90521348a7fca2eb129a3cf, type: 3}
+    <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
+    <Type>k__BackingField: 2
+    <Level>k__BackingField: 0
+    <BaseDamage>k__BackingField: 10
+    <BaseFireRatePerSeconds>k__BackingField: 1
+    <BaseRange>k__BackingField: 12
