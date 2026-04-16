@@ -2,18 +2,40 @@ using UnityEngine;
 
 namespace CarRace
 {
-    public class BallisticProjectile : MonoBehaviour
+    public class BallisticProjectile : BaseProjectile
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
+        private Vector3 _velocity;
+        private float _gravity;
+
+        public BallisticProjectile(ProjectileView view, float speed, Vector3 targetPosition)
+            : base(view, speed, targetPosition)
         {
-        
+            _gravity = Physics.gravity.y;
+
+            var start = view.Rb.position;
+            var toTarget = targetPosition - start;
+
+            var horizontal = new Vector3(toTarget.x, 0f, toTarget.z);
+            float distance = horizontal.magnitude;
+
+            float height = toTarget.y;
+
+            float time = distance / speed;
+
+            Vector3 horizontalVelocity = horizontal / time;
+
+            float verticalVelocity = (height - 0.5f * _gravity * time * time) / time;
+
+            _velocity = horizontalVelocity + Vector3.up * verticalVelocity;
         }
 
-        // Update is called once per frame
-        void Update()
+        public override void OnMove(float deltaTime)
         {
-        
+            var rb = View.Rb;
+
+            _velocity.y += _gravity * deltaTime;
+
+            rb.MovePosition(rb.position + _velocity * deltaTime);
         }
     }
 }

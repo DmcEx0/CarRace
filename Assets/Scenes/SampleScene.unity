@@ -1263,6 +1263,7 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _playerTransform: {fileID: 2104010932}
   _enemyViewPrefab: {fileID: -3576388164618959575, guid: 5b21ae8af6f8e824e973b16d83c53c4d, type: 3}
   _enemiesConfig: {fileID: 11400000, guid: 4c340bb4bbb35b84598a9dcdd2e0dbd2, type: 2}
   _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}

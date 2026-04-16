@@ -17,6 +17,9 @@ namespace CarRace
                 case WeaponType.Minigun:
                     projectile = new ForwardProjectile(instance, weaponData.ProjectileSpeed, targetPosition);
                     break;
+                case WeaponType.RocketLauncher:
+                    projectile = new BallisticProjectile(instance, weaponData.ProjectileSpeed, targetPosition);
+                    break;
             }
 
             return projectile;

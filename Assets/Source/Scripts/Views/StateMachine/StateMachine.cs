@@ -1,9 +1,8 @@
-using System.Runtime.CompilerServices;
 using CarRace;
-using UnityEditorInternal;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
+
 public class StateMachine : IInitializable, IStartable, ITickable
 {
     private BaseState _idle;
