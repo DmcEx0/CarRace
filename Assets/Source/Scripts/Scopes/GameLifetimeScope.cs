@@ -8,7 +8,6 @@ namespace CarRace
     public class GameLifetimeScope : LifetimeScope
     {
         [SerializeField] private Transform _playerTransform;
-        [SerializeField] private EnemyView _enemyViewPrefab;
         [SerializeField] private EnemiesConfig _enemiesConfig;
         [SerializeField] private WeaponsConfig _weaponsConfig;
         [SerializeField] private Transform _enemySpawnPointContainer;
@@ -22,9 +21,9 @@ namespace CarRace
             
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
-            builder.RegisterComponent(_enemyViewPrefab);
 
             builder.Register<ProjectilesFactory>(Lifetime.Singleton);
+            builder.Register<EnemyFactory>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
             
