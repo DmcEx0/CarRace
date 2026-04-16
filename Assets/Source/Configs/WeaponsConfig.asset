@@ -19,11 +19,11 @@ MonoBehaviour:
     <Type>k__BackingField: 1
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 1
-    <BaseFireRate>k__BackingField: 0.49
+    <BaseFireRate>k__BackingField: 0.19
     <BaseRange>k__BackingField: 7
   - <WeaponViewPrefab>k__BackingField: {fileID: 564345519444374367, guid: 82fe90afe90521348a7fca2eb129a3cf, type: 3}
     <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
-    <ProjectileSpeed>k__BackingField: 5
+    <ProjectileSpeed>k__BackingField: 3.32
     <Type>k__BackingField: 2
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 10

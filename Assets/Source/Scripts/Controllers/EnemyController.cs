@@ -12,11 +12,10 @@ namespace CarRace
         
         private List<StateMachine> _stateMachines;
 
-        public EnemyController(EnemyFactory enemyFactory, Transform spawnPointContainer, List<StateMachine> stateMachines)
+        public EnemyController(EnemyFactory enemyFactory, Transform spawnPointContainer)
         {
             _enemyFactory = enemyFactory;
             _spawnPointContainer = spawnPointContainer;
-            _stateMachines = stateMachines;
         }
 
         public void Initialize()
@@ -64,6 +63,7 @@ namespace CarRace
                 };
 
                 stateMachine.SetStates(typeof(IdleState), states);
+                stateMachine.Start();
 
                 _stateMachines.Add(stateMachine);
             }
