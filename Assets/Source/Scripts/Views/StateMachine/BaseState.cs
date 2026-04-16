@@ -1,24 +1,35 @@
+using System;
+using CarRace;
 using UnityEngine;
 
 public abstract class BaseState
 {
-    protected StateMachine _stateMachine;  
-    public virtual void EnterState()
-    {
+    private readonly IStateChanger _stateChanger;
         
-    }
-    public virtual void UpdateState()
+    public BaseState(IStateChanger stateChanger)
     {
-        
-    }
-    public virtual void ExitState()
-    {
-        
+        _stateChanger = stateChanger;
     }
 
-    public void SetStateMachine(StateMachine stateMachine)
+    public virtual void OnEnter()
     {
-        _stateMachine = stateMachine;
+    }
+
+    public virtual void OnUpdate()
+    {
+    }
+
+    public virtual void OnFixedUpdate()
+    {
+    }
+        
+    public virtual void OnExit()
+    {
+    }
+    
+    protected void ChangeState(Type stateType)
+    {
+        _stateChanger.ChangeState(stateType);
     }
 }
 

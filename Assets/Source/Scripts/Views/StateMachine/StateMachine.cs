@@ -1,69 +1,82 @@
+using System;
+using System.Collections.Generic;
 using CarRace;
 using UnityEngine;
-using VContainer;
-using VContainer.Unity;
 
-public class StateMachine : IInitializable, IStartable, ITickable
+public class StateMachine : IStateChanger
 {
-    private BaseState _idle;
-    private BaseState _follow;
-    private BaseState _attack;
-    private BaseState _die;
-    private BaseState[] _states = new BaseState[4];
+    private Dictionary<Type, BaseState> _states = new Dictionary<Type, BaseState>();
+    private BaseState _currentState;
+    private Type _startStateType;
+    private bool _isStop;
 
-    private Transform _playerTransform;
+    public IReadOnlyDictionary<Type, BaseState> States => _states;
 
-    public int NextState;
-    public int CurrentState;
-    public Vector3 PlayerPosition => _playerTransform.position;
-    public EnemyView View;
-
-    public StateMachine(IdleState idle, FollowState follow, AttackState attack,
-        DieState die, [Key(TransformKey.PlayerTransform)] Transform playerTransform)
+    public void SetStates(Type startStateType, Dictionary<Type, BaseState> states)
     {
-        _states[(int)States.Idle] = idle;
-        _states[(int)States.Follow] = follow;
-        _states[(int)States.Attack] = attack;
-        _states[(int)States.Die] = die;
-        _playerTransform = playerTransform;
+        _states = states ?? new Dictionary<Type, BaseState>();
+        _startStateType = startStateType;
+
+        if (_states.TryGetValue(startStateType, out var state))
+        {
+            if (_currentState == null)
+            {
+                _currentState = state;
+            }
+        }
     }
 
     public void Start()
     {
-        NextState = (int)States.Idle;
-        CurrentState = (int)States.Idle;
-        for (int i = 0; i < 4; i++)
+        if (_states.TryGetValue(_startStateType, out var state))
         {
-            _states[i].SetStateMachine(this);
+            if (_currentState == null)
+            {
+                _currentState = state;
+            }
         }
-        _states[CurrentState].EnterState();
+
+        _currentState?.OnEnter();
+        _isStop = false;
     }
 
-    public void Tick()
+    public void Stop()
     {
-        if (NextState != CurrentState)
+        _currentState?.OnExit();
+        _isStop = true;
+    }
+
+    public void Update()
+    {
+        if (_isStop)
         {
-            ChangeState();
+            return;
         }
-        _states[CurrentState].UpdateState();
+
+        _currentState?.OnUpdate();
     }
 
-    public void ChangeState()
+    public void FixedUpdate()
     {
+        if (_isStop)
+        {
+            return;
+        }
 
-        _states[CurrentState].ExitState();
-        CurrentState = NextState;
-        _states[CurrentState].EnterState();
+        _currentState?.OnFixedUpdate();
     }
-    
-    public void Initialize()
+
+    public void ChangeState(Type stateType)
     {
+        if (stateType != null && _states.TryGetValue(stateType, out BaseState state))
+        {
+            _currentState?.OnExit();
+            _currentState = state;
+            _currentState.OnEnter();
+        }
+        else
+        {
+            Debug.LogWarning($"State {stateType?.Name} not found in StateMachine.");
+        }
     }
-}
-public enum States
-{
-    Idle = 0,
-    Follow = 1,
-    Attack = 2,
-    Die = 3
 }

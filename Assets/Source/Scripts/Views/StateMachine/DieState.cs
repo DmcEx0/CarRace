@@ -1,17 +1,8 @@
-public class DieState : BaseState
+using CarRace;
+
+public class DieState : EnemyBaseState
 {
-    public override void EnterState()
+    public DieState(IStateChanger stateChanger, EnemyView view) : base(stateChanger, view)
     {
-
-    }
-
-    public override void ExitState()
-    {
-
-    }
-
-    public override void UpdateState()
-    {
-
     }
 }
