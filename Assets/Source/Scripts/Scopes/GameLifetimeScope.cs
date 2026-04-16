@@ -13,7 +13,7 @@ namespace CarRace
         [SerializeField] private Transform _enemySpawnPointContainer;
         
         //For Test
-        [SerializeField] private TestPlayer _testPlayer;
+        [SerializeField] private Car _testPlayer;
         
         protected override void Configure(IContainerBuilder builder)
         {
