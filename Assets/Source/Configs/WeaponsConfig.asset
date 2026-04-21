@@ -13,19 +13,19 @@ MonoBehaviour:
   m_Name: WeaponsConfig
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.WeaponsConfig
   _weaponsData:
-  - <WeaponViewPrefab>k__BackingField: {fileID: 7791210905474217404, guid: 96ed9af993718674bbf211eb4cd7ef01, type: 3}
+  - <WeaponViewPrefab>k__BackingField: {fileID: 291644616472540469, guid: a807abad9d573264b96019ffcfcae869, type: 3}
     <ProjectileViewPrefab>k__BackingField: {fileID: 8880717970514450129, guid: 3fbe3238aea26b74098ef7708b4391ec, type: 3}
     <ProjectileSpeed>k__BackingField: 10.41
     <Type>k__BackingField: 1
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 1
     <BaseFireRate>k__BackingField: 0.19
-    <BaseRange>k__BackingField: 7
-  - <WeaponViewPrefab>k__BackingField: {fileID: 564345519444374367, guid: 82fe90afe90521348a7fca2eb129a3cf, type: 3}
+    <BaseRange>k__BackingField: 15
+  - <WeaponViewPrefab>k__BackingField: {fileID: 5305335993251836934, guid: 5f73668964f88164aae003225d1f933f, type: 3}
     <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
     <ProjectileSpeed>k__BackingField: 6.55
     <Type>k__BackingField: 2
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 10
     <BaseFireRate>k__BackingField: 0.82
-    <BaseRange>k__BackingField: 12
+    <BaseRange>k__BackingField: 15

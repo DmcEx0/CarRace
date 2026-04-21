@@ -7,8 +7,7 @@ namespace CarRace
     [Serializable]
     public class Weapon
     {
-        public int Level;
-        public GameObject WeaponPrefab;
+        public WeaponData data;
         public Sprite WeaponPreview;
     }
 }
