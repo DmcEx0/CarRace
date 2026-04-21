@@ -10,7 +10,9 @@ namespace CarRace
         [SerializeField] private Transform _playerTransform;
         [SerializeField] private EnemiesConfig _enemiesConfig;
         [SerializeField] private WeaponsConfig _weaponsConfig;
+        
         [SerializeField] private Transform _enemySpawnPointContainer;
+        [SerializeField] private Transform _enemyPoolContainer;
         
         //For Test
         [SerializeField] private Car _testPlayer;
@@ -23,7 +25,7 @@ namespace CarRace
             builder.RegisterComponent(_weaponsConfig);
 
             builder.Register<ProjectilesFactory>(Lifetime.Singleton);
-            builder.Register<EnemyFactory>(Lifetime.Singleton);
+            builder.Register<EnemyFactory>(Lifetime.Singleton).WithParameter(_enemyPoolContainer);
 
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
             
