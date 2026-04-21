@@ -6,7 +6,7 @@ using VContainer;
 
 namespace CarRace.Test
 {
-    public class Car : MonoBehaviour
+    public class CarTest : MonoBehaviour
     {
         [SerializeField, Range(-1, 1)] private int _weaponIndex = -1;
 

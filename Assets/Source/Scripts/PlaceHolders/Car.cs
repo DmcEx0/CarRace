@@ -10,11 +10,12 @@ namespace CarRace
     public class Car : MonoBehaviour
     {
         [SerializeField] private Transform[] _weaponSlots;
-        [SerializeField] private CarConfig carConfig;
         [SerializeField] private LayerMask _enemyLayer;
+        
         private KeyValuePair<WeaponData, WeaponView>[] _instancedWeapons;
         private WeaponsConfig _weaponsConfig;
         private ProjectilesFactory _projectilesFactory;
+        
         private List<BaseProjectile> _projectiles;
         private TargetSystem<EnemyView> _targetSystem;
 
@@ -29,13 +30,16 @@ namespace CarRace
         {
             int i = 0;
             _instancedWeapons = new KeyValuePair<WeaponData, WeaponView>[_weaponSlots.Count()];
+            
             foreach (var weapon in _weaponsConfig.WeaponsData)
             {
                 EquipWeapon(i, weapon);
                 i++;
             }
+            
             _projectiles = new List<BaseProjectile>();
             _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
+            
             foreach (var weapon in _instancedWeapons)
             {
 
@@ -55,6 +59,7 @@ namespace CarRace
                 projectile.OnMove(deltaTime);
             }
         }
+        
         public void EquipWeapon(int slot, WeaponData weapon)
         {
             if (weapon != null)
@@ -108,8 +113,5 @@ namespace CarRace
             _projectiles.Remove(projectile);
             Destroy(projectileView.gameObject);
         }
-
     }
-    
-    
 }

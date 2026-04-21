@@ -1,18 +1,17 @@
 using CarRace;
 using CarRace.Helpers;
-using CarRace.Test;
 using UnityEngine;
 
 public class EnemyFollowState : EnemyBaseState
 {
     // Эти 3 поля будут дублироваться во всех стейтах из-за необходимости.
     // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
-    private readonly TargetSystem<TestPlayer> _targetSystem;
+    private readonly TargetSystem<Car> _targetSystem;
     private readonly LayerMask _layerMask = 1 << 7;
 
     public EnemyFollowState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
     {
-        _targetSystem = new TargetSystem<TestPlayer>(_layerMask, 1);
+        _targetSystem = new TargetSystem<Car>(_layerMask, 1);
     }
 
     public override void OnEnter()
