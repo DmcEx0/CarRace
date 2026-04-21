@@ -3,34 +3,43 @@ using CarRace.Helpers;
 using CarRace.Test;
 using UnityEngine;
 
-public class AttackState : EnemyBaseState
+public class EnemyFollowState : EnemyBaseState
 {
     // Эти 3 поля будут дублироваться во всех стейтах из-за необходимости.
     // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
-    private readonly TargetSystem<TestPlayer> _targetSystem; 
+    private readonly TargetSystem<TestPlayer> _targetSystem;
     private readonly LayerMask _layerMask = 1 << 7;
     private float _radius = 10;
-    
-    public AttackState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
+
+    public EnemyFollowState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
     {
         _targetSystem = new TargetSystem<TestPlayer>(_layerMask, 1);
     }
 
     public override void OnEnter()
     {
-        Debug.Log("Attack");
+        Context.View.Animancer.Play(Context.Config.FollowAnimation);
     }
 
     public override void OnUpdate()
     {
         var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
-        
-        if(hasTarget)
+
+        var transform = Context.View.transform;
+
+        if (hasTarget)
         {
-            if((target.transform.position - Context.View.transform.position).magnitude < 10)
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Context.Config.Speed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+
+            if ((target.transform.position - transform.position).magnitude < 1)
             {
-                ChangeState(typeof(EnemyFollowState));
+                ChangeState(typeof(AttackState));
             }
+        }
+        else
+        {
+            ChangeState(typeof(EnemyIdleState));
         }
     }
 }

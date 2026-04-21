@@ -4,10 +4,10 @@ namespace CarRace
 {
     public class EnemyBaseState : BaseState
     {
-        protected EnemyView View { get; private set; }
-        public EnemyBaseState(IStateChanger stateChanger, EnemyView view) : base(stateChanger)
+        protected EnemyContext Context { get; private set; }
+        public EnemyBaseState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger)
         {
-            View = view;
+            Context = context;
         }
     }
 }

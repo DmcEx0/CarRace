@@ -2,7 +2,7 @@ using CarRace;
 
 public class DieState : EnemyBaseState
 {
-    public DieState(IStateChanger stateChanger, EnemyView view) : base(stateChanger, view)
+    public DieState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
     {
     }
 }

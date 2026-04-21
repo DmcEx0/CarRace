@@ -12,11 +12,13 @@ namespace CarRace
             _config = config;
         }
         
-        public EnemyView Get(Vector3 position)
+        public EnemyContext Get(Vector3 position)
         {
             var instance = Object.Instantiate(_config.Prefab, position, Quaternion.identity);
+
+            var context = new EnemyContext(instance, _config);
             
-            return instance;
+            return context;
         }
     }
 }

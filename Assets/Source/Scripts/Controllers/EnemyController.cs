@@ -50,19 +50,19 @@ namespace CarRace
             
             for (int i = 0; i < childCount; i++)
             {
-                var enemyView = _enemyFactory.Get(_spawnPointContainer.GetChild(i).position);
+                var context = _enemyFactory.Get(_spawnPointContainer.GetChild(i).position);
 
                 var stateMachine = new StateMachine();
             
                 var states = new Dictionary<Type, BaseState>
                 {
-                    { typeof(IdleState), new IdleState(stateMachine, enemyView) },
-                    { typeof(FollowState), new FollowState(stateMachine, enemyView) },
-                    { typeof(AttackState), new AttackState(stateMachine, enemyView) },
-                    { typeof(DieState), new DieState(stateMachine, enemyView) }
+                    { typeof(EnemyIdleState), new EnemyIdleState(stateMachine, context) },
+                    { typeof(EnemyFollowState), new EnemyFollowState(stateMachine, context) },
+                    { typeof(AttackState), new AttackState(stateMachine, context) },
+                    { typeof(DieState), new DieState(stateMachine, context) }
                 };
 
-                stateMachine.SetStates(typeof(IdleState), states);
+                stateMachine.SetStates(typeof(EnemyIdleState), states);
                 stateMachine.Start();
 
                 _stateMachines.Add(stateMachine);
