@@ -9,7 +9,6 @@ public class EnemyFollowState : EnemyBaseState
     // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
     private readonly TargetSystem<TestPlayer> _targetSystem;
     private readonly LayerMask _layerMask = 1 << 7;
-    private float _radius = 10;
 
     public EnemyFollowState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
     {
@@ -23,7 +22,7 @@ public class EnemyFollowState : EnemyBaseState
 
     public override void OnUpdate()
     {
-        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
+        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, Context.Config.FollowRadius);
 
         var transform = Context.View.transform;
 
@@ -32,7 +31,7 @@ public class EnemyFollowState : EnemyBaseState
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Context.Config.Speed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
 
-            if ((target.transform.position - transform.position).magnitude < 1)
+            if ((target.transform.position - transform.position).magnitude < Context.Config.AttackRadius)
             {
                 ChangeState(typeof(AttackState));
             }

@@ -7,10 +7,9 @@ public class EnemyIdleState : EnemyBaseState
 {
     // Эти 3 поля будут дублироваться во всех стейтах из-за необходимости.
     // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
-    private readonly TargetSystem<TestPlayer> _targetSystem; 
+    private readonly TargetSystem<TestPlayer> _targetSystem;
     private readonly LayerMask _layerMask = 1 << 7;
-    private float _radius = 10;
-    
+
     public EnemyIdleState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
     {
         _targetSystem = new TargetSystem<TestPlayer>(_layerMask, 1);
@@ -23,14 +22,12 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void OnUpdate()
     {
-        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
-        
-        if(hasTarget)
+        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position,
+            Context.Config.FollowRadius);
+
+        if (hasTarget)
         {
-            if((target.transform.position - Context.View.transform.position).magnitude < Context.Config.FollowRadius)
-            {
-                ChangeState(typeof(EnemyFollowState));
-            }
+            ChangeState(typeof(EnemyFollowState));
         }
     }
 }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.EnemiesConfig
   <Prefab>k__BackingField: {fileID: 8071094588617318258, guid: 7c7bb0f846ee2df42b4ce292c9ad0045, type: 3}
   <Speed>k__BackingField: 2.28
-  <FollowRadius>k__BackingField: 10
+  <FollowRadius>k__BackingField: 70.5
   <AttackRadius>k__BackingField: 1
   <IdleAnimation>k__BackingField:
     _FadeDuration: 0.25
