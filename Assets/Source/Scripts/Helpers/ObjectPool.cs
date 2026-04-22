@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
-
+ 
 namespace CarRace.Helpers
 {
     public class ObjectPool<T> where T : MonoBehaviour, IPoolable
@@ -16,23 +15,18 @@ namespace CarRace.Helpers
             _container = container;
         }
 
-        public void Create(T prefab, int count)
+        public void Create(T prefab)
         {
             if (_container == null)
             {
                 CreateContainer();
             }
 
-            for (int i = 0; i < count; i++)
-            {
-                var instance = Object.Instantiate(prefab, _container);
-                
-                _pool.Enqueue(instance);
+            _pool.Enqueue(prefab);
 
-                prefab.gameObject.SetActive(false);
-                prefab.transform.SetParent(_container);
-                prefab.SetContainer(_container);
-            }
+            prefab.gameObject.SetActive(false);
+            prefab.transform.SetParent(_container);
+            prefab.SetContainer(_container);
         }
 
         public T Get() //TODO: добавить авто-расширение пула

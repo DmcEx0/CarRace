@@ -1,5 +1,6 @@
 using CarRace.Factory;
 using CarRace.Helpers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CarRace
@@ -15,11 +16,14 @@ namespace CarRace
             _pool = new ObjectPool<EnemyView>(container);
         }
         
-        public void Prepare(int count)
+        public async UniTask PrepareAsync(int count)
         {
-            var instance = Create(_config.Prefab);
-            
-            _pool.Create(_config.Prefab, count);
+            for (int i = 0; i < count; i++)
+            {
+                var instance = await CreateWithAddressAsync<EnemyView>(_config.Reference);
+                
+                _pool.Create(instance.Key);
+            }
         }
         
         public EnemyContext Get(Vector3 position)

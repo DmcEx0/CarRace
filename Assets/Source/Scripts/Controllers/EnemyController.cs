@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace CarRace
 {
-    public class EnemyController : IInitializable, IStartable, ITickable, IFixedTickable
+    public class EnemyController : IInitializable, IAsyncStartable, ITickable, IFixedTickable
     {
         private readonly EnemyFactory _enemyFactory;
         private readonly Transform _spawnPointContainer;
@@ -23,9 +25,9 @@ namespace CarRace
             _stateMachines  = new List<StateMachine>();
         }
 
-        public void Start()
+        public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
         {
-            _enemyFactory.Prepare(25);
+            await _enemyFactory.PrepareAsync(25);
             
             SpawnEnemies();
         }
