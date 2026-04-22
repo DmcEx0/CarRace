@@ -17,7 +17,6 @@ public class AttackState : EnemyBaseState
 
     public override void OnEnter()
     {
-        Debug.Log("Attack");
     }
 
     public override void OnUpdate()

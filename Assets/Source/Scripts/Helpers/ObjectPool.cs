@@ -1,15 +1,13 @@
 using System;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace CarRace.Helpers
 {
     public class ObjectPool<T> where T : MonoBehaviour, IPoolable
     {
         private readonly Queue<T> _pool = new();
-
-        private T _firstInstance;
 
         private Transform _container;
 
@@ -18,25 +16,22 @@ namespace CarRace.Helpers
             _container = container;
         }
 
-        public void Create(IEnumerable<T> instances)
+        public void Create(T prefab, int count)
         {
             if (_container == null)
             {
                 CreateContainer();
             }
 
-            foreach (var instance in instances)
+            for (int i = 0; i < count; i++)
             {
-                if (_firstInstance == false)
-                {
-                    _firstInstance = instance;
-                }
-
+                var instance = Object.Instantiate(prefab, _container);
+                
                 _pool.Enqueue(instance);
 
-                instance.gameObject.SetActive(false);
-                instance.transform.SetParent(_container);
-                instance.SetContainer(_container);
+                prefab.gameObject.SetActive(false);
+                prefab.transform.SetParent(_container);
+                prefab.SetContainer(_container);
             }
         }
 

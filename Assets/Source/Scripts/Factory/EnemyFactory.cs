@@ -17,13 +17,14 @@ namespace CarRace
         
         public void Prepare()
         {
-            _pool.Create();
+            _pool.Create(_config.Prefab, 25);
         }
         
         public EnemyContext Get(Vector3 position)
         {
-            var instance = Object.Instantiate(_config.Prefab, position, Quaternion.identity);
-
+            var instance = _pool.Get();
+            instance.transform.position = position;
+            
             var context = new EnemyContext(instance, _config);
             
             return context;
