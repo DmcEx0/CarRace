@@ -15,9 +15,11 @@ namespace CarRace
             _pool = new ObjectPool<EnemyView>(container);
         }
         
-        public void Prepare()
+        public void Prepare(int count)
         {
-            _pool.Create(_config.Prefab, 25);
+            var instance = Create(_config.Prefab);
+            
+            _pool.Create(_config.Prefab, count);
         }
         
         public EnemyContext Get(Vector3 position)

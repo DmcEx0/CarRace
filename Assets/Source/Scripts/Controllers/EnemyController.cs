@@ -25,7 +25,7 @@ namespace CarRace
 
         public void Start()
         {
-            _enemyFactory.Prepare();
+            _enemyFactory.Prepare(25);
             
             SpawnEnemies();
         }
