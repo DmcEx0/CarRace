@@ -50,10 +50,10 @@ Material:
     - _BlendModePreserveSpecular: 1
     - _CastShadows: 0
     - _Cull: 2
-    - _Distance: 20
+    - _Distance: 0.2
     - _DstBlend: 10
     - _DstBlendAlpha: 10
-    - _Lenth: 5
+    - _Lenth: 2
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1

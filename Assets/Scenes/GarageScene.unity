@@ -563,7 +563,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1330448570}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.51663595
+  m_Size: 0.5134011
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -688,7 +688,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1227602108}
   m_HandleRect: {fileID: 1227602107}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -850,11 +850,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0528616511ad79d4487d9183875357c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _ownedWeapons: {fileID: 11400000, guid: 0415fcbfb96ae45459ea75fd3e9574a0, type: 2}
-  _carConfig: {fileID: 11400000, guid: 796b5693099c0c341a1454c7ff8b44af, type: 2}
-  _contentTransfrom: {fileID: 558629351}
-  _buttonPrefab: {fileID: 3875126835437713195, guid: 44bec9dd2387ded4aa1535773f729721, type: 3}
-  _slotsButtons:
+  ContentTransfrom: {fileID: 558629351}
+  ButtonPrefab: {fileID: 3875126835437713195, guid: 44bec9dd2387ded4aa1535773f729721, type: 3}
+  SlotsButtons:
   - {fileID: 2045386102}
   - {fileID: 1158628586}
   - {fileID: 1741235851}
@@ -1002,22 +1000,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 252311246389932807, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
   m_PrefabInstance: {fileID: 1325324098}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &716022829
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 716022822}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11bb390f1f7cbe342a4f01fd3439d0d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CarRace.Car
-  _weaponSlots:
-  - {fileID: 1168208753}
-  - {fileID: 1296180990}
-  carConfig: {fileID: 11400000, guid: 796b5693099c0c341a1454c7ff8b44af, type: 2}
 --- !u!1 &822209021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,6 +1734,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1988316844822675932, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+      propertyPath: carController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3726528803481750562, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+      propertyPath: carController
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868488192080398802, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+      propertyPath: carController
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3991322847124610659, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1771,6 +1765,10 @@ PrefabInstance:
     - target: {fileID: 4817031991444882198, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
       propertyPath: m_StreamingVersion
       value: 20241001
+      objectReference: {fileID: 0}
+    - target: {fileID: 5839112396960802247, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+      propertyPath: carController
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5906897101108258876, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1812,7 +1810,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3991322847124610659, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 1988316844822675932, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 3342012035444577224, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 7759468415258430945, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 3323817227261090679, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 3726528803481750562, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 5839112396960802247, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 3868488192080398802, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 461118686571800243, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 5059026367733615080, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 2385569221344905392, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 1262979728798655697, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 1912260015583741446, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 7064661392928045568, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 2526596889679727743, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 87076518299820556, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+    - {fileID: 3863704315025586001, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2215079300170807797, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
@@ -1823,9 +1838,24 @@ PrefabInstance:
       addedObject: {fileID: 1296180990}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 252311246389932807, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 716022829}
+      insertIndex: -1
+      addedObject: {fileID: 1325324105}
   m_SourcePrefab: {fileID: 100100000, guid: 5c8111a86f2828240b347fc8044e0750, type: 3}
+--- !u!114 &1325324105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716022822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25f0a5ef0c93b9147b455a696412fbc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  _weaponSlots:
+  - {fileID: 1168208753}
+  - {fileID: 1296180990}
 --- !u!1 &1330448569
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,6 +2413,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045386100}
   m_CullTransparentMesh: 1
+--- !u!1 &2096622188
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2096622190}
+  - component: {fileID: 2096622191}
+  m_Layer: 0
+  m_Name: GameScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2096622190
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096622188}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -97.14568, y: 0, z: -73.69659}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2096622191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096622188}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49079d77b1f25cf429bc32584b7ca069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.GarageLifeTimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  _ownedWeapons: {fileID: 11400000, guid: 0415fcbfb96ae45459ea75fd3e9574a0, type: 2}
+  _canvasView: {fileID: 695571512}
+  _car: {fileID: 1325324105}
+  _weapons: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}
 --- !u!1 &2123630879
 GameObject:
   m_ObjectHideFlags: 0
@@ -2473,3 +2555,4 @@ SceneRoots:
   - {fileID: 864570077}
   - {fileID: 695571511}
   - {fileID: 2123630882}
+  - {fileID: 2096622190}

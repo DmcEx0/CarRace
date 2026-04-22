@@ -11,14 +11,14 @@ namespace CarRace
         [SerializeField] private EnemiesConfig _enemiesConfig;
         [SerializeField] private WeaponsConfig _weaponsConfig;
         [SerializeField] private Transform _enemySpawnPointContainer;
-        
+
         //For Test
         [SerializeField] private Car _testPlayer;
-        
+
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_playerTransform).Keyed(TransformKey.PlayerTransform);
-            
+
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
 
@@ -26,14 +26,14 @@ namespace CarRace
             builder.Register<EnemyFactory>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
-            
+
             TestConfigure(builder);
         }
-        
+
         private void TestConfigure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_testPlayer);
-            
+
             builder.RegisterBuildCallback(container =>
             {
                 container.Inject(_testPlayer);
@@ -48,4 +48,6 @@ namespace CarRace
         EnemySpawnPointTransform
     }
 }
+
+
 
