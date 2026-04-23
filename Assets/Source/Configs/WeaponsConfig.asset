@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: WeaponsConfig
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.WeaponsConfig
   _weaponsData:
-  - <WeaponViewPrefab>k__BackingField: {fileID: 291644616472540469, guid: a807abad9d573264b96019ffcfcae869, type: 3}
+  - <WeaponPreview>k__BackingField: {fileID: 0}
+    <WeaponViewPrefab>k__BackingField: {fileID: 291644616472540469, guid: a807abad9d573264b96019ffcfcae869, type: 3}
+    <Reference>k__BackingField:
+      m_AssetGUID: a807abad9d573264b96019ffcfcae869
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
     <ProjectileViewPrefab>k__BackingField: {fileID: 8880717970514450129, guid: 3fbe3238aea26b74098ef7708b4391ec, type: 3}
     <ProjectileSpeed>k__BackingField: 10.41
     <Type>k__BackingField: 1
@@ -21,11 +28,48 @@ MonoBehaviour:
     <BaseDamage>k__BackingField: 1
     <BaseFireRate>k__BackingField: 0.19
     <BaseRange>k__BackingField: 15
-  - <WeaponViewPrefab>k__BackingField: {fileID: 5305335993251836934, guid: 5f73668964f88164aae003225d1f933f, type: 3}
+  - <WeaponPreview>k__BackingField: {fileID: 0}
+    <WeaponViewPrefab>k__BackingField: {fileID: 5305335993251836934, guid: 5f73668964f88164aae003225d1f933f, type: 3}
+    <Reference>k__BackingField:
+      m_AssetGUID: 5f73668964f88164aae003225d1f933f
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
     <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
     <ProjectileSpeed>k__BackingField: 6.55
     <Type>k__BackingField: 2
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 10
     <BaseFireRate>k__BackingField: 0.82
+    <BaseRange>k__BackingField: 15
+  - <WeaponPreview>k__BackingField: {fileID: 0}
+    <WeaponViewPrefab>k__BackingField: {fileID: 5305335993251836934, guid: add63d8207463194683ced51128e95a8, type: 3}
+    <Reference>k__BackingField:
+      m_AssetGUID: add63d8207463194683ced51128e95a8
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
+    <ProjectileSpeed>k__BackingField: 6.55
+    <Type>k__BackingField: 2
+    <Level>k__BackingField: 1
+    <BaseDamage>k__BackingField: 10
+    <BaseFireRate>k__BackingField: 0.82
+    <BaseRange>k__BackingField: 15
+  - <WeaponPreview>k__BackingField: {fileID: 0}
+    <WeaponViewPrefab>k__BackingField: {fileID: 291644616472540469, guid: 4bb12b60b0b5ffc4a87f726599d94adc, type: 3}
+    <Reference>k__BackingField:
+      m_AssetGUID: 4bb12b60b0b5ffc4a87f726599d94adc
+      m_SubObjectName: 
+      m_SubObjectType: 
+      m_SubObjectGUID: 
+      m_EditorAssetChanged: 0
+    <ProjectileViewPrefab>k__BackingField: {fileID: 8880717970514450129, guid: 3fbe3238aea26b74098ef7708b4391ec, type: 3}
+    <ProjectileSpeed>k__BackingField: 16.23
+    <Type>k__BackingField: 2
+    <Level>k__BackingField: 1
+    <BaseDamage>k__BackingField: 1.32
+    <BaseFireRate>k__BackingField: 0.15
     <BaseRange>k__BackingField: 15

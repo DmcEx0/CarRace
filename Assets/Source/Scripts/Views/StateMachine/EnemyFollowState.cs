@@ -16,21 +16,21 @@ public class EnemyFollowState : EnemyBaseState
 
     public override void OnEnter()
     {
-        Context.View.Animancer.Play(Context.Config.FollowAnimation);
+        Context.View.Animancer.Play(Context.FollowAnimation);
     }
 
     public override void OnUpdate()
     {
-        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, Context.Config.FollowRadius);
+        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, Context.FollowRadius);
 
         var transform = Context.View.transform;
 
         if (hasTarget)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Context.Config.Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Context.Speed * Time.deltaTime);
             transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
 
-            if ((target.transform.position - transform.position).magnitude < Context.Config.AttackRadius)
+            if ((target.transform.position - transform.position).magnitude < Context.AttackRadius)
             {
                 ChangeState(typeof(AttackState));
             }

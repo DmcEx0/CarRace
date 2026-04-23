@@ -15,13 +15,33 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 8e29e26d1f1592e47a233046c8f1c403
   m_SerializeEntries:
+  - m_GUID: 4bb12b60b0b5ffc4a87f726599d94adc
+    m_Address: Assets/Source/Prefabs/Weapon/Minigun_lvl2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5b21ae8af6f8e824e973b16d83c53c4d
     m_Address: Assets/Source/Prefabs/Enemy.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5f73668964f88164aae003225d1f933f
+    m_Address: Assets/Source/Prefabs/Weapon/RocketLauncher_lvl1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 7c7bb0f846ee2df42b4ce292c9ad0045
     m_Address: Assets/Source/Prefabs/Zombie1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a807abad9d573264b96019ffcfcae869
+    m_Address: Assets/Source/Prefabs/Weapon/Minigun_lvl1.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: add63d8207463194683ced51128e95a8
+    m_Address: Assets/Source/Prefabs/Weapon/RocketLauncher_lvl2.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

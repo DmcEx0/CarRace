@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 3636916878509483228}
   - component: {fileID: 7791210905474217404}
   m_Layer: 0
-  m_Name: Minigun
+  m_Name: MinigunTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

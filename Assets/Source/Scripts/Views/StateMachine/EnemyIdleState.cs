@@ -16,13 +16,13 @@ public class EnemyIdleState : EnemyBaseState
 
     public override void OnEnter()
     {
-        Context.View.Animancer.Play(Context.Config.IdleAnimation);
+        Context.View.Animancer.Play(Context.IdleAnimation);
     }
 
     public override void OnUpdate()
     {
         var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position,
-            Context.Config.FollowRadius);
+            Context.FollowRadius);
 
         if (hasTarget)
         {

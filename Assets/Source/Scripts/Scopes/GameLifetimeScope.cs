@@ -1,4 +1,6 @@
+using CarRace.Inventory;
 using CarRace.Test;
+using PG;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -25,9 +27,13 @@ namespace CarRace
             builder.RegisterComponent(_weaponsConfig);
 
             builder.Register<ProjectilesFactory>(Lifetime.Singleton);
+            builder.Register<WeaponFactory>(Lifetime.Singleton);
             builder.Register<EnemyFactory>(Lifetime.Singleton).WithParameter(_enemyPoolContainer);
+            
+            builder.Register<WeaponInventorySystem>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
+            builder.RegisterEntryPoint<CarController>();
 
             TestConfigure(builder);
         }
