@@ -9,8 +9,9 @@ namespace CarRace
     {
         [field: SerializeField] public Sprite WeaponPreview { get; private set; }
         [field: SerializeField] public WeaponView WeaponViewPrefab { get; private set; }
-        [field: SerializeField] public AssetReference Reference { get; private set; }
+        [field: SerializeField] public AssetReference WeaponReference { get; private set; }
         [field: SerializeField] public ProjectileView ProjectileViewPrefab { get; private set; }
+        [field: SerializeField] public AssetReference ProjectileReference { get; private set; }
         
         [field: SerializeField] public float ProjectileSpeed { get; private set; }
         
