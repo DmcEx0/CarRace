@@ -6,6 +6,7 @@ namespace CarRace
     [Serializable]
     public class WeaponData
     {
+        [field: SerializeField] public Sprite WeaponPreview { get; private set; }
         [field: SerializeField] public WeaponView WeaponViewPrefab { get; private set; }
         [field: SerializeField] public ProjectileView ProjectileViewPrefab { get; private set; }
         

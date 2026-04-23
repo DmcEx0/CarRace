@@ -17,13 +17,11 @@ namespace CarRace
                     var child = _weaponSlots[slot].GetChild(0);
                     if (child != null)
                         Destroy(child);
-
                 }
 
                 var inst = Instantiate(weapon.WeaponViewPrefab, _weaponSlots[slot]);
                 _instancedWeapons[slot] = new(weapon, inst);
             }
-
         }
     }
 }
