@@ -10,25 +10,24 @@ public class AttackState : EnemyBaseState
     private readonly LayerMask _layerMask = 1 << 7;
     private float _radius = 10;
     
-    public AttackState(IStateChanger stateChanger, EnemyView view) : base(stateChanger, view)
+    public AttackState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
     {
         _targetSystem = new TargetSystem<Car>(_layerMask, 1);
     }
 
     public override void OnEnter()
     {
-        Debug.Log("Attack");
     }
 
     public override void OnUpdate()
     {
-        var hasTarget = _targetSystem.TryGetNearest(out var target, View.transform.position, _radius);
+        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
         
         if(hasTarget)
         {
-            if((target.transform.position - View.transform.position).magnitude < 10)
+            if((target.transform.position - Context.View.transform.position).magnitude < 10)
             {
-                ChangeState(typeof(FollowState));
+                ChangeState(typeof(EnemyFollowState));
             }
         }
     }

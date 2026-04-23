@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using CarRace.Helpers;
@@ -10,11 +11,12 @@ namespace CarRace
     public class Car : MonoBehaviour
     {
         [SerializeField] private Transform[] _weaponSlots;
-        [SerializeField] private CarConfig carConfig;
         [SerializeField] private LayerMask _enemyLayer;
+        
         private KeyValuePair<WeaponData, WeaponView>[] _instancedWeapons;
         private WeaponsConfig _weaponsConfig;
         private ProjectilesFactory _projectilesFactory;
+        
         private List<BaseProjectile> _projectiles;
         private TargetSystem<EnemyView> _targetSystem;
 
@@ -29,16 +31,18 @@ namespace CarRace
         {
             int i = 0;
             _instancedWeapons = new KeyValuePair<WeaponData, WeaponView>[_weaponSlots.Count()];
+            
             foreach (var weapon in _weaponsConfig.WeaponsData)
             {
                 EquipWeapon(i, weapon);
                 i++;
             }
+            
             _projectiles = new List<BaseProjectile>();
             _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
+            
             foreach (var weapon in _instancedWeapons)
             {
-
                 FireWeapon(weapon.Key, weapon.Value).Forget();
             }
         }
@@ -55,6 +59,7 @@ namespace CarRace
                 projectile.OnMove(deltaTime);
             }
         }
+        
         public void EquipWeapon(int slot, WeaponData weapon)
         {
             if (weapon != null)
@@ -64,25 +69,22 @@ namespace CarRace
                     var child = _weaponSlots[slot].GetChild(0);
                     if (child != null)
                         Destroy(child);
-
                 }
 
                 var inst = Instantiate(weapon.WeaponViewPrefab, _weaponSlots[slot]);
                 _instancedWeapons[slot] = new(weapon, inst);
             }
-
         }
 
-        private async UniTaskVoid FireWeapon(WeaponData data, WeaponView instance)
+        private async UniTask FireWeapon(WeaponData data, WeaponView instance) //TODO: добавить токен отмены
         {
             while (true)
             {
                 var hasTarget =
                     _targetSystem.TryGetNearest(out var target, instance.transform.position, data.BaseRange);
-
+                
                 if (hasTarget)
                 {
-                    Debug.Log("fire");
                     var projectile = _projectilesFactory.Get(data, target.transform.position,
                     instance.FirePoints[0].position);
 
@@ -90,7 +92,8 @@ namespace CarRace
 
                     _projectiles.Add(projectile);
                 }
-                await Awaitable.WaitForSecondsAsync(data.BaseFireRate);
+
+                await UniTask.Delay(TimeSpan.FromSeconds(data.BaseFireRate));
             }
         }
 
@@ -108,8 +111,5 @@ namespace CarRace
             _projectiles.Remove(projectile);
             Destroy(projectileView.gameObject);
         }
-
     }
-    
-    
 }
