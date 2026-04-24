@@ -2,9 +2,9 @@ using UnityEngine;
 
 namespace CarRace
 {
-    public class ForwardProjectile : BaseProjectile
+    public class ForwardProjectileBehaviour : BaseProjectileBehaviour
     {
-        public ForwardProjectile(ProjectileView view, float speed, Vector3 endPosition) : base(view, speed, endPosition) { }
+        public ForwardProjectileBehaviour(ProjectileView view, float speed) : base(view, speed) { }
 
         public override void OnMove(float deltaTime)
         {

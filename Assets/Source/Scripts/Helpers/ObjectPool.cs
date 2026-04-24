@@ -4,7 +4,7 @@ using UnityEngine;
  
 namespace CarRace.Helpers
 {
-    public class ObjectPool<T> where T : MonoBehaviour, IPoolable
+    public class ObjectPool<T> where T : IPoolable
     {
         private readonly Queue<T> _pool = new();
 
@@ -15,18 +15,18 @@ namespace CarRace.Helpers
             _container = container;
         }
 
-        public void Create(T prefab)
+        public void AddInstance(T instance)
         {
             if (_container == null)
             {
                 CreateContainer();
             }
 
-            _pool.Enqueue(prefab);
+            _pool.Enqueue(instance);
 
-            prefab.gameObject.SetActive(false);
-            prefab.transform.SetParent(_container);
-            prefab.SetContainer(_container);
+            instance.Transform.SetActive(false);
+            instance.Transform.SetParent(_container);
+            instance.SetContainer(_container);
         }
 
         public T Get() //TODO: добавить авто-расширение пула
@@ -34,8 +34,8 @@ namespace CarRace.Helpers
             if (_pool.Count != 0)
             {
                 var instance = _pool.Dequeue();
-                instance.gameObject.SetActive(true);
-                instance.transform.SetParent(null);
+                instance.Transform.SetActive(true);
+                instance.Transform.SetParent(null);
 
                 return instance;
             }

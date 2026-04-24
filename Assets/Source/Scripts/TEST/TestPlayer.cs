@@ -23,7 +23,7 @@ namespace CarRace.Test
         private KeyValuePair<WeaponData, WeaponView> _currentWeapon;
         private int _currentWeaponIndex;
 
-        private List<BaseProjectile> _projectiles;
+        private List<BaseProjectileBehaviour> _projectiles;
 
         private float _timeForSpawnProjectiles;
 
@@ -36,7 +36,7 @@ namespace CarRace.Test
 
         private void Start()
         {
-            _projectiles = new List<BaseProjectile>();
+            _projectiles = new List<BaseProjectileBehaviour>();
             _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
             _currentWeaponIndex = _weaponIndex;
         }
@@ -90,12 +90,12 @@ namespace CarRace.Test
 
         private void SpawnProjectile()
         {
-            var projectile = _projectilesFactory.Get(_currentWeapon.Key, _target.transform.position,
-                _currentWeapon.Value.FirePoints[0].position);
+            // var projectile = _projectilesFactory.Get(_currentWeapon.Key, _target.transform.position,
+            //     _currentWeapon.Value.FirePoints[0].position);
+            //
+            // projectile.View.DetectedEnemy += OnProjectileEnemyDetected;
 
-            projectile.View.DetectedEnemy += OnProjectileEnemyDetected;
-
-            _projectiles.Add(projectile);
+            // _projectiles.Add(projectile);
         }
 
         private void SpawnWeapon()
@@ -123,7 +123,7 @@ namespace CarRace.Test
 
         private void OnProjectileEnemyDetected(EnemyView enemyView, ProjectileView projectileView)
         {
-            projectileView.DetectedEnemy -= OnProjectileEnemyDetected;
+            // projectileView.DetectedEnemy -= OnProjectileEnemyDetected;
 
             var projectile = _projectiles.Find(prj => prj.View == projectileView);
 

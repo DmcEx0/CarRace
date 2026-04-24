@@ -17,7 +17,7 @@ namespace CarRace
         private WeaponsConfig _weaponsConfig;
         private ProjectilesFactory _projectilesFactory;
         
-        private List<BaseProjectile> _projectiles;
+        private List<BaseProjectileBehaviour> _projectiles;
         private TargetSystem<EnemyView> _targetSystem;
 
         [Inject]
@@ -38,7 +38,7 @@ namespace CarRace
                 i++;
             }
             
-            _projectiles = new List<BaseProjectile>();
+            _projectiles = new List<BaseProjectileBehaviour>();
             _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
             
             foreach (var weapon in _instancedWeapons)
@@ -85,12 +85,12 @@ namespace CarRace
                 
                 if (hasTarget)
                 {
-                    var projectile = _projectilesFactory.Get(data, target.transform.position,
-                    instance.FirePoints[0].position);
+                    // var projectile = _projectilesFactory.Get(data, target.transform.position,
+                    // instance.FirePoints[0].position);
+                    //
+                    // projectile.View.DetectedEnemy += OnProjectileEnemyDetected;
 
-                    projectile.View.DetectedEnemy += OnProjectileEnemyDetected;
-
-                    _projectiles.Add(projectile);
+                    // _projectiles.Add(projectile);
                 }
 
                 await UniTask.Delay(TimeSpan.FromSeconds(data.BaseFireRate));
@@ -99,7 +99,7 @@ namespace CarRace
 
         private void OnProjectileEnemyDetected(EnemyView enemyView, ProjectileView projectileView)
         {
-            projectileView.DetectedEnemy -= OnProjectileEnemyDetected;
+            // projectileView.DetectedEnemy -= OnProjectileEnemyDetected;
 
             var projectile = _projectiles.Find(prj => prj.View == projectileView);
 

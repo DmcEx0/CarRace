@@ -28,7 +28,7 @@ namespace CarRace
                 var instance = await CreateWithAddressAsync<EnemyView>(_config.Reference);
                 
                 _operationHandles.Add(instance.Value);
-                _pool.Create(instance.Key);
+                _pool.AddInstance(instance.Key);
             }
         }
         

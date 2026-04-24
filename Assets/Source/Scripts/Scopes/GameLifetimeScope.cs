@@ -1,6 +1,7 @@
 using CarRace.Controllers;
 using CarRace.Inventory;
 using CarRace.Views;
+using CarRace.Weapon;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -11,9 +12,11 @@ namespace CarRace
     {
         [SerializeField] private EnemiesConfig _enemiesConfig;
         [SerializeField] private WeaponsConfig _weaponsConfig;
+        [SerializeField] private GameConfig _gameConfig;
         
         [SerializeField] private Transform _enemySpawnPointContainer;
         [SerializeField] private Transform _enemyPoolContainer;
+        [SerializeField] private Transform _projectilePoolContainer;
         
         //For Test
         [SerializeField] private Car _testPlayer;
@@ -26,15 +29,20 @@ namespace CarRace
 
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
+            builder.RegisterComponent(_gameConfig);
 
-            builder.Register<ProjectilesFactory>(Lifetime.Singleton);
             builder.Register<WeaponFactory>(Lifetime.Singleton);
+            
+            builder.Register<ProjectilesFactory>(Lifetime.Singleton).WithParameter(_projectilePoolContainer);
             builder.Register<EnemyFactory>(Lifetime.Singleton).WithParameter(_enemyPoolContainer);
+            
+            builder.Register<WeaponsProvider>(Lifetime.Singleton);
             
             builder.Register<WeaponInventorySystem>(Lifetime.Singleton);
 
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
             builder.RegisterEntryPoint<CarController>();
+            builder.RegisterEntryPoint<WeaponsController>();
 
             // TestConfigure(builder);
         }

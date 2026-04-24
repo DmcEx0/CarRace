@@ -1,25 +1,31 @@
 using CarRace.Factory;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace CarRace.Views
 {
     public class WeaponSlot
     {
+        private readonly AsyncReactiveProperty<WeaponContext> _weaponContext;
+        
         public Transform ParentTransform { get; private set; }
         public int Number { get; private set; }
-        public WeaponContext WeaponContext { get; private set; }
+
+        public IReadOnlyAsyncReactiveProperty<WeaponContext> WeaponContext => _weaponContext;
 
         public WeaponSlot(Transform parentTransform, int number)
         {
             ParentTransform = parentTransform;
             Number = number;
+            
+            _weaponContext = new AsyncReactiveProperty<WeaponContext>(null);
         }
 
         public void Replace(WeaponContext weaponContext)
         {
             Remove();
 
-            WeaponContext = weaponContext;
+            _weaponContext.Value = weaponContext;
         }
 
         public void Remove()
@@ -29,8 +35,8 @@ namespace CarRace.Views
                 return;
             }
 
-            GameObjectFactory.Release(WeaponContext.OpHandle);
-            WeaponContext =  null;
+            GameObjectFactory.Release(_weaponContext.Value.OpHandle);
+            _weaponContext.Value =  null;
         }
     }
 }

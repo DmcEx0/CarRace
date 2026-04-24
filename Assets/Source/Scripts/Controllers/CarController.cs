@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using CarRace.Inventory;
 using CarRace.Views;
+using CarRace.Weapon;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
@@ -11,16 +12,17 @@ namespace CarRace.Controllers
     {
         private readonly WeaponInventorySystem _weaponInventorySystem;
         private readonly WeaponFactory _weaponFactory;
+        private readonly WeaponsProvider _weaponsProvider;
         private readonly CarView _view;
-
-        private List<WeaponSlot> _weaponsSlots;
 
         private List<KeyValuePair<WeaponType, int>> _initialWeapons; // Для теста
 
-        public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarView carView)
+        public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarView carView,
+            WeaponsProvider weaponsProvider)
         {
             _weaponInventorySystem = weaponInventorySystem;
             _weaponFactory = weaponFactory;
+            _weaponsProvider = weaponsProvider;
             _view = carView;
         }
 
@@ -28,17 +30,15 @@ namespace CarRace.Controllers
         {
             _initialWeapons = new List<KeyValuePair<WeaponType, int>>()
             {
-                new (WeaponType.Minigun, 0),
-                new (WeaponType.RocketLauncher, 0),
+                new(WeaponType.Minigun, 0),
+                new(WeaponType.RocketLauncher, 0),
             };
-
-            _weaponsSlots = new List<WeaponSlot>();
         }
 
         public void Start()
         {
             InitInventory();
-            InitWeaponPlaces();
+            _weaponsProvider.InitWeaponsSlots(_view.WeaponsSlotsTransform);
         }
 
         public void Tick() // Для теста
@@ -58,23 +58,14 @@ namespace CarRace.Controllers
             }
         }
 
-        private void InitWeaponPlaces()
-        {
-            for (int i = 0; i < _view.WeaponsSlotsTransform.Count; i++)
-            {
-                var weaponPlace = new WeaponSlot(_view.WeaponsSlotsTransform[i], i);
-                _weaponsSlots.Add(weaponPlace);
-            }
-        }
-
         private async UniTask CreateWeaponAsync() // Test
         {
             for (int i = 0; i < _initialWeapons.Count; i++)
             {
                 var weaponContext = await GetCreatedWeaponAsync(_initialWeapons[i].Key, _initialWeapons[i].Value,
-                    _weaponsSlots[i].ParentTransform);
+                    _weaponsProvider.WeaponsSlots[i].ParentTransform);
                 
-                _weaponsSlots[i].Replace(weaponContext);
+                _weaponsProvider.WeaponsSlots[i].Replace(weaponContext);
             }
         }
 
