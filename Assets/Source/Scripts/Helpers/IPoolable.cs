@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace CarRace.Helpers
 {
-    public interface IPoolable
+    public interface IPoolable<T>
     {
         public Transform Transform { get; }
-        public Action<IPoolable> Despawned { get; set; }
+        public Action<T> Despawned { get; set; }
     }
 }

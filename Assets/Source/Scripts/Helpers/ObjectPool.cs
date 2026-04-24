@@ -4,7 +4,7 @@ using UnityEngine;
  
 namespace CarRace.Helpers
 {
-    public class ObjectPool<T> where T : IPoolable
+    public class ObjectPool<T> : IDisposable where T : class, IPoolable<T>
     {
         private readonly Queue<T> _pool = new();
 
@@ -14,6 +14,16 @@ namespace CarRace.Helpers
         {
             _container = container;
         }
+        
+        public void Dispose()
+        {
+            foreach (var instance in _pool)
+            {
+                instance.Despawned -= OnDespawned;
+            }
+            
+            _pool.Clear();
+        }
 
         public void AddInstance(T instance)
         {
@@ -22,17 +32,14 @@ namespace CarRace.Helpers
                 CreateContainer();
             }
 
-            _pool.Enqueue(instance);
-
             instance.Despawned += OnDespawned;
             
-            instance.Transform.SetActive(false);
-            instance.Transform.SetParent(_container);
+            ConfigureInstance(instance);
         }
 
         private void OnDespawned(T instance)
         {
-            _pool.Enqueue(instance);
+            ConfigureInstance(instance);
         }
 
         public T Get() //TODO: добавить авто-расширение пула
@@ -47,6 +54,14 @@ namespace CarRace.Helpers
             }
 
             throw new Exception($"Pool for {typeof(T).Name} is empty");
+        }
+        
+        private void ConfigureInstance(T instance)
+        {
+            _pool.Enqueue(instance);
+            
+            instance.Transform.SetActive(false);
+            instance.Transform.SetParent(_container);
         }
 
         private void CreateContainer()

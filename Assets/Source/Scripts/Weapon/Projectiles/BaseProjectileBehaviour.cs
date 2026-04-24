@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CarRace
 {
-    public abstract class BaseProjectileBehaviour : IPoolable
+    public abstract class BaseProjectileBehaviour : IPoolable<BaseProjectileBehaviour>
     {
         public ProjectileView View { get; private set; }
         protected float Speed { get; private set; }
@@ -14,7 +14,7 @@ namespace CarRace
 
         public Action<BaseProjectileBehaviour, EnemyView> DetectedEnemy { get; set; }
         
-        public Action<IPoolable> Despawned { get; set; }
+        public Action<BaseProjectileBehaviour> Despawned { get; set; }
 
         protected BaseProjectileBehaviour(ProjectileView view, float speed)
         {
@@ -40,6 +40,7 @@ namespace CarRace
         {
             DetectedEnemy?.Invoke(this, enemyView);
             View.DetectedEnemy -= OnViewEnemyDetected;
+            Despawned?.Invoke(this);
         }
     }
 }
