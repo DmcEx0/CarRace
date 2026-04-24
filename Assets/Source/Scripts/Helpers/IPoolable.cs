@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace CarRace.Helpers
@@ -5,7 +6,6 @@ namespace CarRace.Helpers
     public interface IPoolable
     {
         public Transform Transform { get; }
-        public void SetContainer(Transform container);
-        public void Despawn();
+        public Action<IPoolable> Despawned { get; set; }
     }
 }

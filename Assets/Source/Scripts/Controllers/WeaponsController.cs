@@ -6,11 +6,12 @@ using CarRace.Views;
 using CarRace.Weapon;
 using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace CarRace.Controllers
 {
-    public class WeaponsController : IInitializable, IStartable, ITickable, IDisposable
+    public class WeaponsController : IInitializable, IStartable, IFixedTickable, IDisposable
     {
         private const int ProjectilesCount = 15; //ForTest
 
@@ -20,6 +21,7 @@ namespace CarRace.Controllers
         private readonly CarView _view;
 
         private TargetSystem<EnemyView> _targetSystem;
+        private List<BaseProjectileBehaviour> _projectiles;
 
         private CancellationTokenSource _cts;
 
@@ -39,8 +41,8 @@ namespace CarRace.Controllers
             _targetSystem =
                 new TargetSystem<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
 
+            _projectiles = new List<BaseProjectileBehaviour>();
             _cts = new CancellationTokenSource();
-
             _canFire = true;
         }
 
@@ -60,8 +62,12 @@ namespace CarRace.Controllers
             }
         }
 
-        public void Tick()
+        public void FixedTick()
         {
+            foreach (var projectile in _projectiles)
+            {
+                projectile.OnMove(Time.fixedDeltaTime);
+            }
         }
 
         private async UniTask WeaponFireAsync(WeaponContext weaponContext)
@@ -77,6 +83,8 @@ namespace CarRace.Controllers
                         weaponContext.View.FirePoints[0].position);
 
                     projectileBehaviour.DetectedEnemy += OnProjectileEnemyDetected;
+
+                    _projectiles.Add(projectileBehaviour);
                 }
 
                 await UniTask.Delay(TimeSpan.FromSeconds(weaponContext.BaseFireRate), cancellationToken: _cts.Token);
@@ -85,17 +93,23 @@ namespace CarRace.Controllers
 
         private void OnProjectileEnemyDetected(BaseProjectileBehaviour projectileBehaviour, EnemyView enemyView)
         {
+            _projectiles.Remove(projectileBehaviour);
             projectileBehaviour.DetectedEnemy -= OnProjectileEnemyDetected;
         }
 
         private void OnWeaponContextChanged(WeaponContext weaponContext)
         {
+            if (weaponContext == null)
+            {
+                return;
+            }
+
             ConfigureWeaponAsync(weaponContext).Forget();
         }
 
         private async UniTask ConfigureWeaponAsync(WeaponContext weaponContext)
         {
-            await _projectilesFactory.PrepareAsync(weaponContext, ProjectilesCount);
+            await _projectilesFactory.PrepareAsync(weaponContext, ProjectilesCount, _cts.Token);
             await WeaponFireAsync(weaponContext);
         }
     }

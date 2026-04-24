@@ -30,7 +30,7 @@ namespace CarRace.Views
 
         public void Remove()
         {
-            if (WeaponContext == null)
+            if (WeaponContext.Value == null)
             {
                 return;
             }

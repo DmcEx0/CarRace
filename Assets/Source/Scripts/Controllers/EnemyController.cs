@@ -7,12 +7,14 @@ using VContainer.Unity;
 
 namespace CarRace
 {
-    public class EnemyController : IInitializable, IAsyncStartable, ITickable, IFixedTickable
+    public class EnemyController : IInitializable, IAsyncStartable, ITickable, IFixedTickable, IDisposable
     {
         private readonly EnemyFactory _enemyFactory;
         private readonly Transform _spawnPointContainer;
         
         private List<StateMachine> _stateMachines;
+        
+        private CancellationTokenSource _cts;
 
         public EnemyController(EnemyFactory enemyFactory, Transform spawnPointContainer)
         {
@@ -23,11 +25,19 @@ namespace CarRace
         public void Initialize()
         {
             _stateMachines  = new List<StateMachine>();
+            
+            _cts = new CancellationTokenSource();
         }
 
+        public void Dispose()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+        }
+        
         public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
         {
-            await _enemyFactory.PrepareAsync(25);
+            await _enemyFactory.PrepareAsync(25, _cts.Token);
             
             SpawnEnemies();
         }

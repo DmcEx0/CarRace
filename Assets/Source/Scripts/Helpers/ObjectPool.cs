@@ -24,9 +24,15 @@ namespace CarRace.Helpers
 
             _pool.Enqueue(instance);
 
+            instance.Despawned += OnDespawned;
+            
             instance.Transform.SetActive(false);
             instance.Transform.SetParent(_container);
-            instance.SetContainer(_container);
+        }
+
+        private void OnDespawned(T instance)
+        {
+            _pool.Enqueue(instance);
         }
 
         public T Get() //TODO: добавить авто-расширение пула

@@ -325,7 +325,7 @@ GameObject:
   m_Component:
   - component: {fileID: 269563618}
   m_Layer: 0
-  m_Name: PoolContainer
+  m_Name: EnemyPoolContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -586,6 +586,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1404770542}
   m_LocalEulerAnglesHint: {x: -14.657, y: 0, z: 0}
+--- !u!1 &499633926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 499633927}
+  m_Layer: 0
+  m_Name: ProjectilePoolContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &499633927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 499633926}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &805576457 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3252014629734535972, guid: 0a56027de01421a4ea8bf0342953a4a9, type: 3}
@@ -1411,8 +1442,10 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _enemiesConfig: {fileID: 11400000, guid: 4c340bb4bbb35b84598a9dcdd2e0dbd2, type: 2}
   _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}
+  _gameConfig: {fileID: 11400000, guid: 655dda959d37c094e9617267a845386f, type: 2}
   _enemySpawnPointContainer: {fileID: 265934176}
   _enemyPoolContainer: {fileID: 269563618}
+  _projectilePoolContainer: {fileID: 499633927}
   _testPlayer: {fileID: 1886424620}
   _carView: {fileID: 1886424628}
 --- !u!4 &1753491120
@@ -2403,3 +2436,4 @@ SceneRoots:
   - {fileID: 1753491120}
   - {fileID: 265934176}
   - {fileID: 269563618}
+  - {fileID: 499633927}

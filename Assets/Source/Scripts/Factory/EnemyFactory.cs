@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading;
 using CarRace.Factory;
 using CarRace.Helpers;
 using Cysharp.Threading.Tasks;
@@ -21,14 +22,15 @@ namespace CarRace
             _operationHandles = new List<AsyncOperationHandle>();
         }
         
-        public async UniTask PrepareAsync(int count)
+        public async UniTask PrepareAsync(int count, CancellationToken token)
         {
             for (int i = 0; i < count; i++)
             {
-                var instance = await CreateWithAddressAsync<EnemyView>(_config.Reference);
+                var result = await CreateWithAddressAsync<EnemyView>(_config.Reference, token);
                 
-                _operationHandles.Add(instance.Value);
-                _pool.AddInstance(instance.Key);
+                _operationHandles.Add(result.Handle);
+                
+                _pool.AddInstance(result.Instance);
             }
         }
         
@@ -48,6 +50,8 @@ namespace CarRace
             {
                 Release(operationHandle);
             }
+            
+            _operationHandles.Clear();
         }
     }
 }

@@ -23,7 +23,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     <ProjectileViewPrefab>k__BackingField: {fileID: 8880717970514450129, guid: 3fbe3238aea26b74098ef7708b4391ec, type: 3}
     <ProjectileReference>k__BackingField:
-      m_AssetGUID: 
+      m_AssetGUID: 3fbe3238aea26b74098ef7708b4391ec
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -44,7 +44,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
     <ProjectileReference>k__BackingField:
-      m_AssetGUID: 
+      m_AssetGUID: f5527253c5febca45b9c872f2c3184a3
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -65,7 +65,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     <ProjectileViewPrefab>k__BackingField: {fileID: 3113952028025215983, guid: f5527253c5febca45b9c872f2c3184a3, type: 3}
     <ProjectileReference>k__BackingField:
-      m_AssetGUID: 
+      m_AssetGUID: 3fbe3238aea26b74098ef7708b4391ec
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 
@@ -86,7 +86,7 @@ MonoBehaviour:
       m_EditorAssetChanged: 0
     <ProjectileViewPrefab>k__BackingField: {fileID: 8880717970514450129, guid: 3fbe3238aea26b74098ef7708b4391ec, type: 3}
     <ProjectileReference>k__BackingField:
-      m_AssetGUID: 
+      m_AssetGUID: f5527253c5febca45b9c872f2c3184a3
       m_SubObjectName: 
       m_SubObjectType: 
       m_SubObjectGUID: 

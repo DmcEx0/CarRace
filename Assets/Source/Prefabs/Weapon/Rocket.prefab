@@ -58,6 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.BaseProjectileView
   <Rb>k__BackingField: {fileID: 5722720858117267577}
+  <Transform>k__BackingField: {fileID: 8447238155852528396}
 --- !u!23 &993113992032057526
 MeshRenderer:
   m_ObjectHideFlags: 0

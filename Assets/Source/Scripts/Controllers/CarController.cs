@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Threading;
 using CarRace.Inventory;
 using CarRace.Views;
 using CarRace.Weapon;
@@ -8,12 +10,14 @@ using VContainer.Unity;
 
 namespace CarRace.Controllers
 {
-    public class CarController : IInitializable, IStartable, ITickable
+    public class CarController : IInitializable, IStartable, ITickable, IDisposable
     {
         private readonly WeaponInventorySystem _weaponInventorySystem;
         private readonly WeaponFactory _weaponFactory;
         private readonly WeaponsProvider _weaponsProvider;
         private readonly CarView _view;
+
+        private CancellationTokenSource _ctx;
 
         private List<KeyValuePair<WeaponType, int>> _initialWeapons; // Для теста
 
@@ -24,6 +28,8 @@ namespace CarRace.Controllers
             _weaponFactory = weaponFactory;
             _weaponsProvider = weaponsProvider;
             _view = carView;
+            
+            _ctx = new CancellationTokenSource();
         }
 
         public void Initialize()
@@ -33,6 +39,12 @@ namespace CarRace.Controllers
                 new(WeaponType.Minigun, 0),
                 new(WeaponType.RocketLauncher, 0),
             };
+        }
+        
+        public void Dispose()
+        {
+            _ctx?.Cancel();
+            _ctx?.Dispose();
         }
 
         public void Start()
@@ -71,7 +83,7 @@ namespace CarRace.Controllers
 
         private async UniTask<WeaponContext> GetCreatedWeaponAsync(WeaponType type, int level, Transform parent)
         {
-            var weaponContext = await _weaponFactory.GetAsync(type, level, parent);
+            var weaponContext = await _weaponFactory.GetAsync(type, level, parent, _ctx.Token);
 
             return weaponContext;
         }

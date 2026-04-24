@@ -1,5 +1,10 @@
+using System.Collections.Generic;
+using System.Threading;
 using CarRace.Factory;
+using CarRace.Helpers;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace CarRace
 {
@@ -10,10 +15,13 @@ namespace CarRace
         private readonly ObjectPool<BaseProjectileBehaviour> _pool;
 
         private BaseProjectileBehaviour _projectileBehaviour;
+        
+        private readonly List<AsyncOperationHandle> _operationHandles;
 
         public ProjectilesFactory(Transform container)
         {
             _pool = new ObjectPool<BaseProjectileBehaviour>(container);
+            _operationHandles = new List<AsyncOperationHandle>();
         }
 
         public async UniTask PrepareAsync(WeaponContext weaponContext, int count, CancellationToken token)
@@ -25,7 +33,7 @@ namespace CarRace
                     await UniTask.Yield();
                 }
 
-                var instance = await CreateAsync<ProjectileView>(weaponContext.ProjectileReference, token);
+                var result = await CreateWithAddressAsync<ProjectileView>(weaponContext.ProjectileReference, token);
 
                 BaseProjectileBehaviour projectileBehaviour = default;
 
@@ -33,15 +41,16 @@ namespace CarRace
                 {
                     case WeaponType.Minigun:
                         projectileBehaviour =
-                            new ForwardProjectileBehaviour(instance, weaponContext.ProjectileSpeed);
+                            new ForwardProjectileBehaviour(result.Instance, weaponContext.ProjectileSpeed);
                         break;
                     case WeaponType.RocketLauncher:
                         projectileBehaviour =
-                            new BallisticProjectileBehaviour(instance, weaponContext.ProjectileSpeed);
+                            new BallisticProjectileBehaviour(result.Instance, weaponContext.ProjectileSpeed);
                         break;
                 }
 
                 _pool.AddInstance(projectileBehaviour);
+                _operationHandles.Add(result.Handle);
             }
         }
 
@@ -53,6 +62,16 @@ namespace CarRace
             instance.Transform.position = position;
 
             return instance;
+        }
+        
+        public void ReleaseAll()
+        {
+            foreach (var operationHandle in _operationHandles)
+            {
+                Release(operationHandle);
+            }
+            
+            _operationHandles.Clear();
         }
     }
 }

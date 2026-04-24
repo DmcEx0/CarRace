@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Default Local Group
   m_GUID: 8e29e26d1f1592e47a233046c8f1c403
   m_SerializeEntries:
+  - m_GUID: 3fbe3238aea26b74098ef7708b4391ec
+    m_Address: Assets/Source/Prefabs/Weapon/Bullet.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4bb12b60b0b5ffc4a87f726599d94adc
     m_Address: Assets/Source/Prefabs/Weapon/Minigun_lvl2.prefab
     m_ReadOnly: 0
@@ -42,6 +47,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: add63d8207463194683ced51128e95a8
     m_Address: Assets/Source/Prefabs/Weapon/RocketLauncher_lvl2.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f5527253c5febca45b9c872f2c3184a3
+    m_Address: Assets/Source/Prefabs/Weapon/Rocket.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

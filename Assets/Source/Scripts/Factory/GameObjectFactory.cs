@@ -8,27 +8,23 @@ using Object = UnityEngine.Object;
 
 namespace CarRace.Factory
 {
-    public abstract class GameObjectFactory : IDisposable
+    public abstract class GameObjectFactory
     {
-        private CancellationTokenSource _tokenSource = new CancellationTokenSource();
-        
         protected T Create<T>(T prefab) where T : Object
         {
             var instance = Object.Instantiate(prefab);
             return instance;
         }
         
-        protected async UniTask<KeyValuePair<T, AsyncOperationHandle>> CreateWithAddressAsync<T>(AssetReference reference)
+        protected async UniTask<SpawnResult<T>> CreateWithAddressAsync<T>(AssetReference reference, CancellationToken token)
             where T : Object
         {
-            ResetToken();
-            
             var loadOp = reference.InstantiateAsync();
-            var obj = await loadOp.WithCancellation(_tokenSource.Token);
+            var obj = await loadOp.WithCancellation(token);
 
             if (obj.TryGetComponent(out T instance))
             {
-                return new KeyValuePair<T, AsyncOperationHandle>(instance, loadOp);
+                return new SpawnResult<T>(instance, loadOp);
             }
 
             throw new Exception($"Can't get component {typeof(T)} from {obj}");
@@ -37,23 +33,6 @@ namespace CarRace.Factory
         public static void Release(AsyncOperationHandle reference)
         {
             reference.Release();
-        }
-
-        public void Dispose()
-        {
-            DisposeCancellation();
-        }
-
-        private void ResetToken()
-        {
-            DisposeCancellation();
-            _tokenSource = new CancellationTokenSource();
-        }
-        
-        private void DisposeCancellation()
-        {
-            _tokenSource?.Cancel();
-            _tokenSource?.Dispose();
         }
     }
 }
