@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.EnemyView
   <Animancer>k__BackingField: {fileID: 7132952588218863096}
-  <Transform>k__BackingField: {fileID: 7175102338878484725}
+  <ViewTransform>k__BackingField: {fileID: 7175102338878484725}
 --- !u!136 &6993166089533008878
 CapsuleCollider:
   m_ObjectHideFlags: 0

@@ -1,42 +1,121 @@
+using System;
 using UnityEngine;
 
 namespace CarRace
 {
-    public class BallisticProjectileBehaviour : BaseProjectileBehaviour
+    public sealed class BallisticProjectileBehaviour : BaseProjectileBehaviour
     {
-        private Vector3 _velocity;
-        private float _gravity;
+        private AnimationCurve _heightByProgress;
+        private float _arcHeight;
+        private bool _rotateAlongVelocity;
+        private Vector3 _arcDirection;
+        private Action<EnemyView> _baseEnemyDetectedHandler;
 
-        public BallisticProjectileBehaviour(ProjectileView view, float speed) : base(view, speed) { }
+        private float _curveStartValue;
+        private float _curveEndValue;
+        private float _elapsed;
+        private float _duration;
+        private bool _isFinished;
+        private Vector3 _startPosition;
+        private Vector3 _previousPosition;
+
+        public BallisticProjectileBehaviour(ProjectileView view, ProjectileSettings settings, Transform firePoint) :
+            base(view, settings, firePoint)
+        { }
+
+        protected override void OnInit()
+        {
+            if (Settings is BallisticProjectileSettings ballisticSettings)
+            {
+                _arcHeight = Mathf.Max(0f, ballisticSettings.ArcHeight);
+                _heightByProgress = CopyCurve(ballisticSettings.HeightByProgress);
+                _rotateAlongVelocity = ballisticSettings.RotateAlongVelocity;
+                _arcDirection = ballisticSettings.ArcDirection.sqrMagnitude > 0f
+                    ? ballisticSettings.ArcDirection.normalized
+                    : Vector3.up;
+            }
+            
+            _elapsed = 0f;
+            _isFinished = false;
+            _startPosition = FirePoint.position;
+            _previousPosition = _startPosition;
+            _duration = CalculateDuration(_startPosition, TargetPosition);
+            _curveStartValue = _heightByProgress.Evaluate(0f);
+            _curveEndValue = _heightByProgress.Evaluate(1f);
+        }
 
         public override void OnMove(float deltaTime)
         {
-            var rb = View.Rb;
+            if (_isFinished)
+            {
+                return;
+            }
 
-            _velocity.y += _gravity * deltaTime;
+            if (_duration <= 0f)
+            {
+                FinishFlight();
+                return;
+            }
 
-            rb.MovePosition(rb.position + _velocity * deltaTime);
+            _elapsed = Mathf.Min(_elapsed + deltaTime, _duration);
+
+            float progress = Mathf.Clamp01(_elapsed / _duration);
+            Vector3 linearPosition = Vector3.Lerp(_startPosition, TargetPosition, progress);
+            float curveValue = _heightByProgress.Evaluate(progress);
+            float normalizedCurveValue = curveValue - Mathf.Lerp(_curveStartValue, _curveEndValue, progress);
+            Vector3 nextPosition = linearPosition + _arcDirection * (normalizedCurveValue * _arcHeight);
+            Vector3 movement = nextPosition - _previousPosition;
+
+            ViewTransform.position = nextPosition;
+
+            if (_rotateAlongVelocity && movement.sqrMagnitude > 0.000001f)
+            {
+                ViewTransform.forward = movement.normalized;
+            }
+
+            _previousPosition = nextPosition;
+
+            if (progress >= 1f)
+            {
+                FinishFlight();
+            }
         }
-        
-        protected override void OnInit()
+
+        private float CalculateDuration(Vector3 startPosition, Vector3 targetPosition)
         {
-            _gravity = Physics.gravity.y;
+            if (Settings.Speed <= 0f)
+            {
+                return 0f;
+            }
 
-            var start = View.Rb.position;
-            var toTarget = TargetPosition - start;
+            return Vector3.Distance(startPosition, targetPosition) / Settings.Speed;
+        }
 
-            var horizontal = new Vector3(toTarget.x, 0f, toTarget.z);
-            float distance = horizontal.magnitude;
+        private void FinishFlight()
+        {
+            _isFinished = true;
+            ViewTransform.position = TargetPosition;
 
-            float height = toTarget.y;
+            if (_baseEnemyDetectedHandler != null)
+            {
+                // Base class subscribes on Init, so we mirror the unsubscribe on non-hit despawn.
+                View.DetectedEnemy -= _baseEnemyDetectedHandler;
+            }
 
-            float time = distance / Speed;
+            Despawned?.Invoke(this);
+        }
 
-            Vector3 horizontalVelocity = horizontal / time;
+        private static AnimationCurve CopyCurve(AnimationCurve sourceCurve)
+        {
+            if (sourceCurve == null || sourceCurve.length == 0)
+            {
+                return new AnimationCurve(
+                    new Keyframe(0f, 0f),
+                    new Keyframe(0.5f, 1f),
+                    new Keyframe(1f, 0f));
+            }
 
-            float verticalVelocity = (height - 0.5f * _gravity * time * time) / time;
-
-            _velocity = horizontalVelocity + Vector3.up * verticalVelocity;
+            return new AnimationCurve(sourceCurve.keys);
         }
     }
 }

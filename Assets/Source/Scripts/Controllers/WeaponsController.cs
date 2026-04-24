@@ -17,7 +17,7 @@ namespace CarRace.Controllers
 
         private readonly GameConfig _gameConfig;
         private readonly WeaponsProvider _weaponsProvider;
-        private readonly ProjectilesFactory _projectilesFactory;
+        // private readonly ProjectilesFactory _projectilesFactory;
         private readonly CarView _view;
 
         private TargetSystem<EnemyView> _targetSystem;
@@ -32,7 +32,7 @@ namespace CarRace.Controllers
         {
             _weaponsProvider = weaponsProvider;
             _gameConfig = gameConfig;
-            _projectilesFactory = projectilesFactory;
+            // _projectilesFactory = projectilesFactory;
             _view = view;
         }
 
@@ -64,9 +64,9 @@ namespace CarRace.Controllers
 
         public void FixedTick()
         {
-            foreach (var projectile in _projectiles)
+            for (int i = _projectiles.Count - 1; i >= 0; i--)
             {
-                projectile.OnMove(Time.fixedDeltaTime);
+                _projectiles[i].OnMove(Time.fixedDeltaTime);
             }
         }
 
@@ -79,7 +79,7 @@ namespace CarRace.Controllers
 
                 if (hasTarget)
                 {
-                    var projectileBehaviour = _projectilesFactory.Get(target.transform.position,
+                    var projectileBehaviour = weaponContext.ProjectilesFactory.Get(target.ViewTransform.position,
                         weaponContext.View.FirePoints[0].position);
 
                     projectileBehaviour.DetectedEnemy += OnProjectileEnemyDetected;
@@ -109,8 +109,8 @@ namespace CarRace.Controllers
 
         private async UniTask ConfigureWeaponAsync(WeaponContext weaponContext)
         {
-            await _projectilesFactory.PrepareAsync(weaponContext, ProjectilesCount, _cts.Token);
-            await WeaponFireAsync(weaponContext);
+            await weaponContext.ProjectilesFactory.PrepareAsync(weaponContext, ProjectilesCount, _cts.Token);
+            WeaponFireAsync(weaponContext).Forget();
         }
     }
 }

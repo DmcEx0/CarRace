@@ -10,12 +10,17 @@ namespace CarRace
 
         public Action<EnemyView> DetectedEnemy { get; set; }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if (other.TryGetComponent(out EnemyView enemyView))
             {
                 DetectedEnemy?.Invoke(enemyView);
+
+                return;
             }
+
+            DetectedEnemy?.Invoke(null);
+            Debug.Log(name);
         }
     }
 }

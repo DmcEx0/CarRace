@@ -47,8 +47,8 @@ namespace CarRace.Helpers
             if (_pool.Count != 0)
             {
                 var instance = _pool.Dequeue();
-                instance.Transform.SetActive(true);
-                instance.Transform.SetParent(null);
+                instance.ViewTransform.SetActive(true);
+                instance.ViewTransform.SetParent(null);
 
                 return instance;
             }
@@ -60,8 +60,8 @@ namespace CarRace.Helpers
         {
             _pool.Enqueue(instance);
             
-            instance.Transform.SetActive(false);
-            instance.Transform.SetParent(_container);
+            instance.ViewTransform.SetActive(false);
+            instance.ViewTransform.SetParent(_container);
         }
 
         private void CreateContainer()

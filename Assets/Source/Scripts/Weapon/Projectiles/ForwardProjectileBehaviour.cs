@@ -4,7 +4,7 @@ namespace CarRace
 {
     public class ForwardProjectileBehaviour : BaseProjectileBehaviour
     {
-        public ForwardProjectileBehaviour(ProjectileView view, float speed) : base(view, speed) { }
+        public ForwardProjectileBehaviour(ProjectileView view, ProjectileSettings settings, Transform firePoint) : base(view, settings, firePoint) { }
 
         public override void OnMove(float deltaTime)
         {
@@ -12,7 +12,7 @@ namespace CarRace
             
             var direction = TargetPosition - rb.position;
             
-            rb.MovePosition(rb.position + direction * (Speed * deltaTime));
+            rb.MovePosition(rb.position + direction * (Settings.Speed * deltaTime));
         }
     }
 }

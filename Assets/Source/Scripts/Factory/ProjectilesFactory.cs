@@ -15,7 +15,7 @@ namespace CarRace
         private readonly ObjectPool<BaseProjectileBehaviour> _pool;
 
         private BaseProjectileBehaviour _projectileBehaviour;
-        
+
         private readonly List<AsyncOperationHandle> _operationHandles;
 
         public ProjectilesFactory(Transform container)
@@ -41,11 +41,13 @@ namespace CarRace
                 {
                     case WeaponType.Minigun:
                         projectileBehaviour =
-                            new ForwardProjectileBehaviour(result.Instance, weaponContext.ProjectileSpeed);
+                            new ForwardProjectileBehaviour(result.Instance, weaponContext.ProjectileSettings,
+                                weaponContext.View.FirePoints[0]);
                         break;
                     case WeaponType.RocketLauncher:
                         projectileBehaviour =
-                            new BallisticProjectileBehaviour(result.Instance, weaponContext.ProjectileSpeed);
+                            new BallisticProjectileBehaviour(result.Instance, weaponContext.ProjectileSettings,
+                                weaponContext.View.FirePoints[0]);
                         break;
                 }
 
@@ -59,18 +61,17 @@ namespace CarRace
             var instance = _pool.Get();
 
             instance.Init(targetPosition);
-            instance.Transform.position = position;
 
             return instance;
         }
-        
+
         public void ReleaseAll()
         {
             foreach (var operationHandle in _operationHandles)
             {
                 Release(operationHandle);
             }
-            
+
             _operationHandles.Clear();
         }
     }

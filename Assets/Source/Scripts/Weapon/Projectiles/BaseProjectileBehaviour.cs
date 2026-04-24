@@ -7,23 +7,27 @@ namespace CarRace
     public abstract class BaseProjectileBehaviour : IPoolable<BaseProjectileBehaviour>
     {
         public ProjectileView View { get; private set; }
-        protected float Speed { get; private set; }
+        protected ProjectileSettings Settings { get; private set; }
         protected Vector3 TargetPosition { get; private set; }
+        protected Transform FirePoint { get; private set; }
 
-        public Transform Transform => View.Transform;
+        public Transform ViewTransform => View.Transform;
 
         public Action<BaseProjectileBehaviour, EnemyView> DetectedEnemy { get; set; }
         
         public Action<BaseProjectileBehaviour> Despawned { get; set; }
 
-        protected BaseProjectileBehaviour(ProjectileView view, float speed)
+        protected BaseProjectileBehaviour(ProjectileView view, ProjectileSettings settings, Transform firePoint)
         {
             View = view;
-            Speed = speed;
+            Settings = settings;
+            FirePoint = firePoint;
         }
 
         public void Init(Vector3 targetPosition)
         {
+            ViewTransform.position = FirePoint.position;
+            
             TargetPosition = targetPosition;
             View.DetectedEnemy += OnViewEnemyDetected;
 

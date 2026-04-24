@@ -13,7 +13,7 @@ namespace CarRace
         [field: SerializeField] public ProjectileView ProjectileViewPrefab { get; private set; }
         [field: SerializeField] public AssetReference ProjectileReference { get; private set; }
         
-        [field: SerializeField] public float ProjectileSpeed { get; private set; }
+        [field: SerializeReference] public ProjectileSettings ProjectileSettings { get; private set; }
         
         [field: Space]
         [field: SerializeField] public WeaponType Type { get; private set; }
