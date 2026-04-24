@@ -55,7 +55,7 @@ MonoBehaviour:
     <Type>k__BackingField: 2
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 10
-    <BaseFireRate>k__BackingField: 0.82
+    <BaseFireRate>k__BackingField: 1.05
     <BaseRange>k__BackingField: 31.7
   - <WeaponPreview>k__BackingField: {fileID: 0}
     <WeaponViewPrefab>k__BackingField: {fileID: 5305335993251836934, guid: add63d8207463194683ced51128e95a8, type: 3}
@@ -109,14 +109,23 @@ MonoBehaviour:
     - rid: 3406934086495502419
       type: {class: BallisticProjectileSettings, ns: CarRace, asm: Assembly-CSharp}
       data:
-        <Speed>k__BackingField: 6.55
-        <ArcHeight>k__BackingField: 2
+        <Speed>k__BackingField: 10.48
+        <ArcHeight>k__BackingField: 3.28
         <HeightByProgress>k__BackingField:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
             value: 0
+            inSlope: 3.5720894
+            outSlope: 3.5720894
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0.06349201
+          - serializedVersion: 3
+            time: 0.69122314
+            value: 0.9976196
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -124,22 +133,22 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.5
-            value: 1
-            inSlope: 0
-            outSlope: 0
+            time: 0.9763427
+            value: 0.12164038
+            inSlope: -6.1096807
+            outSlope: -6.1096807
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0
-            outWeight: 0
+            inWeight: 0.07095205
+            outWeight: 0.33333334
           - serializedVersion: 3
             time: 1
             value: 0
-            inSlope: 0
-            outSlope: 0
+            inSlope: -5.1413918
+            outSlope: -5.1413918
             tangentMode: 0
             weightedMode: 0
-            inWeight: 0
+            inWeight: 1
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2

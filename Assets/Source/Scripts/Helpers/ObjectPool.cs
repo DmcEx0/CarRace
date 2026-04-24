@@ -58,10 +58,10 @@ namespace CarRace.Helpers
         
         private void ConfigureInstance(T instance)
         {
-            _pool.Enqueue(instance);
-            
             instance.ViewTransform.SetActive(false);
             instance.ViewTransform.SetParent(_container);
+            
+            _pool.Enqueue(instance);
         }
 
         private void CreateContainer()

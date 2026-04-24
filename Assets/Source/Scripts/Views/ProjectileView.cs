@@ -20,7 +20,6 @@ namespace CarRace
             }
 
             DetectedEnemy?.Invoke(null);
-            Debug.Log(name);
         }
     }
 }

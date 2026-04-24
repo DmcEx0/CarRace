@@ -7,9 +7,9 @@ namespace CarRace
     public abstract class BaseProjectileBehaviour : IPoolable<BaseProjectileBehaviour>
     {
         public ProjectileView View { get; private set; }
-        protected ProjectileSettings Settings { get; private set; }
         protected Vector3 TargetPosition { get; private set; }
         protected Transform FirePoint { get; private set; }
+        protected ProjectileSettings Settings { get; private set; }
 
         public Transform ViewTransform => View.Transform;
 
@@ -42,9 +42,9 @@ namespace CarRace
         
         private void OnViewEnemyDetected(EnemyView enemyView)
         {
+            Despawned?.Invoke(this);
             DetectedEnemy?.Invoke(this, enemyView);
             View.DetectedEnemy -= OnViewEnemyDetected;
-            Despawned?.Invoke(this);
         }
     }
 }
