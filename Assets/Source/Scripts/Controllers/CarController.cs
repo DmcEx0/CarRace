@@ -80,10 +80,11 @@ namespace CarRace.Controllers
         {
             for (int i = 0; i < _weaponsProvider.WeaponsSlots.Count; i++)
             {
-                var weaponContext = await GetCreatedWeaponAsync(type, lvl,
-                    _weaponsProvider.WeaponsSlots[i].ParentTransform);
+                var slot = _weaponsProvider.WeaponsSlots[i];
                 
-                _weaponsProvider.WeaponsSlots[i].Replace(weaponContext);
+                var weaponContext = await GetCreatedWeaponAsync(type, lvl, slot.ParentTransform);
+                
+                slot.Replace(weaponContext);
             }
         }
 

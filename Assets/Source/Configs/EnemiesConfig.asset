@@ -19,7 +19,7 @@ MonoBehaviour:
     m_SubObjectType: 
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
-  <Speed>k__BackingField: 2.28
+  <Speed>k__BackingField: 0.08
   <FollowRadius>k__BackingField: 70.5
   <AttackRadius>k__BackingField: 1
   <IdleAnimation>k__BackingField:

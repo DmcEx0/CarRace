@@ -22,3 +22,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   <MaxTargetsCountForPlayer>k__BackingField: 10
+  <WeaponsNumberForMerge>k__BackingField: 3
