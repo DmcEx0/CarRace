@@ -1,19 +1,11 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-namespace CarRace
+namespace CarRace.UI.Equipnet
 {
     public class EquipmentView : MonoBehaviour
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        [field: SerializeField] public RectTransform InventoryContainer { get; private set; }
+        [field: SerializeField] public Button CloseButton { get; private set; }
     }
 }

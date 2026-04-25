@@ -1,5 +1,6 @@
 using CarRace.Controllers;
 using CarRace.Inventory;
+using CarRace.UI;
 using CarRace.Views;
 using CarRace.Weapon;
 using UnityEngine;
@@ -14,11 +15,16 @@ namespace CarRace
         [SerializeField] private WeaponsConfig _weaponsConfig;
         [SerializeField] private GameConfig _gameConfig;
         
+        [Space]
         [SerializeField] private Transform _enemySpawnPointContainer;
         [SerializeField] private Transform _enemyPoolContainer;
         [SerializeField] private Transform _projectilePoolContainer;
+
+        [Space]
+        [SerializeField] private UIElementsProvider _uiElementsProvider;
         
         //For Test
+        [Space]
         [SerializeField] private Car _testPlayer;
         [SerializeField] private CarView _carView;
 
@@ -26,6 +32,7 @@ namespace CarRace
         {
             builder.RegisterInstance(_testPlayer);
             builder.RegisterInstance(_carView);
+            builder.RegisterInstance(_uiElementsProvider);
 
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
@@ -43,6 +50,7 @@ namespace CarRace
             builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
             builder.RegisterEntryPoint<CarController>();
             builder.RegisterEntryPoint<WeaponsController>();
+            builder.RegisterEntryPoint<UIController>();
 
             // TestConfigure(builder);
         }
