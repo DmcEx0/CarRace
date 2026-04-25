@@ -17,22 +17,20 @@ namespace CarRace.Controllers
 
         private readonly GameConfig _gameConfig;
         private readonly WeaponsProvider _weaponsProvider;
-        // private readonly ProjectilesFactory _projectilesFactory;
         private readonly CarView _view;
 
         private TargetSystem<EnemyView> _targetSystem;
         private List<BaseProjectileBehaviour> _projectiles;
 
         private CancellationTokenSource _cts;
+        private CancellationTokenSource _weaponFireCts;
 
         private bool _canFire;
 
-        public WeaponsController(WeaponsProvider weaponsProvider, GameConfig gameConfig,
-            ProjectilesFactory projectilesFactory, CarView view)
+        public WeaponsController(WeaponsProvider weaponsProvider, GameConfig gameConfig, CarView view)
         {
             _weaponsProvider = weaponsProvider;
             _gameConfig = gameConfig;
-            // _projectilesFactory = projectilesFactory;
             _view = view;
         }
 
@@ -42,7 +40,9 @@ namespace CarRace.Controllers
                 new TargetSystem<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
 
             _projectiles = new List<BaseProjectileBehaviour>();
+            
             _cts = new CancellationTokenSource();
+            
             _canFire = true;
         }
 
@@ -50,6 +50,8 @@ namespace CarRace.Controllers
         {
             _cts?.Cancel();
             _cts?.Dispose();
+
+            DisposeWeaponFireCts();
 
             _canFire = false;
         }
@@ -70,7 +72,7 @@ namespace CarRace.Controllers
             }
         }
 
-        private async UniTask WeaponFireAsync(WeaponContext weaponContext)
+        private async UniTask WeaponFireAsync(WeaponContext weaponContext, CancellationToken token)
         {
             while (_canFire)
             {
@@ -87,7 +89,7 @@ namespace CarRace.Controllers
                     _projectiles.Add(projectileBehaviour);
                 }
 
-                await UniTask.Delay(TimeSpan.FromSeconds(weaponContext.BaseFireRate), cancellationToken: _cts.Token);
+                await UniTask.Delay(TimeSpan.FromSeconds(weaponContext.BaseFireRate), cancellationToken: token);
             }
         }
 
@@ -96,6 +98,16 @@ namespace CarRace.Controllers
             _projectiles.Remove(projectileBehaviour);
             projectileBehaviour.DetectedEnemy -= OnProjectileEnemyDetected;
         }
+        
+        private void RemoveProjectiles()
+        {
+            foreach (var projectileBehaviour in _projectiles)
+            {
+                projectileBehaviour.DetectedEnemy -= OnProjectileEnemyDetected;
+            }
+            
+            _projectiles.Clear();
+        }
 
         private void OnWeaponContextChanged(WeaponContext weaponContext)
         {
@@ -103,14 +115,31 @@ namespace CarRace.Controllers
             {
                 return;
             }
-
+            
+            DisposeWeaponFireCts();
+            
+            _weaponFireCts = new CancellationTokenSource();
+            
+            _canFire = false;
+            
+            RemoveProjectiles();
+            
             ConfigureWeaponAsync(weaponContext).Forget();
         }
 
         private async UniTask ConfigureWeaponAsync(WeaponContext weaponContext)
         {
             await weaponContext.ProjectilesFactory.PrepareAsync(weaponContext, ProjectilesCount, _cts.Token);
-            WeaponFireAsync(weaponContext).Forget();
+         
+            _canFire = true;
+            
+            WeaponFireAsync(weaponContext, _weaponFireCts.Token).Forget();
+        }
+
+        private void DisposeWeaponFireCts()
+        {
+            _weaponFireCts?.Cancel();
+            _weaponFireCts?.Dispose();
         }
     }
 }

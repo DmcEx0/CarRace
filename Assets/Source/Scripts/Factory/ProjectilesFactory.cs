@@ -67,11 +67,16 @@ namespace CarRace
 
         public void ReleaseAll()
         {
+            if(_operationHandles.Count == 0)
+            {
+                return;
+            }
+            
             foreach (var operationHandle in _operationHandles)
             {
                 Release(operationHandle);
             }
-
+            
             _operationHandles.Clear();
         }
     }

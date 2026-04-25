@@ -38,6 +38,8 @@ namespace CarRace.Controllers
             {
                 new(WeaponType.Minigun, 0),
                 new(WeaponType.RocketLauncher, 0),
+                new(WeaponType.Minigun, 1),
+                new(WeaponType.RocketLauncher, 1),
             };
         }
         
@@ -57,7 +59,11 @@ namespace CarRace.Controllers
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
-                CreateWeaponAsync().Forget();
+                CreateWeaponAsync(WeaponType.Minigun, 0).Forget();
+            }
+            else if (Input.GetKeyDown(KeyCode.O))
+            {
+                CreateWeaponAsync(WeaponType.RocketLauncher, 0).Forget();
             }
         }
 
@@ -70,11 +76,11 @@ namespace CarRace.Controllers
             }
         }
 
-        private async UniTask CreateWeaponAsync() // Test
+        private async UniTask CreateWeaponAsync(WeaponType type, int lvl) // Test
         {
-            for (int i = 0; i < _initialWeapons.Count; i++)
+            for (int i = 0; i < _weaponsProvider.WeaponsSlots.Count; i++)
             {
-                var weaponContext = await GetCreatedWeaponAsync(_initialWeapons[i].Key, _initialWeapons[i].Value,
+                var weaponContext = await GetCreatedWeaponAsync(type, lvl,
                     _weaponsProvider.WeaponsSlots[i].ParentTransform);
                 
                 _weaponsProvider.WeaponsSlots[i].Replace(weaponContext);

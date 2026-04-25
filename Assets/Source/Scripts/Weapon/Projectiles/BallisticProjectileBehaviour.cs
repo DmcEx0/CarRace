@@ -21,7 +21,7 @@ namespace CarRace
                 _ballisticSettings = ballisticSettings;
             }
         }
-        
+
         protected override void OnInit()
         {
             _startPosition = FirePoint.position;
@@ -37,8 +37,16 @@ namespace CarRace
 
         public override void OnMove(float deltaTime)
         {
-            if (_ballisticSettings == null)
+            if(View == null)
+            {
+                Debug.LogWarning("ForwardProjectileBehaviour.OnMove called without View");
                 return;
+            }
+            
+            if (_ballisticSettings == null)
+            {
+                return;
+            }
 
             _currentTime += deltaTime;
 

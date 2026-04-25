@@ -8,6 +8,12 @@ namespace CarRace
 
         public override void OnMove(float deltaTime)
         {
+            if(View == null)
+            {
+                Debug.LogWarning("ForwardProjectileBehaviour.OnMove called without View");
+                return;
+            }
+            
             var rb = View.Rb;
             
             var direction = TargetPosition - rb.position;

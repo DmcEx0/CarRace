@@ -33,7 +33,7 @@ MonoBehaviour:
     <Type>k__BackingField: 1
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 1
-    <BaseFireRate>k__BackingField: 2.1
+    <BaseFireRate>k__BackingField: 0.34
     <BaseRange>k__BackingField: 34.9
   - <WeaponPreview>k__BackingField: {fileID: 0}
     <WeaponViewPrefab>k__BackingField: {fileID: 5305335993251836934, guid: 5f73668964f88164aae003225d1f933f, type: 3}
@@ -124,8 +124,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0.06349201
           - serializedVersion: 3
-            time: 0.69122314
-            value: 0.9976196
+            time: 0.5658313
+            value: 1.0047455
             inSlope: 0
             outSlope: 0
             tangentMode: 0

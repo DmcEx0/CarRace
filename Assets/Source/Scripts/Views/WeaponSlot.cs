@@ -34,6 +34,8 @@ namespace CarRace.Views
             {
                 return;
             }
+            
+            _weaponContext.Value.ProjectilesFactory.ReleaseAll();
 
             GameObjectFactory.Release(_weaponContext.Value.OpHandle);
             _weaponContext.Value =  null;
