@@ -1,6 +1,6 @@
 namespace CarRace.Inventory
 {
-    public struct WeaponInventoryCell
+    public class WeaponInventoryCell
     {
         public int Level { get; private set; }
         public WeaponType Type { get; private set; }
