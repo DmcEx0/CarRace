@@ -31,7 +31,8 @@ namespace CarRace
         [Space]
         [SerializeField] private Car _testPlayer;
         [SerializeField] private CarView _carView;
-
+        [SerializeField] private TestConfig _testConfig;
+        
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_testPlayer);
@@ -41,6 +42,7 @@ namespace CarRace
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
             builder.RegisterComponent(_gameConfig);
+            builder.RegisterComponent(_testConfig);
             
             builder.RegisterComponent(_equipmentCellView);
 

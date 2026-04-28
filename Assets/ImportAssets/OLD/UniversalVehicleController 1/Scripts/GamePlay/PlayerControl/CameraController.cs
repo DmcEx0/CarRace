@@ -78,6 +78,7 @@ namespace PG
         RaycastHit[] Hits = new RaycastHit[4];
         bool ManualRotation;
 
+        [Obsolete("Obsolete")]
         public override bool Initialize (VehicleController vehicle)
         {
             if (Car != null)
@@ -197,6 +198,7 @@ namespace PG
             UpdateActiveCamera (fastCameraRotation: true);
         }
 
+        [Obsolete("Obsolete")]
         protected override void Start ()
         {
             base.Start ();

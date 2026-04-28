@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -317,6 +318,7 @@ namespace PG
             OnDestroyAction.SafeInvoke ();
         }
 
+        [Obsolete("Obsolete")]
         public override bool Initialize (VehicleController car)
         {
             base.Initialize (car);

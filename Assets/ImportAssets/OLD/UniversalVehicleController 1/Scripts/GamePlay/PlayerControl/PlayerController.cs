@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -66,6 +67,7 @@ namespace PG
             }
         }
 
+        [Obsolete("Obsolete")]
         public override bool Initialize (VehicleController vehicle)
         {
             if (!base.Initialize (vehicle))

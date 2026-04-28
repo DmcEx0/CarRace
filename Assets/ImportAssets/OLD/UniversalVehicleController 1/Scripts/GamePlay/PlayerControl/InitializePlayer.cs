@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ namespace PG
         public bool IsInitialized { get; private set; }
         protected GameController GameController { get { return GameController.Instance; } }
 
+        [Obsolete("Obsolete")]
         protected virtual void Start ()
         {
             if (TargetVehicle && !IsInitialized)
@@ -27,6 +29,7 @@ namespace PG
             }
         }
 
+        [Obsolete("Obsolete")]
         public virtual bool Initialize (VehicleController vehicle)
         {
             if (IsInitialized)

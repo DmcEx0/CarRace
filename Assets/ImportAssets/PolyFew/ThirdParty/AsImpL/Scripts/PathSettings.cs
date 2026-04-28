@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,6 +53,7 @@ namespace BrainFailProductions.PolyFew.AsImpL
         }
 
 
+        [Obsolete("Obsolete")]
         public static PathSettings FindPathComponent(GameObject obj)
         {
             PathSettings pathSettings = obj.GetComponent<PathSettings>();

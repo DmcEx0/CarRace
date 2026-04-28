@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,7 @@ namespace PG
 
         float CameraVerticlaAngle = 0;
 
+        [Obsolete("Obsolete")]
         void Start ()
         {
             if (Input == null)

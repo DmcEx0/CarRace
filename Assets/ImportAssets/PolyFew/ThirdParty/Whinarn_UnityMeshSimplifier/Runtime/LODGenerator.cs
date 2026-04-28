@@ -24,9 +24,11 @@ SOFTWARE.
 */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace UnityMeshSimplifier
 {
@@ -275,12 +277,13 @@ namespace UnityMeshSimplifier
         /// </summary>
         /// <param name="generatorHelper">The LOD generator helper.</param>
         /// <returns>If the LODs were successfully destroyed.</returns>
+        [Obsolete("Obsolete")]
         public static bool DestroyLODs(LODGeneratorHelper generatorHelper)
         {
             if (generatorHelper == null)
                 throw new System.ArgumentNullException(nameof(generatorHelper));
 
-            return DestroyLODs(generatorHelper.gameObject);
+            return DestroyLoDs(generatorHelper.gameObject);
         }
 
         /// <summary>
@@ -288,7 +291,8 @@ namespace UnityMeshSimplifier
         /// </summary>
         /// <param name="gameObject">The game object to destroy LODs for.</param>
         /// <returns>If the LODs were successfully destroyed.</returns>
-        public static bool DestroyLODs(GameObject gameObject)
+        [Obsolete("Obsolete")]
+        public static bool DestroyLoDs(GameObject gameObject)
         {
             if (gameObject == null)
                 throw new System.ArgumentNullException(nameof(gameObject));
@@ -727,6 +731,7 @@ namespace UnityMeshSimplifier
             }
         }
 
+        [Obsolete("Obsolete")]
         private static void DestroyLODAssets(Transform transform)
         {
 #if UNITY_EDITOR
@@ -760,6 +765,7 @@ namespace UnityMeshSimplifier
 #endif
         }
 
+        [Obsolete("Obsolete")]
         private static void DestroyLODMaterialAsset(Material material)
         {
             if (material == null)
