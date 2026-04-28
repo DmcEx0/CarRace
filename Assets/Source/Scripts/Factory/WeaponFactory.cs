@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using CarRace.Configs;
 using CarRace.Factory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;

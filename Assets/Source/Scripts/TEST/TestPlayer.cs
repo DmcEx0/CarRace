@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using CarRace.Configs;
 using CarRace.Helpers;
 using UnityEngine;
 using VContainer;

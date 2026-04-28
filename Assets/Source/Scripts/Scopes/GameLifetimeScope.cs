@@ -1,6 +1,9 @@
+using CarRace.Configs;
 using CarRace.Controllers;
+using CarRace.Factory;
 using CarRace.Inventory;
 using CarRace.UI;
+using CarRace.UI.Equipnet;
 using CarRace.Views;
 using CarRace.Weapon;
 using UnityEngine;
@@ -22,6 +25,7 @@ namespace CarRace
 
         [Space]
         [SerializeField] private UIElementsProvider _uiElementsProvider;
+        [SerializeField] private EquipmentCellView _equipmentCellView;
         
         //For Test
         [Space]
@@ -37,6 +41,8 @@ namespace CarRace
             builder.RegisterComponent(_enemiesConfig);
             builder.RegisterComponent(_weaponsConfig);
             builder.RegisterComponent(_gameConfig);
+            
+            builder.RegisterComponent(_equipmentCellView);
 
             builder.Register<WeaponFactory>(Lifetime.Singleton);
             
@@ -66,6 +72,3 @@ namespace CarRace
         }
     }
 }
-
-
-

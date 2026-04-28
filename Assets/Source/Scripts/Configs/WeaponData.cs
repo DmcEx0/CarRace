@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace CarRace
+namespace CarRace.Configs
 {
     [Serializable]
     public class WeaponData

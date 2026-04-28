@@ -1,9 +1,8 @@
-using Alchemy.Inspector;
 using Animancer;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace CarRace
+namespace CarRace.Configs
 {
     [CreateAssetMenu(fileName = "EnemiesConfig", menuName = "Configs/Enemies Config")]
     public class EnemiesConfig : ScriptableObject

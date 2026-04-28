@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Threading;
+using CarRace.Configs;
 using CarRace.Factory;
 using CarRace.Helpers;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace CarRace
+namespace CarRace.Factory
 {
     public class EnemyFactory : GameObjectFactory
     {

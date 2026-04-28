@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Configs
 {
     [CreateAssetMenu(fileName = "WeaponsConfig", menuName = "Configs/Weapons Config")]
     public class WeaponsConfig : ScriptableObject

@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 3497469887340571892}
   - component: {fileID: 586438709654085208}
   m_Layer: 5
-  m_Name: EquipnentCellView
+  m_Name: EquipmentCellView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using CarRace.Configs;
 using UnityEngine;
 
 namespace CarRace

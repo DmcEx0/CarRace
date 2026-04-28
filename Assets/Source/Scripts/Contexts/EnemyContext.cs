@@ -1,4 +1,5 @@
 using Animancer;
+using CarRace.Configs;
 
 namespace CarRace
 {

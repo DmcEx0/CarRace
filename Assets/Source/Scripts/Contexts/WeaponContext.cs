@@ -1,3 +1,4 @@
+using CarRace.Configs;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 

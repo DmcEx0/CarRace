@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR
 
+using System;
 using System.Collections.Generic;
 using System.IO;
 using UnityEditor;
@@ -150,6 +151,7 @@ namespace BrainFailProductions.PolyFew
 
 
         [MenuItem("Assets/Brainfail Products/PolyFew/Clean Missing Scripts From Prefabs")]
+        [Obsolete("Obsolete")]
         public static void CleanMissingScriptsFromFolders()
         {
             string folderPath = null;
@@ -221,6 +223,7 @@ namespace BrainFailProductions.PolyFew
 #if UNITY_2018_3_OR_NEWER
 
         [MenuItem("Assets/Brainfail Products/PolyFew/Remove Polyfew Scripts From Prefabs")]
+        [Obsolete("Obsolete")]
         public static void RemovePolyfewScriptsFromPrefabs()
         {
             string folderPath = null;

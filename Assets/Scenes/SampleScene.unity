@@ -1813,6 +1813,7 @@ MonoBehaviour:
   _enemyPoolContainer: {fileID: 269563618}
   _projectilePoolContainer: {fileID: 499633927}
   _uiElementsProvider: {fileID: 976817988}
+  _equipmentCellView: {fileID: 586438709654085208, guid: ae14adb7d617b6848aded6054b17b114, type: 3}
   _testPlayer: {fileID: 1886424620}
   _carView: {fileID: 1886424628}
 --- !u!4 &1753491120

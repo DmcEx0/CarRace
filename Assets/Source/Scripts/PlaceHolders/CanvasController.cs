@@ -1,8 +1,9 @@
+using CarRace.Configs;
 using UnityEngine;
 using UnityEngine.UI;
 using VContainer.Unity;
 
-namespace CarRace
+namespace CarRace.Controllers
 {
     public class CanvasController : IInitializable
     {

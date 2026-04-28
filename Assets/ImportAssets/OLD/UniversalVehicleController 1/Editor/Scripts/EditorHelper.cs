@@ -1,7 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEditor;
+using Object = UnityEngine.Object;
 
 namespace PG
 {
@@ -27,12 +27,13 @@ namespace PG
         }
 
         [MenuItem ("GameObject/Create Other/UVC/AI Debug Spawner (Only for Editor)")]
+        [Obsolete("Obsolete")]
         public static void CreateAiSpawner ()
         {
             var go = new GameObject("AISpawner");
             var aiSpawner = go.AddComponent<AIDebugSpawner> ();
-            aiSpawner.AIPath = Transform.FindObjectOfType<AIPath> ();
-            aiSpawner.AIControl = Transform.FindObjectOfType<PositioningAIControl> ();
+            aiSpawner.AIPath = Object.FindObjectOfType<AIPath> ();
+            aiSpawner.AIControl = Object.FindObjectOfType<PositioningAIControl> ();
             Selection.activeObject = go;
         }
 
@@ -50,7 +51,7 @@ namespace PG
             {
                 pos = glass.ShardsParticles.transform.position;
                 rot = glass.ShardsParticles.transform.rotation;
-                GameObject.DestroyImmediate (glass.ShardsParticles.gameObject);
+                Object.DestroyImmediate (glass.ShardsParticles.gameObject);
             }
             else
             {
@@ -67,7 +68,7 @@ namespace PG
             }
 
             var shardsRef = EditorHelperSettings.GetSettings.GlassShards;
-            glass.ShardsParticles = GameObject.Instantiate (shardsRef, glass.transform.parent);
+            glass.ShardsParticles = Object.Instantiate (shardsRef, glass.transform.parent);
             glass.ShardsParticles.transform.position = pos;
             glass.ShardsParticles.transform.rotation = rot;
             glass.ShardsParticles.name = glass.name + "_Shards";
@@ -91,7 +92,7 @@ namespace PG
             {
                 pos = light.ShardsParticles.transform.position;
                 rot = light.ShardsParticles.transform.rotation;
-                GameObject.DestroyImmediate (light.ShardsParticles.gameObject);
+                Object.DestroyImmediate (light.ShardsParticles.gameObject);
             }
             else
             {
@@ -108,7 +109,7 @@ namespace PG
             }
 
             var shardsRef = EditorHelperSettings.GetSettings.GetShardsForLight(light.CarLightType);
-            light.ShardsParticles = GameObject.Instantiate (shardsRef, light.transform.parent);
+            light.ShardsParticles = Object.Instantiate (shardsRef, light.transform.parent);
             light.ShardsParticles.transform.position = pos;
             light.ShardsParticles.transform.rotation = rot;
             light.ShardsParticles.name = light.name + "_Shards";
