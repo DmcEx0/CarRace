@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using CarRace.Configs;
 using CarRace.Factory;
+using CarRace.Inventory;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -17,14 +18,15 @@ namespace CarRace
             _weaponsConfig = weaponsConfig;
         }
 
-        public async UniTask<WeaponContext> GetAsync(WeaponType type, int level, Transform parent,
+        public async UniTask<WeaponContext> GetAsync(WeaponInventoryCell inventoryCell, Transform parent,
             CancellationToken token) // Мб, заменить тип и левел на ID
         {
-            var data = _weaponsConfig.WeaponsData.FirstOrDefault(wpn => wpn.Type == type && wpn.Level == level);
+            var data = _weaponsConfig.WeaponsData.FirstOrDefault(wpn =>
+                wpn.Type == inventoryCell.Type && wpn.Level == inventoryCell.Level);
 
             if (data == null)
             {
-                throw new Exception($"Weapon type: {type}, lvl: {level} not found");
+                throw new Exception($"Weapon type: {inventoryCell.Type}, lvl: {inventoryCell.Level} not found");
             }
 
             var result = await CreateWithAddressAsync<WeaponView>(data.WeaponReference, token);

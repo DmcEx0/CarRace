@@ -1816,6 +1816,7 @@ MonoBehaviour:
   _equipmentCellView: {fileID: 586438709654085208, guid: ae14adb7d617b6848aded6054b17b114, type: 3}
   _testPlayer: {fileID: 1886424620}
   _carView: {fileID: 1886424628}
+  _testConfig: {fileID: 11400000, guid: 704b70c85193e574eb8b0fb095693665, type: 2}
 --- !u!4 &1753491120
 Transform:
   m_ObjectHideFlags: 0
@@ -2679,6 +2680,14 @@ PrefabInstance:
     - target: {fileID: 7448879637183758030, guid: 5369c3d64b2749e47bdba9882e9d822e, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356245174573329880, guid: 5369c3d64b2749e47bdba9882e9d822e, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -600
+      objectReference: {fileID: 0}
+    - target: {fileID: 8356245174573329880, guid: 5369c3d64b2749e47bdba9882e9d822e, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -300
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
