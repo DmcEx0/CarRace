@@ -22,11 +22,6 @@ namespace CarRace
 
         private bool _isReversing;
 
-        private void Start()
-        {
-            Application.targetFrameRate = 120;
-        }
-
         private void Update()
         {
             float rawX = SimpleInput.GetAxis(_horizontalAxis);

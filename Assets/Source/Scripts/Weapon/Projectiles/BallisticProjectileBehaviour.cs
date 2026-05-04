@@ -28,7 +28,7 @@ namespace CarRace
 
             float distance = Vector3.Distance(_startPosition, TargetPosition);
 
-            _distanceScale = Mathf.Clamp(distance * 0.1f, 1f, 10f);
+            _distanceScale = Mathf.Clamp(distance * 0.1f, 0.1f, 10f);
 
             _currentTime = 0f;
 

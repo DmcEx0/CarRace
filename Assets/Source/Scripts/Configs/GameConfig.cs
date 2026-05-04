@@ -14,5 +14,8 @@ namespace CarRace.Configs
         
         [field: Space]
         [field: SerializeField] public int WeaponsNumberForMerge {get; private set;}
+        
+        [field: Space]
+        [field: SerializeField, Min(0)] public int TargetFPS {get; private set;}
     }
 }
