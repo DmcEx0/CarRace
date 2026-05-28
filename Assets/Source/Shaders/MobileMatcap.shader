@@ -86,7 +86,8 @@ Shader "CarRace/MobileMatcap"
                 float4 positionCS : SV_POSITION;
                 float2 uv         : TEXCOORD0;
                 half3  normalWS   : TEXCOORD1;
-                half   rim        : TEXCOORD2;
+                half3  viewDirWS  : TEXCOORD2;
+                half   rim        : TEXCOORD3;
             };
 
             Varyings vert (Attributes IN)
@@ -95,14 +96,15 @@ Shader "CarRace/MobileMatcap"
 
                 VertexPositionInputs posIn = GetVertexPositionInputs(IN.positionOS.xyz);
                 float3 normalWS = TransformObjectToWorldNormal(IN.normalOS);
+                float3 viewDirWS = normalize(GetCameraPositionWS() - posIn.positionWS);
 
                 OUT.positionCS = posIn.positionCS;
                 OUT.uv         = TRANSFORM_TEX(IN.uv, _BaseMap);
                 OUT.normalWS   = (half3)normalWS;
+                OUT.viewDirWS  = (half3)viewDirWS;
 
                 // Rim считается на вершине — на машинах с нормальной топологией
                 // разницы с per-pixel почти не видно, а инструкций экономим много.
-                float3 viewDirWS = normalize(GetCameraPositionWS() - posIn.positionWS);
                 OUT.rim = pow(saturate(1.0h - dot(normalWS, viewDirWS)), _RimPower);
 
                 return OUT;
@@ -111,11 +113,16 @@ Shader "CarRace/MobileMatcap"
             half4 frag (Varyings IN) : SV_Target
             {
                 half3 nWS = normalize(IN.normalWS);
+                half3 vWS = normalize(IN.viewDirWS);
 
-                // MatCap UV из вью-нормали: классический трюк, картинка
-                // "поворачивается" вместе с камерой и выглядит лит.
-                half3 nVS = mul((half3x3)UNITY_MATRIX_V, nWS);
-                half2 matcapUV = nVS.xy * 0.5h + 0.5h;
+                // Sphere map mapping (Blinn 1976) — корректно сворачивает заднюю
+                // полусферу к центру matcap'а. Без этого на silhouette-краях
+                // лезет тёмная кромка matcap-текстуры (визуальный "шов").
+                half3 rWS = reflect(-vWS, nWS);
+                half3 rVS = mul((half3x3)UNITY_MATRIX_V, rWS);
+                rVS.z += 1.0h;
+                half  invM = 0.5h * rsqrt(dot(rVS, rVS));
+                half2 matcapUV = rVS.xy * invM + 0.5h;
                 half3 matcap   = SAMPLE_TEXTURE2D(_MatCap, sampler_MatCap, matcapUV).rgb * _MatCapColor.rgb;
 
                 // Hemisphere: верх -> SkyColor, низ -> GroundColor.
