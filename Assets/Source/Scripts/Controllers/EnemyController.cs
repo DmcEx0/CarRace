@@ -65,7 +65,14 @@ namespace CarRace
             
             for (int i = 0; i < childCount; i++)
             {
-                var context = _enemyFactory.Get(_spawnPointContainer.GetChild(i).position);
+                var childTransform = _spawnPointContainer.GetChild(i);
+                
+                if(childTransform.gameObject.activeInHierarchy == false)
+                {
+                    continue;
+                }
+                
+                var context = _enemyFactory.Get(childTransform.position);
 
                 var stateMachine = new StateMachine();
             

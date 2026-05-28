@@ -17,5 +17,9 @@ namespace CarRace.Configs
         
         [field: Space]
         [field: SerializeField, Min(0)] public int TargetFPS {get; private set;}
+        
+        [field: Space]
+        [field: SerializeField, Min(0)] public int HubSceneIndex {get; private set;}
+        [field: SerializeField, Min(0)] public int Lvl1SceneIndex {get; private set;}
     }
 }
