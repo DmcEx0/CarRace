@@ -118,10 +118,14 @@ Shader "CarRace/MobileMatcap"
                 // Sphere map mapping (Blinn 1976) — корректно сворачивает заднюю
                 // полусферу к центру matcap'а. Без этого на silhouette-краях
                 // лезет тёмная кромка matcap-текстуры (визуальный "шов").
+                // Множитель 0.46 (вместо 0.5) поджимает UV-диск до 92% от полного
+                // радиуса — на гранях под скользящим углом перестаём попадать в
+                // самые тёмные пиксели силуэта сферы. Константа сворачивается
+                // компилятором — рантайм-стоимости ноль.
                 half3 rWS = reflect(-vWS, nWS);
                 half3 rVS = mul((half3x3)UNITY_MATRIX_V, rWS);
                 rVS.z += 1.0h;
-                half  invM = 0.5h * rsqrt(dot(rVS, rVS));
+                half  invM = 0.46h * rsqrt(dot(rVS, rVS));
                 half2 matcapUV = rVS.xy * invM + 0.5h;
                 half3 matcap   = SAMPLE_TEXTURE2D(_MatCap, sampler_MatCap, matcapUV).rgb * _MatCapColor.rgb;
 

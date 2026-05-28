@@ -8,8 +8,8 @@ namespace CarRace.Shaders.Tools
     [CustomEditor(typeof(MatcapBaker))]
     public sealed class MatcapBakerEditor : Editor
     {
-        private const string SceneSavePath    = "Assets/Source/Shaders/Tools/MatcapBakerScene.unity";
-        private const string SphereMaterialPath = "Assets/Source/Shaders/Tools/MatcapBakeSphere.mat";
+        private const string SceneSavePath      = "Assets/Source/MatCap/Tools/MatcapBakerScene.unity";
+        private const string SphereMaterialPath = "Assets/Source/MatCap/Tools/MatcapBakeSphere.mat";
 
         public override void OnInspectorGUI()
         {
@@ -95,9 +95,16 @@ namespace CarRace.Shaders.Tools
             sphereRenderer.sharedMaterial = GetOrCreateSphereMaterial();
 
             // --- Lights (Key / Fill / Rim) ---
+            // Fill и Rim сделаны ярче специально — они отвечают за свет на силуэте
+            // сферы. Если силуэт уходит в чёрный, на гранях под скользящим углом
+            // в matcap-выводе появляются чёрные полосы (грань сэмплит тёмный край).
             CreateLight("KeyLight",  new Vector3(50f, -30f, 0f),  new Color(1.00f, 0.96f, 0.88f), 1.00f, LightShadows.Soft);
-            CreateLight("FillLight", new Vector3(15f, 150f, 0f),  new Color(0.55f, 0.65f, 0.80f), 0.35f, LightShadows.None);
-            CreateLight("RimLight",  new Vector3(-25f, -160f, 0f), new Color(0.85f, 0.95f, 0.75f), 0.60f, LightShadows.None);
+            CreateLight("FillLight", new Vector3(15f, 150f, 0f),  new Color(0.55f, 0.65f, 0.80f), 0.70f, LightShadows.None);
+            CreateLight("RimLight",  new Vector3(-25f, -160f, 0f), new Color(0.85f, 0.95f, 0.75f), 0.90f, LightShadows.None);
+
+            // Ambient — гарантирует что силуэт сферы никогда не уходит в полный чёрный.
+            RenderSettings.ambientMode  = UnityEngine.Rendering.AmbientMode.Flat;
+            RenderSettings.ambientLight = new Color(0.28f, 0.28f, 0.30f);
 
             // --- Baker GameObject ---
             var bakerGO = new GameObject("MatcapBaker");
