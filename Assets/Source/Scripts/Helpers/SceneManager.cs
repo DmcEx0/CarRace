@@ -1,4 +1,4 @@
-namespace CarRace
+namespace CarRace.Helpers
 {
     public class SceneManager
     {

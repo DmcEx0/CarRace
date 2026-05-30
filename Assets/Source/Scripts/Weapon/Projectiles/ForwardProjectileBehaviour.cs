@@ -1,6 +1,7 @@
+using CarRace.Views;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Weapon
 {
     public class ForwardProjectileBehaviour : BaseProjectileBehaviour
     {

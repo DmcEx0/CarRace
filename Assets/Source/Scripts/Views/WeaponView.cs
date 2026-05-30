@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Views
 {
     public class WeaponView : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 using System;
 using CarRace.Helpers;
+using CarRace.Views;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Weapon
 {
     public abstract class BaseProjectileBehaviour : IPoolable<BaseProjectileBehaviour>
     {

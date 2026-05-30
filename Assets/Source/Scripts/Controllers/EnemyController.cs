@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using CarRace.Factory;
+using CarRace.FSM;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace CarRace
+namespace CarRace.Controllers
 {
     public class EnemyController : IInitializable, IAsyncStartable, ITickable, IFixedTickable, IDisposable
     {

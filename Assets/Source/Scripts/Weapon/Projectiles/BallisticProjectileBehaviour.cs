@@ -1,7 +1,8 @@
 using System;
+using CarRace.Views;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Weapon
 {
     public sealed class BallisticProjectileBehaviour : BaseProjectileBehaviour
     {

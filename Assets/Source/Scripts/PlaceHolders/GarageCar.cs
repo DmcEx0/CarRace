@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using CarRace.Configs;
+using CarRace.Views;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.PlaceHolders
 {
     public class GarageCar : MonoBehaviour
     {

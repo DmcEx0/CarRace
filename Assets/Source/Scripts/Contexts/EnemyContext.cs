@@ -1,7 +1,8 @@
 using Animancer;
 using CarRace.Configs;
+using CarRace.Views;
 
-namespace CarRace
+namespace CarRace.Contexts
 {
     public class EnemyContext
     {

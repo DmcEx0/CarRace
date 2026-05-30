@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CarRace.UI.Equipnet
+namespace CarRace.UI
 {
     public class EquipmentView : MonoBehaviour
     {

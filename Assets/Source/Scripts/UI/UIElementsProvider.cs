@@ -1,8 +1,7 @@
-using CarRace.UI.Equipnet;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CarRace
+namespace CarRace.UI
 {
     public class UIElementsProvider : MonoBehaviour
     {

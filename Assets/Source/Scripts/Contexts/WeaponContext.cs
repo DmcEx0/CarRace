@@ -1,8 +1,11 @@
 using CarRace.Configs;
+using CarRace.Factory;
+using CarRace.Views;
+using CarRace.Weapon;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace CarRace
+namespace CarRace.Contexts
 {
     public class WeaponContext
     {

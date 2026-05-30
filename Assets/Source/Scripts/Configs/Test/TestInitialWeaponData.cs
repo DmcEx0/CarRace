@@ -1,3 +1,4 @@
+using CarRace.Weapon;
 using UnityEngine;
 
 namespace CarRace.Configs

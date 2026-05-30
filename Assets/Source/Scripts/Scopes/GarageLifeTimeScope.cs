@@ -1,10 +1,10 @@
 using CarRace.Configs;
-using CarRace.Controllers;
+using CarRace.PlaceHolders;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace CarRace
+namespace CarRace.Scopes
 {
     public class GarageLifeTimeScope : LifetimeScope
     {

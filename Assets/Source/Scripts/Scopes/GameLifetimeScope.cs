@@ -2,15 +2,15 @@ using CarRace.Configs;
 using CarRace.Controllers;
 using CarRace.Factory;
 using CarRace.Inventory;
+using CarRace.PlaceHolders;
 using CarRace.UI;
-using CarRace.UI.Equipnet;
 using CarRace.Views;
 using CarRace.Weapon;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace CarRace
+namespace CarRace.Scopes
 {
     public class GameLifetimeScope : LifetimeScope
     {

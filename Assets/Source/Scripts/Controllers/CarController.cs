@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using CarRace.Contexts;
+using CarRace.Factory;
 using CarRace.Inventory;
 using CarRace.Views;
 using CarRace.Weapon;
@@ -17,7 +19,7 @@ namespace CarRace.Controllers
         private readonly WeaponsProvider _weaponsProvider;
         private readonly CarView _view;
 
-        private readonly CancellationTokenSource _ctx;
+        private readonly CancellationTokenSource _cts;
 
         public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarView carView,
             WeaponsProvider weaponsProvider)
@@ -27,13 +29,13 @@ namespace CarRace.Controllers
             _weaponsProvider = weaponsProvider;
             _view = carView;
 
-            _ctx = new CancellationTokenSource();
+            _cts = new CancellationTokenSource();
         }
 
         public void Dispose()
         {
-            _ctx?.Cancel();
-            _ctx?.Dispose();
+            _cts?.Cancel();
+            _cts?.Dispose();
         }
 
         public void Start()
@@ -66,7 +68,7 @@ namespace CarRace.Controllers
 
         private async UniTask<WeaponContext> GetCreatedWeaponAsync(WeaponInventoryCell inventoryCell, Transform parent)
         {
-            var weaponContext = await _weaponFactory.GetAsync(inventoryCell, parent, _ctx.Token);
+            var weaponContext = await _weaponFactory.GetAsync(inventoryCell, parent, _cts.Token);
 
             return weaponContext;
         }

@@ -1,33 +1,37 @@
-using CarRace;
+using CarRace.Contexts;
 using CarRace.Helpers;
+using CarRace.PlaceHolders;
 using UnityEngine;
 
-public class AttackState : EnemyBaseState
+namespace CarRace.FSM
 {
-    // Эти 3 поля будут дублироваться во всех стейтах из-за необходимости.
-    // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
-    private readonly TargetSystem<Car> _targetSystem; 
-    private readonly LayerMask _layerMask = 1 << 7;
-    private float _radius = 10;
-    
-    public AttackState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
+    public class AttackState : EnemyBaseState
     {
-        _targetSystem = new TargetSystem<Car>(_layerMask, 1);
-    }
+        // Эти 3 поля будут дублироваться во всех стейтах из-за необходимости.
+        // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
+        private readonly TargetSystem<Car> _targetSystem;
+        private readonly LayerMask _layerMask = 1 << 7;
+        private float _radius = 10;
 
-    public override void OnEnter()
-    {
-    }
-
-    public override void OnUpdate()
-    {
-        var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
-        
-        if(hasTarget)
+        public AttackState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
         {
-            if((target.transform.position - Context.View.transform.position).magnitude < 10)
+            _targetSystem = new TargetSystem<Car>(_layerMask, 1);
+        }
+
+        public override void OnEnter()
+        {
+        }
+
+        public override void OnUpdate()
+        {
+            var hasTarget = _targetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
+
+            if(hasTarget)
             {
-                ChangeState(typeof(EnemyFollowState));
+                if((target.transform.position - Context.View.transform.position).magnitude < 10)
+                {
+                    ChangeState(typeof(EnemyFollowState));
+                }
             }
         }
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CarRace.Configs;
 using CarRace.Inventory;
-using CarRace.UI.Equipnet;
 using UnityEngine;
 using VContainer.Unity;
 using Object = UnityEngine.Object;

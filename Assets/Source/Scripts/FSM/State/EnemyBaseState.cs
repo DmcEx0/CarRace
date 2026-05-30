@@ -1,6 +1,6 @@
-using UnityEngine;
+using CarRace.Contexts;
 
-namespace CarRace
+namespace CarRace.FSM
 {
     public class EnemyBaseState : BaseState
     {

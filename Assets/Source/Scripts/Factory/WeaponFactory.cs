@@ -2,12 +2,13 @@ using System;
 using System.Linq;
 using System.Threading;
 using CarRace.Configs;
-using CarRace.Factory;
+using CarRace.Contexts;
 using CarRace.Inventory;
+using CarRace.Views;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Factory
 {
     public class WeaponFactory : GameObjectFactory
     {

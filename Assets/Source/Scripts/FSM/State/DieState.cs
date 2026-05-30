@@ -1,8 +1,11 @@
-using CarRace;
+using CarRace.Contexts;
 
-public class DieState : EnemyBaseState
+namespace CarRace.FSM
 {
-    public DieState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
+    public class DieState : EnemyBaseState
     {
+        public DieState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
+        {
+        }
     }
 }

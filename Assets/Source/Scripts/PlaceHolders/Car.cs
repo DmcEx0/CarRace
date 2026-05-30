@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using CarRace.Configs;
+using CarRace.Factory;
 using CarRace.Helpers;
+using CarRace.Views;
+using CarRace.Weapon;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
-namespace CarRace
+namespace CarRace.PlaceHolders
 {
     public class Car : MonoBehaviour
     {

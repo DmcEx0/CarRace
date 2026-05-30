@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Weapon
 {
     public class WeaponController : MonoBehaviour
     {

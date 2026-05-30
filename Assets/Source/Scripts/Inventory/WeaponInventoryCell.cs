@@ -1,4 +1,5 @@
 using System;
+using CarRace.Weapon;
 
 namespace CarRace.Inventory
 {

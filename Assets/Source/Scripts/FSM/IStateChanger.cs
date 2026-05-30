@@ -1,6 +1,6 @@
 using System;
 
-namespace CarRace
+namespace CarRace.FSM
 {
     public interface IStateChanger
     {

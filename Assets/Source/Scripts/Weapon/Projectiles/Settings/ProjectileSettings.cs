@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Weapon
 {
     public abstract class ProjectileSettings
     {

@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace CarRace
+namespace CarRace.Test
 {
     public class TestLifetimeScope : LifetimeScope
     {

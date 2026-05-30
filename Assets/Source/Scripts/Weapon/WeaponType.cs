@@ -1,5 +1,5 @@
 
-namespace CarRace
+namespace CarRace.Weapon
 {
     public enum WeaponType
     {

@@ -1,35 +1,35 @@
 using System;
-using CarRace;
-using UnityEngine;
 
-public abstract class BaseState
+namespace CarRace.FSM
 {
-    private readonly IStateChanger _stateChanger;
-        
-    public BaseState(IStateChanger stateChanger)
+    public abstract class BaseState
     {
-        _stateChanger = stateChanger;
-    }
+        private readonly IStateChanger _stateChanger;
 
-    public virtual void OnEnter()
-    {
-    }
+        public BaseState(IStateChanger stateChanger)
+        {
+            _stateChanger = stateChanger;
+        }
 
-    public virtual void OnUpdate()
-    {
-    }
+        public virtual void OnEnter()
+        {
+        }
 
-    public virtual void OnFixedUpdate()
-    {
-    }
-        
-    public virtual void OnExit()
-    {
-    }
-    
-    protected void ChangeState(Type stateType)
-    {
-        _stateChanger.ChangeState(stateType);
+        public virtual void OnUpdate()
+        {
+        }
+
+        public virtual void OnFixedUpdate()
+        {
+        }
+
+        public virtual void OnExit()
+        {
+        }
+
+        protected void ChangeState(Type stateType)
+        {
+            _stateChanger.ChangeState(stateType);
+        }
     }
 }
-

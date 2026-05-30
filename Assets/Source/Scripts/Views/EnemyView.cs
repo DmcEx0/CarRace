@@ -3,7 +3,7 @@ using Animancer;
 using CarRace.Helpers;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Views
 {
     public class EnemyView : MonoBehaviour, IPoolable<EnemyView>
     {
