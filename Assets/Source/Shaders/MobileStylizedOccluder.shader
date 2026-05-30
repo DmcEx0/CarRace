@@ -122,8 +122,12 @@ Shader "CarRace/MobileStylizedOccluder"
                 litColor += _RimColor.rgb * (rim * _RimIntensity);
 
                 OUT.lighting    = litColor;
-                OUT.positionNDC = posIn.positionNDC;
-                OUT.occDW       = float2(-posIn.positionVS.z, posIn.positionWS.y);
+
+                // Зону вокруг игрока меряем по ПИВОТУ объекта (object-space 0,0,0),
+                // а не по фрагменту -> растворяется объект целиком, без "дырки".
+                VertexPositionInputs pivot = GetVertexPositionInputs(float3(0.0, 0.0, 0.0));
+                OUT.positionNDC = pivot.positionNDC;
+                OUT.occDW       = float2(-pivot.positionVS.z, posIn.positionWS.y);
                 return OUT;
             }
 

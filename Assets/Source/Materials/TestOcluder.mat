@@ -100,7 +100,7 @@ Material:
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
     - _FoundationEdge: 0.25
-    - _FoundationMode: 1
+    - _FoundationMode: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0

@@ -31,9 +31,12 @@ float CarRace_IGN(float2 px)
 }
 
 // Возвращает hide 0..1: 0 = полностью видим, 1 = полностью скрыт.
-//   screenUV01   — экранные UV фрагмента (0..1, Unity-конвенция, снизу-слева)
-//   eyeDepth     — положительная глубина фрагмента (-positionVS.z)
-//   worldY       — мировая Y фрагмента
+// ВАЖНО: screenUV01 и eyeDepth берутся по ПИВОТУ объекта (а не по фрагменту),
+// поэтому значение одинаково для всех фрагментов меша -> объект растворяется
+// ЦЕЛИКОМ и равномерно, без "дырки"-круга вокруг игрока.
+//   screenUV01   — экранные UV пивота объекта (0..1, Unity-конвенция, снизу-слева)
+//   eyeDepth     — положительная глубина пивота объекта (-positionVS.z)
+//   worldY       — мировая Y ФРАГМЕНТА (нужна только для режима "фундамент")
 //   foundationMode — 0 = растворять весь объект, 1 = оставлять основание
 //   keepHeight   — высота над основанием объекта, которую сохраняем (мир. ед.)
 //   foundationEdge — мягкость горизонтального среза (мир. ед.)
@@ -44,13 +47,13 @@ float CarRace_OccluderHide(float2 screenUV01, float eyeDepth, float worldY,
     if (_OccluderPlayer.w < 0.5)
         return 0.0;
 
-    // 1) Насколько фрагмент близок к игроку на экране (круг с поправкой на аспект).
+    // 1) Насколько пивот объекта близок к игроку на экране (круг с поправкой на аспект).
     float2 d = screenUV01 - _OccluderPlayer.xy;
     d.x *= _ScreenParams.x / _ScreenParams.y;          // делаем зону круглой, а не овальной
     float dist = length(d);
     float prox = 1.0 - smoothstep(_OccluderParams.x - _OccluderParams.y, _OccluderParams.x, dist);
 
-    // 2) Фрагмент ближе к камере, чем игрок -> он реально перекрывает игрока.
+    // 2) Объект ближе к камере, чем игрок -> он реально перекрывает игрока.
     float inFront = step(eyeDepth, _OccluderPlayer.z - _OccluderParams.z);
 
     float occ = prox * inFront;
