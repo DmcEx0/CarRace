@@ -104,17 +104,17 @@
             {
                 "type": "System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "ShapeBuilder.ActiveShapeIndex",
-                "value": "{\"m_Value\":6}"
+                "value": "{\"m_Value\":1}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Cube",
-                "value": "{\"m_Value\":{\"x\":23.31270408630371,\"y\":12.17107105255127,\"z\":-10.019683837890625}}"
+                "value": "{\"m_Value\":{\"x\":4.962917327880859,\"y\":12.276708602905274,\"z\":-4.993936538696289}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
                 "key": "ShapeBuilder.LastSize.Plane",
-                "value": "{\"m_Value\":{\"x\":80.05642700195313,\"y\":0.0,\"z\":-130.09164428710938}}"
+                "value": "{\"m_Value\":{\"x\":134.4581298828125,\"y\":0.0,\"z\":-104.68525695800781}}"
             },
             {
                 "type": "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
