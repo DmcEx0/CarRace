@@ -22,6 +22,29 @@ namespace ArcadeVP
         [Tooltip("turn more while drifting (while holding space) only if kart Like is true")]
         public float driftMultiplier = 1.5f;
 
+        [Header("Ground stability")]
+        [Tooltip("Extra distance for ground detection. Higher values keep the car grounded over small bumps.")]
+        public float groundCheckDistance = 0.35f;
+        [Tooltip("Additional force that presses the drive sphere into the current ground normal.")]
+        public float groundStickiness = 12f;
+        [Tooltip("Maximum velocity allowed away from the ground normal while grounded.")]
+        public float maxGroundedUpVelocity = 1.5f;
+        [Tooltip("How quickly upward bump impulses are removed while grounded.")]
+        public float bumpDamping = 10f;
+
+        [Header("Ramp assist")]
+        public bool rampAssist = true;
+        [Tooltip("Forward offset from the car body used to sample ramps before the center ground check reaches them.")]
+        public float frontProbeOffset = 2.2f;
+        public float frontProbeHeight = 0.6f;
+        public float frontProbeDistance = 1.6f;
+        public float frontProbeRadius = 0.25f;
+        [Range(0f, 1f)]
+        public float frontNormalBlend = 0.65f;
+        [Range(0f, 75f)]
+        public float maxRampAssistAngle = 55f;
+        public float rampPitchAssist = 6f;
+
         public Rigidbody rb, carBody;
 
         [HideInInspector]
@@ -52,10 +75,14 @@ namespace ArcadeVP
 
         private float radius, horizontalInput, verticalInput;
         private Vector3 origin;
+        private SphereCollider sphereCollider;
+        private RaycastHit frontHit;
+        private bool hasFrontGround;
 
         private void Start()
         {
-            radius = rb.GetComponent<SphereCollider>().radius;
+            sphereCollider = rb.GetComponent<SphereCollider>();
+            radius = sphereCollider.radius;
             if (movementMode == MovementMode.AngularVelocity)
             {
                 Physics.defaultMaxAngularSpeed = 100;
@@ -89,6 +116,7 @@ namespace ArcadeVP
         void FixedUpdate()
         {
             carVelocity = carBody.transform.InverseTransformDirection(carBody.linearVelocity);
+            bool isGrounded = grounded();
 
             if (Mathf.Abs(carVelocity.x) > 0)
             {
@@ -97,8 +125,12 @@ namespace ArcadeVP
             }
 
 
-            if (grounded())
+            if (isGrounded)
             {
+                hasFrontGround = rampAssist && TryGetFrontGround(out frontHit);
+                Vector3 groundNormal = GetAssistedGroundNormal();
+                StabilizeGroundContact(groundNormal);
+
                 //turnlogic
                 float sign = Mathf.Sign(carVelocity.z);
                 float TurnMultiplyer = turnCurve.Evaluate(carVelocity.magnitude / MaxSpeed);
@@ -155,13 +187,15 @@ namespace ArcadeVP
                 }
 
                 // down froce
-                rb.AddForce(-transform.up * downforce * rb.mass);
+                rb.AddForce(-groundNormal * downforce * rb.mass);
 
                 //body tilt
-                carBody.MoveRotation(Quaternion.Slerp(carBody.rotation, Quaternion.FromToRotation(carBody.transform.up, hit.normal) * carBody.transform.rotation, 0.12f));
+                carBody.MoveRotation(Quaternion.Slerp(carBody.rotation, Quaternion.FromToRotation(carBody.transform.up, groundNormal) * carBody.transform.rotation, 0.12f));
             }
             else
             {
+                hasFrontGround = false;
+
                 if (AirControl)
                 {
                     //turnlogic
@@ -175,6 +209,50 @@ namespace ArcadeVP
             }
 
         }
+        private Vector3 GetAssistedGroundNormal()
+        {
+            if (!hasFrontGround)
+            {
+                return hit.normal;
+            }
+
+            float rampAngle = Vector3.Angle(frontHit.normal, Vector3.up);
+            bool frontSurfaceFacesCar = Vector3.Dot(carBody.transform.forward, frontHit.normal) < -0.05f;
+
+            if (!frontSurfaceFacesCar || rampAngle > maxRampAssistAngle)
+            {
+                return hit.normal;
+            }
+
+            return Vector3.Slerp(hit.normal, frontHit.normal, frontNormalBlend).normalized;
+        }
+
+        private void StabilizeGroundContact(Vector3 groundNormal)
+        {
+            float awaySpeed = Vector3.Dot(rb.linearVelocity, groundNormal);
+            if (awaySpeed > maxGroundedUpVelocity)
+            {
+                float dampedAwaySpeed = Mathf.Lerp(awaySpeed, maxGroundedUpVelocity, Mathf.Clamp01(bumpDamping * Time.fixedDeltaTime));
+                rb.linearVelocity -= groundNormal * (awaySpeed - dampedAwaySpeed);
+            }
+
+            float speedFactor = MaxSpeed > 0 ? Mathf.Clamp01(rb.linearVelocity.magnitude / MaxSpeed) : 0f;
+            rb.AddForce(-groundNormal * Mathf.Max(0f, groundStickiness) * rb.mass * (1f + speedFactor));
+
+            if (hasFrontGround && Vector3.Dot(carBody.transform.forward, frontHit.normal) < -0.05f)
+            {
+                carBody.AddTorque(-carBody.transform.right * Mathf.Max(0f, rampPitchAssist) * Mathf.Max(0.2f, speedFactor), ForceMode.Force);
+            }
+        }
+
+        private bool TryGetFrontGround(out RaycastHit frontGroundHit)
+        {
+            Vector3 probeOrigin = carBody.position
+                                  + carBody.transform.forward * frontProbeOffset
+                                  + carBody.transform.up * frontProbeHeight;
+            return Physics.SphereCast(probeOrigin, Mathf.Max(0.01f, frontProbeRadius), -carBody.transform.up, out frontGroundHit, Mathf.Max(0f, frontProbeDistance), drivableSurface, QueryTriggerInteraction.Ignore);
+        }
+
         public void Visuals()
         {
             //tires
@@ -220,9 +298,15 @@ namespace ArcadeVP
 
         public bool grounded() //checks for if vehicle is grounded or not
         {
-            origin = rb.position + rb.GetComponent<SphereCollider>().radius * Vector3.up;
+            if (sphereCollider == null)
+            {
+                sphereCollider = rb.GetComponent<SphereCollider>();
+            }
+
+            radius = sphereCollider.radius;
+            origin = rb.position + radius * Vector3.up;
             var direction = -transform.up;
-            var maxdistance = rb.GetComponent<SphereCollider>().radius + 0.2f;
+            var maxdistance = radius + Mathf.Max(0f, groundCheckDistance);
 
             if (GroundCheck == groundCheck.rayCast)
             {
