@@ -25,6 +25,8 @@ namespace ArcadeVP
         [Header("Ground stability")]
         [Tooltip("Extra distance for ground detection. Higher values keep the car grounded over small bumps.")]
         public float groundCheckDistance = 0.35f;
+        [Tooltip("Stability and ramp assist only run inside this close-contact distance. Keep it lower than Ground Check Distance so jumps stay free.")]
+        public float groundAssistDistance = 0.2f;
         [Tooltip("Additional force that presses the drive sphere into the current ground normal.")]
         public float groundStickiness = 12f;
         [Tooltip("Maximum velocity allowed away from the ground normal while grounded.")]
@@ -127,9 +129,14 @@ namespace ArcadeVP
 
             if (isGrounded)
             {
-                hasFrontGround = rampAssist && TryGetFrontGround(out frontHit);
-                Vector3 groundNormal = GetAssistedGroundNormal();
-                StabilizeGroundContact(groundNormal);
+                bool useGroundAssist = CanUseGroundAssist();
+                hasFrontGround = useGroundAssist && rampAssist && TryGetFrontGround(out frontHit);
+                Vector3 groundNormal = useGroundAssist ? GetAssistedGroundNormal() : hit.normal;
+
+                if (useGroundAssist)
+                {
+                    StabilizeGroundContact(groundNormal);
+                }
 
                 //turnlogic
                 float sign = Mathf.Sign(carVelocity.z);
@@ -187,7 +194,7 @@ namespace ArcadeVP
                 }
 
                 // down froce
-                rb.AddForce(-groundNormal * downforce * rb.mass);
+                rb.AddForce(-(useGroundAssist ? groundNormal : transform.up) * downforce * rb.mass);
 
                 //body tilt
                 carBody.MoveRotation(Quaternion.Slerp(carBody.rotation, Quaternion.FromToRotation(carBody.transform.up, groundNormal) * carBody.transform.rotation, 0.12f));
@@ -225,6 +232,11 @@ namespace ArcadeVP
             }
 
             return Vector3.Slerp(hit.normal, frontHit.normal, frontNormalBlend).normalized;
+        }
+
+        private bool CanUseGroundAssist()
+        {
+            return hit.collider != null && hit.distance <= radius + Mathf.Max(0f, groundAssistDistance);
         }
 
         private void StabilizeGroundContact(Vector3 groundNormal)
