@@ -12,8 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Test.unity
     guid: aa29aefa6699af1429a3f82633338581
   - enabled: 1
-    path: Assets/Scenes/TestCity.unity
-    guid: 86fc28f3f63ba9a4d8fc60823ea7565c
+    path: Assets/Scenes/Bootstrap.unity
+    guid: df27b0ee1b535e44e9a23a1de1c3de42
+  - enabled: 1
+    path: Assets/Scenes/Hub.unity
+    guid: 5cbd445372491db48bdac1c00725b603
+  - enabled: 1
+    path: Assets/Scenes/Lvl1.unity
+    guid: 07d4e57e992a5fc488556304cc3b4c51
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: ae380272825127246b5fbba6863ea796, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

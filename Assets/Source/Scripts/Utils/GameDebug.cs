@@ -13,6 +13,9 @@ namespace CarRace.Utils
 
         [Conditional("GAME_DEBUG")]
         public static void LogWarning(object message) => Debug.LogWarning(message);
+        
+        [Conditional("GAME_DEBUG")]
+        public static void LogWarning(string type,object message) => Debug.LogWarning($"[{type}] {message}");
 
         [Conditional("GAME_DEBUG")]
         public static void LogError(object message) => Debug.LogError(message);
