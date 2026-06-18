@@ -1,3 +1,4 @@
+using System.Threading;
 using CarRace.Utils;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -7,7 +8,8 @@ namespace CarRace.Services
 {
     public class SceneLoadingService
     {
-        public async UniTask LoadSceneAsync(int nextSceneIndex, int currentSceneIndex, LoadSceneMode mode)
+        public async UniTask LoadSceneAsync(int currentSceneIndex, int nextSceneIndex, CancellationToken token,
+            LoadSceneMode mode = LoadSceneMode.Additive)
         {
             if (currentSceneIndex == nextSceneIndex)
             {
@@ -17,10 +19,10 @@ namespace CarRace.Services
 
             if (currentSceneIndex != Constants.Scenes.BootstrapIndex)
             {
-                await SceneManager.UnloadSceneAsync(currentSceneIndex);
+                await SceneManager.UnloadSceneAsync(currentSceneIndex).WithCancellation(token);
             }
 
-            await SceneManager.LoadSceneAsync(nextSceneIndex, mode);
+            await SceneManager.LoadSceneAsync(nextSceneIndex, mode).WithCancellation(token);;
         }
     }
 }
