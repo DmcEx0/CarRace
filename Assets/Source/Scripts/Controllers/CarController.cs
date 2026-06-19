@@ -43,7 +43,7 @@ namespace CarRace.Controllers
             _weaponsProvider.InitWeaponsSlots(_view.WeaponsSlotsTransform);
         }
 
-        public void Tick() // Для теста
+        public void Tick() //TODO: Для теста, удалить
         {
             if (Input.GetKeyDown(KeyCode.I))
             {
@@ -57,7 +57,7 @@ namespace CarRace.Controllers
             }
         }
 
-        private async UniTask CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) // Test
+        private async UniTask CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) //TODO: Для теста, удалить
         {
             var slot = _weaponsProvider.WeaponsSlots[slotIndex];
 

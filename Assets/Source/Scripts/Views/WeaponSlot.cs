@@ -36,9 +36,11 @@ namespace CarRace.Views
                 return;
             }
             
-            _weaponContext.Value.ProjectilesFactory.ReleaseAll();
-
-            GameObjectFactory.Release(_weaponContext.Value.OpHandle);
+            _weaponContext.Value.ProjectilesFactory.Dispose();
+            _weaponContext.Value.SpawnResult.Release();
+            
+            Object.Destroy(_weaponContext.Value.View);
+            
             _weaponContext.Value =  null;
         }
     }

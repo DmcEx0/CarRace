@@ -27,7 +27,7 @@ namespace CarRace.Helpers
 
         public void AddInstance(T instance)
         {
-            if (_container == null)
+            if (_container == null) //TODO: обязательно передавать контейнер
             {
                 CreateContainer();
             }

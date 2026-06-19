@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using CarRace.Contexts;
@@ -6,55 +7,48 @@ using CarRace.Views;
 using CarRace.Weapon;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
+using Object = UnityEngine.Object;
 
 namespace CarRace.Factory
 {
-    public class ProjectilesFactory : GameObjectFactory
+    public class ProjectilesFactory : GameObjectFactory, IDisposable
     {
-        private const int MaxIterationsCount = 10;
-
         private readonly ObjectPool<BaseProjectileBehaviour> _pool;
 
         private BaseProjectileBehaviour _projectileBehaviour;
 
-        private readonly List<AsyncOperationHandle> _operationHandles;
+        private SpawnResult<ProjectileView> _spawnResult;
 
         public ProjectilesFactory(Transform container)
         {
             _pool = new ObjectPool<BaseProjectileBehaviour>(container);
-            _operationHandles = new List<AsyncOperationHandle>();
         }
 
         public async UniTask PrepareAsync(WeaponContext weaponContext, int count, CancellationToken token)
         {
+            _spawnResult = await CreateWithAddressAsync<ProjectileView>(weaponContext.ProjectileReference, token);
+
             for (int i = 0; i < count; i++)
             {
-                if (i % MaxIterationsCount == 0)
-                {
-                    await UniTask.Yield();
-                }
-
-                var result = await CreateWithAddressAsync<ProjectileView>(weaponContext.ProjectileReference, token);
-
                 BaseProjectileBehaviour projectileBehaviour = default;
 
+                var instance = Create(_spawnResult.Prefab);
+                
                 switch (weaponContext.Type)
                 {
                     case WeaponType.Minigun:
                         projectileBehaviour =
-                            new ForwardProjectileBehaviour(result.Instance, weaponContext.ProjectileSettings,
+                            new ForwardProjectileBehaviour(instance, weaponContext.ProjectileSettings,
                                 weaponContext.View.FirePoints[0]);
                         break;
                     case WeaponType.RocketLauncher:
                         projectileBehaviour =
-                            new BallisticProjectileBehaviour(result.Instance, weaponContext.ProjectileSettings,
+                            new BallisticProjectileBehaviour(instance, weaponContext.ProjectileSettings,
                                 weaponContext.View.FirePoints[0]);
                         break;
                 }
 
                 _pool.AddInstance(projectileBehaviour);
-                _operationHandles.Add(result.Handle);
             }
         }
 
@@ -67,19 +61,10 @@ namespace CarRace.Factory
             return instance;
         }
 
-        public void ReleaseAll()
+        public void Dispose()
         {
-            if(_operationHandles.Count == 0)
-            {
-                return;
-            }
-            
-            foreach (var operationHandle in _operationHandles)
-            {
-                Release(operationHandle);
-            }
-            
-            _operationHandles.Clear();
+            _pool?.Dispose();
+            _spawnResult.Release();
         }
     }
 }

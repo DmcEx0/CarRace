@@ -770,17 +770,12 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
-  _enemiesConfig: {fileID: 11400000, guid: 4c340bb4bbb35b84598a9dcdd2e0dbd2, type: 2}
   _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}
   _gameConfig: {fileID: 11400000, guid: 655dda959d37c094e9617267a845386f, type: 2}
-  _enemySpawnPointContainer: {fileID: 0}
-  _enemyPoolContainer: {fileID: 0}
+  _cinemachine: {fileID: 8751799045054382916}
   _projectilePoolContainer: {fileID: 2253559959726574467}
   _uiElementsProvider: {fileID: 676650581446005941}
   _equipmentCellView: {fileID: 586438709654085208, guid: ae14adb7d617b6848aded6054b17b114, type: 3}
-  _testPlayer: {fileID: 0}
-  _carView: {fileID: 0}
-  _testConfig: {fileID: 11400000, guid: 704b70c85193e574eb8b0fb095693665, type: 2}
 --- !u!114 &1886594999717826682
 MonoBehaviour:
   m_ObjectHideFlags: 0

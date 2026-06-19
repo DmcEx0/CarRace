@@ -12,9 +12,9 @@ namespace CarRace.Contexts
         private readonly WeaponData _data;
 
         public WeaponView View { get; private set; }
-        public AsyncOperationHandle OpHandle { get; private set; }
         
         public ProjectilesFactory ProjectilesFactory {get; private set;}
+        public SpawnResult<WeaponView> SpawnResult {get; private set;}
 
         public WeaponType Type => _data.Type;
         public int Level => _data.Level;
@@ -24,11 +24,11 @@ namespace CarRace.Contexts
         public AssetReference ProjectileReference => _data.ProjectileReference;
         public ProjectileSettings ProjectileSettings => _data.ProjectileSettings;
 
-        public WeaponContext(WeaponData data, WeaponView view, AsyncOperationHandle opHandle)
+        public WeaponContext(WeaponData data, WeaponView view, SpawnResult<WeaponView> spawnResult)
         {
             _data = data;
             View = view;
-            OpHandle = opHandle;
+            SpawnResult = spawnResult;
 
             ProjectilesFactory = new ProjectilesFactory(null);
         }

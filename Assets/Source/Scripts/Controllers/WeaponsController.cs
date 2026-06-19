@@ -29,11 +29,11 @@ namespace CarRace.Controllers
 
         private bool _canFire;
 
-        public WeaponsController(WeaponsProvider weaponsProvider, GameConfig gameConfig, CarView view)
+        public WeaponsController(WeaponsProvider weaponsProvider, GameConfig gameConfig/*, CarView view*/)
         {
             _weaponsProvider = weaponsProvider;
             _gameConfig = gameConfig;
-            _view = view;
+            // _view = view;
         }
 
         public void Initialize()

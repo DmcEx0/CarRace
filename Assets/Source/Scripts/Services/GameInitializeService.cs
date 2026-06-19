@@ -9,14 +9,17 @@ namespace CarRace.Services
     {
         private readonly SceneLoadingService _sceneLoadingService;
 
+        private readonly CancellationTokenSource _cts; //TODO: управлять 
+
         public GameInitializeService(SceneLoadingService sceneLoadingService)
         {
             _sceneLoadingService = sceneLoadingService;
+            _cts = new CancellationTokenSource();
         }
         
         public void Initialize()
         {
-            _sceneLoadingService.LoadSceneAsync(Constants.Scenes.BootstrapIndex, Constants.Scenes.HubIndex, new CancellationToken()).Forget(); //TODO: заменить на конкретный
+            _sceneLoadingService.LoadSceneAsync(Constants.Scenes.BootstrapIndex, Constants.Scenes.HubIndex, _cts.Token).Forget(); 
         }
     }
 }

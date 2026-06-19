@@ -1,16 +1,27 @@
+using UnityEngine;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace CarRace.Factory
 {
-    public struct SpawnResult<T>
+    public class SpawnResult<T>
     {
-        public readonly T Instance;
-        public readonly AsyncOperationHandle Handle;
+        private  AsyncOperationHandle<GameObject> _handle;
+        
+        public readonly T Prefab;
 
-        public SpawnResult(T instance, AsyncOperationHandle handle)
+        public SpawnResult(T prefab, AsyncOperationHandle<GameObject> handle)
         {
-            Instance = instance;
-            Handle = handle;
+            Prefab = prefab;
+            _handle = handle;
+        }
+
+        public void Release()
+        {
+            if(_handle.IsValid())
+            {
+                _handle.Release();
+                _handle = default;
+            }
         }
     }
 }
