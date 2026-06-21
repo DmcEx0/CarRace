@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using CarRace.Configs;
 using CarRace.Contexts;
@@ -7,8 +6,6 @@ using CarRace.Helpers;
 using CarRace.Views;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.ResourceManagement.AsyncOperations;
-using Object = UnityEngine.Object;
 
 namespace CarRace.Factory
 {
@@ -19,10 +16,10 @@ namespace CarRace.Factory
 
         private SpawnResult<EnemyView> _spawnResult;
 
-        public EnemyFactory(EnemiesConfig config, Transform container)
+        public EnemyFactory(EnemiesConfig config, LevelSceneContext levelSceneContext)
         {
             _config = config;
-            _pool = new ObjectPool<EnemyView>(container);
+            _pool = new ObjectPool<EnemyView>(levelSceneContext.EnemyPoolContainer);
         }
 
         public async UniTask PrepareAsync(int count, CancellationToken token)

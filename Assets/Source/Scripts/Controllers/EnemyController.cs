@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using CarRace.Contexts;
 using CarRace.Factory;
 using CarRace.FSM;
 using Cysharp.Threading.Tasks;
@@ -12,16 +13,16 @@ namespace CarRace.Controllers
     public class EnemyController : IInitializable, IAsyncStartable, ITickable, IFixedTickable, IDisposable
     {
         private readonly EnemyFactory _enemyFactory;
-        private readonly Transform _spawnPointContainer;
+        private readonly Transform _spawnPointsContainer;
         
         private List<StateMachine> _stateMachines;
         
         private CancellationTokenSource _cts;
 
-        public EnemyController(EnemyFactory enemyFactory, Transform spawnPointContainer)
+        public EnemyController(EnemyFactory enemyFactory, LevelSceneContext levelSceneContext)
         {
             _enemyFactory = enemyFactory;
-            _spawnPointContainer = spawnPointContainer;
+            _spawnPointsContainer = levelSceneContext.EnemySpawnPointsContainer;
         }
 
         public void Initialize()
@@ -62,11 +63,11 @@ namespace CarRace.Controllers
         
         private void SpawnEnemies()
         {
-            var childCount = _spawnPointContainer.childCount;
+            var childCount = _spawnPointsContainer.childCount;
             
             for (int i = 0; i < childCount; i++)
             {
-                var childTransform = _spawnPointContainer.GetChild(i);
+                var childTransform = _spawnPointsContainer.GetChild(i);
                 
                 if(childTransform.gameObject.activeInHierarchy == false)
                 {

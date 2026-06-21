@@ -426,6 +426,7 @@ GameObject:
   - component: {fileID: 7175102338878484725}
   - component: {fileID: 8071094588617318258}
   - component: {fileID: 6993166089533008878}
+  - component: {fileID: 3970455145718097356}
   m_Layer: 8
   m_Name: Zombie1
   m_TagString: Untagged
@@ -463,6 +464,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.EnemyView
   <Animancer>k__BackingField: {fileID: 7132952588218863096}
   <ViewTransform>k__BackingField: {fileID: 7175102338878484725}
+  <Agent>k__BackingField: {fileID: 3970455145718097356}
 --- !u!136 &6993166089533008878
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -486,6 +488,28 @@ CapsuleCollider:
   m_Height: 1.8242005
   m_Direction: 1
   m_Center: {x: -0.0040288866, y: 0.9035334, z: 0.012086645}
+--- !u!195 &3970455145718097356
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2294324418621178191}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 1
 --- !u!1 &2385347377297191800
 GameObject:
   m_ObjectHideFlags: 0

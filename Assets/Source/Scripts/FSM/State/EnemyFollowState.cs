@@ -1,6 +1,6 @@
 using CarRace.Contexts;
 using CarRace.Helpers;
-using CarRace.Placeholders;
+using CarRace.Views;
 using UnityEngine;
 
 namespace CarRace.FSM
@@ -9,12 +9,12 @@ namespace CarRace.FSM
     {
         // Эти 3 поля будут дублироваться во всех стейтах из-за необходимости.
         // Поэтому надо будет их вынести в какой-нибудь TargetProvider.cs, чтобы передавать один экземпляр, вместо того, чтобы создавать новые в каждом стейте
-        private readonly TargetSystem<Car> _targetSystem;
+        private readonly TargetSystem<CarView> _targetSystem;
         private readonly LayerMask _layerMask = 1 << 7;
 
         public EnemyFollowState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
         {
-            _targetSystem = new TargetSystem<Car>(_layerMask, 1);
+            _targetSystem = new TargetSystem<CarView>(_layerMask, 1);
         }
 
         public override void OnEnter()

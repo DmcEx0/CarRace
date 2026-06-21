@@ -1,4 +1,5 @@
 using CarRace.Configs;
+using CarRace.Contexts;
 using CarRace.Controllers;
 using CarRace.Factory;
 using UnityEngine;
@@ -10,17 +11,18 @@ namespace CarRace.Scopes
     public class LevelLifetimeScope : LifetimeScope
     {
         [SerializeField] private EnemiesConfig _enemiesConfig;
-        [SerializeField] private Transform _enemySpawnPointContainer;
-        [SerializeField] private Transform _enemyPoolContainer;
+        [SerializeField] private LevelSceneContext _levelSceneContext;
         
         
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterInstance(_levelSceneContext);
+            
             builder.RegisterComponent(_enemiesConfig);
             
-            builder.Register<EnemyFactory>(Lifetime.Singleton).WithParameter(_enemyPoolContainer);
+            builder.Register<EnemyFactory>(Lifetime.Singleton);
             
-            builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
+            builder.RegisterEntryPoint<EnemyController>();
         }
     }
 }
