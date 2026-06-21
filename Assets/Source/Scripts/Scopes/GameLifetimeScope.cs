@@ -6,7 +6,6 @@ using CarRace.Inventory;
 using CarRace.Services;
 using CarRace.UI;
 using CarRace.Weapon;
-using Unity.Cinemachine;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

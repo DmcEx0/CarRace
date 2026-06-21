@@ -818,7 +818,7 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}
   _gameConfig: {fileID: 11400000, guid: 655dda959d37c094e9617267a845386f, type: 2}
-  _sceneContext: {fileID: 1386880645}
+  _bootstrapSceneContext: {fileID: 1386880645}
   _uiElementsProvider: {fileID: 676650581446005941}
   _equipmentCellView: {fileID: 586438709654085208, guid: ae14adb7d617b6848aded6054b17b114, type: 3}
 --- !u!114 &1886594999717826682
