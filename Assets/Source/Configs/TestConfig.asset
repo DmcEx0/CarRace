@@ -12,6 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16af9866c770478499b7b9ff0e5f51e0, type: 3}
   m_Name: TestConfig
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.Configs.TestConfig
+  <CarReference>k__BackingField:
+    m_AssetGUID: 5c8111a86f2828240b347fc8044e0750
+    m_SubObjectName: 
+    m_SubObjectType: 
+    m_SubObjectGUID: 
+    m_EditorAssetChanged: 0
   _initialWeapons:
   - <Type>k__BackingField: 1
     <Level>k__BackingField: 0

@@ -209,6 +209,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1386880644
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1386880646}
+  - component: {fileID: 1386880645}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1386880645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386880644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86ea260b15ce9b2408ba7a9ede0cb3b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.Contexts.SceneContext
+  <Camera>k__BackingField: {fileID: 8751799045054382916}
+  <ProjectilePoolContainer>k__BackingField: {fileID: 2253559959726574467}
+--- !u!4 &1386880646
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1386880644}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1712370612
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,13 +813,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.GameLifetimeScope
   parentReference:
-    TypeName: 
+    TypeName: CarRace.Scopes.TestLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}
   _gameConfig: {fileID: 11400000, guid: 655dda959d37c094e9617267a845386f, type: 2}
-  _cinemachine: {fileID: 8751799045054382916}
-  _projectilePoolContainer: {fileID: 2253559959726574467}
+  _sceneContext: {fileID: 1386880645}
   _uiElementsProvider: {fileID: 676650581446005941}
   _equipmentCellView: {fileID: 586438709654085208, guid: ae14adb7d617b6848aded6054b17b114, type: 3}
 --- !u!114 &1886594999717826682
@@ -1714,6 +1759,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2066232795538801038}
   - component: {fileID: 1869498309169491434}
+  - component: {fileID: 8248905078294484264}
   m_Layer: 0
   m_Name: Scopes
   m_TagString: Untagged
@@ -1721,6 +1767,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &8248905078294484264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8248905078294484263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335866ec91d64719a31c259a1bf4e6d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarRace.Scopes.TestLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  _testConfig: {fileID: 11400000, guid: 704b70c85193e574eb8b0fb095693665, type: 2}
 --- !u!224 &8279221092316294109
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2011,6 +2074,7 @@ SceneRoots:
   - {fileID: 3707131198628654394}
   - {fileID: 58052074}
   - {fileID: 2066232795538801038}
+  - {fileID: 1386880646}
   - {fileID: 1712370614}
   - {fileID: 4351344565731028976}
   - {fileID: 856674848144215326}

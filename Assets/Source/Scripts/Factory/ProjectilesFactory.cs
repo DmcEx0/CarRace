@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using CarRace.Contexts;
 using CarRace.Helpers;
@@ -7,7 +6,6 @@ using CarRace.Views;
 using CarRace.Weapon;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace CarRace.Factory
 {
@@ -19,9 +17,9 @@ namespace CarRace.Factory
 
         private SpawnResult<ProjectileView> _spawnResult;
 
-        public ProjectilesFactory(Transform container)
+        public ProjectilesFactory(SceneContext sceneContext)
         {
-            _pool = new ObjectPool<BaseProjectileBehaviour>(container);
+            _pool = new ObjectPool<BaseProjectileBehaviour>(sceneContext.ProjectilePoolContainer);
         }
 
         public async UniTask PrepareAsync(WeaponContext weaponContext, int count, CancellationToken token)

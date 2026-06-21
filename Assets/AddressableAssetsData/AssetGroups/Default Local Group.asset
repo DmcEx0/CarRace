@@ -30,6 +30,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c8111a86f2828240b347fc8044e0750
+    m_Address: Assets/Source/Prefabs/Arcade_SM_Veh_Car_Medium_01.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 5f73668964f88164aae003225d1f933f
     m_Address: Assets/Source/Prefabs/Weapon/RocketLauncher_lvl1.prefab
     m_ReadOnly: 0

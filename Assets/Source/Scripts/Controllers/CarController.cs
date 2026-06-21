@@ -1,34 +1,44 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using CarRace.Configs;
 using CarRace.Contexts;
 using CarRace.Factory;
 using CarRace.Inventory;
 using CarRace.Views;
 using CarRace.Weapon;
 using Cysharp.Threading.Tasks;
+using Unity.Cinemachine;
 using UnityEngine;
 using VContainer.Unity;
 
 namespace CarRace.Controllers
 {
-    public class CarController : IStartable, ITickable, IDisposable
+    public class CarController : IAsyncStartable, ITickable, IDisposable
     {
         private readonly WeaponInventorySystem _weaponInventorySystem;
-        private readonly WeaponFactory _weaponFactory;
         private readonly WeaponsProvider _weaponsProvider;
-        private readonly CarView _view;
 
+        private readonly WeaponFactory _weaponFactory;
+        private readonly CarFactory _carFactory;
+        
+        private readonly TestConfig _testConfig;
+        private readonly SceneContext _sceneContext;
+        
         private readonly CancellationTokenSource _cts;
 
-        public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarView carView,
-            WeaponsProvider weaponsProvider)
+        public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarFactory carFactory,
+            WeaponsProvider weaponsProvider, TestConfig testConfig, SceneContext sceneContext)
         {
             _weaponInventorySystem = weaponInventorySystem;
-            _weaponFactory = weaponFactory;
             _weaponsProvider = weaponsProvider;
-            _view = carView;
 
+            _weaponFactory = weaponFactory;
+            _carFactory = carFactory;
+            
+            _testConfig = testConfig;
+            _sceneContext = sceneContext;
+            
             _cts = new CancellationTokenSource();
         }
 
@@ -38,10 +48,11 @@ namespace CarRace.Controllers
             _cts?.Dispose();
         }
 
-        public void Start()
+        public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
         {
-            _weaponsProvider.InitWeaponsSlots(_view.WeaponsSlotsTransform);
+            await CreateCarAsync();
         }
+
 
         public void Tick() //TODO: Для теста, удалить
         {
@@ -57,7 +68,8 @@ namespace CarRace.Controllers
             }
         }
 
-        private async UniTask CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) //TODO: Для теста, удалить
+        private async UniTask
+            CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) //TODO: Для теста, удалить
         {
             var slot = _weaponsProvider.WeaponsSlots[slotIndex];
 
@@ -71,6 +83,18 @@ namespace CarRace.Controllers
             var weaponContext = await _weaponFactory.GetAsync(inventoryCell, parent, _cts.Token);
 
             return weaponContext;
+        }
+        
+        private async UniTask CreateCarAsync()
+        {
+            var view = await _carFactory.GetAsync(_testConfig.CarReference, _cts.Token);
+
+            CameraTarget target = new CameraTarget();
+            target.TrackingTarget = view.transform;
+            
+            _sceneContext.Camera.Target = target;
+            
+            _weaponsProvider.InitWeaponsSlots(view.WeaponsSlotsTransform);
         }
     }
 }

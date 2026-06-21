@@ -1,4 +1,5 @@
 using CarRace.Configs;
+using CarRace.Contexts;
 using CarRace.Controllers;
 using CarRace.Factory;
 using CarRace.Inventory;
@@ -21,8 +22,7 @@ namespace CarRace.Scopes
         [Space]
         // [SerializeField] private Transform _enemySpawnPointContainer;
         // [SerializeField] private Transform _enemyPoolContainer;
-        [SerializeField] private CinemachineCamera _cinemachine;
-        [SerializeField] private Transform _projectilePoolContainer;
+        [SerializeField] private SceneContext _sceneContext;
 
         [Space]
         [SerializeField] private UIElementsProvider _uiElementsProvider;
@@ -30,7 +30,7 @@ namespace CarRace.Scopes
         
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_cinemachine);
+            builder.RegisterInstance(_sceneContext);
             builder.RegisterInstance(_uiElementsProvider);
 
             // builder.RegisterComponent(_enemiesConfig);
@@ -40,7 +40,8 @@ namespace CarRace.Scopes
             builder.RegisterComponent(_equipmentCellView);
 
             builder.Register<WeaponFactory>(Lifetime.Singleton);
-            builder.Register<ProjectilesFactory>(Lifetime.Singleton).WithParameter(_projectilePoolContainer);
+            builder.Register<CarFactory>(Lifetime.Singleton);
+            builder.Register<ProjectilesFactory>(Lifetime.Singleton);
             // builder.Register<EnemyFactory>(Lifetime.Singleton).WithParameter(_enemyPoolContainer);
             
             builder.Register<WeaponsProvider>(Lifetime.Singleton);

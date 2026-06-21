@@ -9,21 +9,21 @@ namespace CarRace.Scopes
 {
     public class TestLifetimeScope : LifetimeScope
     {
-        [SerializeField] private Car _testPlayer;
-        [SerializeField] private CarView _carView;
+        // [SerializeField] private Car _testPlayer;
+        // [SerializeField] private CarView _carView;
         [SerializeField] private TestConfig _testConfig;
 
         protected override void Configure(IContainerBuilder builder)
         {
-            builder.RegisterInstance(_testPlayer);
-            builder.RegisterInstance(_carView);
+            // builder.RegisterInstance(_testPlayer);
+            // builder.RegisterInstance(_carView);
             
             builder.RegisterComponent(_testConfig);
             
-            builder.RegisterBuildCallback(container =>
-            {
-                container.Inject(_testPlayer);
-            });
+            // builder.RegisterBuildCallback(container =>
+            // {
+            //     container.Inject(_testPlayer);
+            // });
         }
     }
 }
