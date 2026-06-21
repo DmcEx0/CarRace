@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace CarRace.PlaceHolders
+namespace CarRace.Placeholders
 {
     public class CanvasView : MonoBehaviour
     {

@@ -17,9 +17,9 @@ namespace CarRace.Factory
 
         private SpawnResult<ProjectileView> _spawnResult;
 
-        public ProjectilesFactory(SceneContext sceneContext)
+        public ProjectilesFactory(BootstrapSceneContext bootstrapSceneContext)
         {
-            _pool = new ObjectPool<BaseProjectileBehaviour>(sceneContext.ProjectilePoolContainer);
+            _pool = new ObjectPool<BaseProjectileBehaviour>(bootstrapSceneContext.ProjectilePoolContainer);
         }
 
         public async UniTask PrepareAsync(WeaponContext weaponContext, int count, CancellationToken token)

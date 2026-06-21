@@ -3,7 +3,7 @@ using CarRace.Configs;
 using CarRace.Views;
 using UnityEngine;
 
-namespace CarRace.PlaceHolders
+namespace CarRace.Placeholders
 {
     public class GarageCar : MonoBehaviour
     {

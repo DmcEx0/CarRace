@@ -19,7 +19,7 @@ namespace CarRace.Services
         
         public void Initialize()
         {
-            _sceneLoadingService.LoadSceneAsync(Constants.Scenes.BootstrapIndex, Constants.Scenes.HubIndex, _cts.Token).Forget(); 
+            _sceneLoadingService.LoadSceneAsync(SceneId.Bootstrap, SceneId.Hub, _cts.Token).Forget(); 
         }
     }
 }

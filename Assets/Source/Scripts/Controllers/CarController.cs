@@ -23,12 +23,12 @@ namespace CarRace.Controllers
         private readonly CarFactory _carFactory;
         
         private readonly TestConfig _testConfig;
-        private readonly SceneContext _sceneContext;
+        private readonly BootstrapSceneContext _bootstrapSceneContext;
         
         private readonly CancellationTokenSource _cts;
 
         public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarFactory carFactory,
-            WeaponsProvider weaponsProvider, TestConfig testConfig, SceneContext sceneContext)
+            WeaponsProvider weaponsProvider, TestConfig testConfig, BootstrapSceneContext bootstrapSceneContext)
         {
             _weaponInventorySystem = weaponInventorySystem;
             _weaponsProvider = weaponsProvider;
@@ -37,7 +37,7 @@ namespace CarRace.Controllers
             _carFactory = carFactory;
             
             _testConfig = testConfig;
-            _sceneContext = sceneContext;
+            _bootstrapSceneContext = bootstrapSceneContext;
             
             _cts = new CancellationTokenSource();
         }
@@ -92,7 +92,7 @@ namespace CarRace.Controllers
             CameraTarget target = new CameraTarget();
             target.TrackingTarget = view.transform;
             
-            _sceneContext.Camera.Target = target;
+            _bootstrapSceneContext.Camera.Target = target;
             
             _weaponsProvider.InitWeaponsSlots(view.WeaponsSlotsTransform);
         }

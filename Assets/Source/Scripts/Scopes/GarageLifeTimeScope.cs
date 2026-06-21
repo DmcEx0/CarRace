@@ -1,5 +1,5 @@
 using CarRace.Configs;
-using CarRace.PlaceHolders;
+using CarRace.Placeholders;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

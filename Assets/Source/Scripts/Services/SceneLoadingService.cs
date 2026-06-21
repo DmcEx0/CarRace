@@ -1,28 +1,30 @@
 using System.Threading;
 using CarRace.Utils;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace CarRace.Services
 {
     public class SceneLoadingService
     {
-        public async UniTask LoadSceneAsync(int currentSceneIndex, int nextSceneIndex, CancellationToken token,
+        public async UniTask LoadSceneAsync(SceneId currentScene, SceneId nextScene, CancellationToken token,
             LoadSceneMode mode = LoadSceneMode.Additive)
         {
-            if (currentSceneIndex == nextSceneIndex)
+            if (currentScene == nextScene)
             {
                 GameDebug.LogWarning("SceneLoading", "Current scene index and next scene index is equals");
                 return;
             }
+            
+            var currentSceneName = Scenes.GetName(currentScene);
+            var nextSceneName = Scenes.GetName(nextScene);
 
-            if (currentSceneIndex != Constants.Scenes.BootstrapIndex)
+            if (currentScene != SceneId.Bootstrap)
             {
-                await SceneManager.UnloadSceneAsync(currentSceneIndex).WithCancellation(token);
+                await SceneManager.UnloadSceneAsync(currentSceneName).WithCancellation(token);
             }
 
-            await SceneManager.LoadSceneAsync(nextSceneIndex, mode).WithCancellation(token);;
+            await SceneManager.LoadSceneAsync(nextSceneName, mode).WithCancellation(token);;
         }
     }
 }

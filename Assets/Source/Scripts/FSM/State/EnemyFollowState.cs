@@ -1,6 +1,6 @@
 using CarRace.Contexts;
 using CarRace.Helpers;
-using CarRace.PlaceHolders;
+using CarRace.Placeholders;
 using UnityEngine;
 
 namespace CarRace.FSM

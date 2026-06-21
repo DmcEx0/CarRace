@@ -10,7 +10,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using VContainer;
 
-namespace CarRace.PlaceHolders
+namespace CarRace.Placeholders
 {
     public class Car : MonoBehaviour
     {

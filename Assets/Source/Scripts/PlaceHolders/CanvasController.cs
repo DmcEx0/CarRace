@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using VContainer.Unity;
 
-namespace CarRace.PlaceHolders
+namespace CarRace.Placeholders
 {
     public class CanvasController : IInitializable
     {
