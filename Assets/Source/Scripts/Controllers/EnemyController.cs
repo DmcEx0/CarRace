@@ -82,7 +82,7 @@ namespace CarRace.Controllers
                 {
                     { typeof(EnemyIdleState), new EnemyIdleState(stateMachine, context) },
                     { typeof(EnemyFollowState), new EnemyFollowState(stateMachine, context) },
-                    { typeof(AttackState), new AttackState(stateMachine, context) },
+                    { typeof(EnemyAttackState), new EnemyAttackState(stateMachine, context) },
                     { typeof(DieState), new DieState(stateMachine, context) }
                 };
 

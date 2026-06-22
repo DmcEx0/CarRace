@@ -11,20 +11,23 @@ namespace CarRace.Factory
 {
     public class EnemyFactory : GameObjectFactory, IDisposable
     {
-        private readonly EnemiesConfig _config;
+        private readonly EnemiesConfig _enemyConfig;
+        private readonly GameConfig _gameConfig;
         private readonly ObjectPool<EnemyView> _pool;
 
         private SpawnResult<EnemyView> _spawnResult;
 
-        public EnemyFactory(EnemiesConfig config, LevelSceneContext levelSceneContext)
+        public EnemyFactory(EnemiesConfig enemyConfig, GameConfig gameConfig, LevelSceneContext levelSceneContext)
         {
-            _config = config;
+            _enemyConfig = enemyConfig;
+            _gameConfig = gameConfig;
+            
             _pool = new ObjectPool<EnemyView>(levelSceneContext.EnemyPoolContainer);
         }
 
         public async UniTask PrepareAsync(int count, CancellationToken token)
         {
-            _spawnResult = await CreateWithAddressAsync<EnemyView>(_config.Reference, token);
+            _spawnResult = await CreateWithAddressAsync<EnemyView>(_enemyConfig.Reference, token);
 
             for (int i = 0; i < count; i++)
             {
@@ -38,7 +41,9 @@ namespace CarRace.Factory
             var instance = _pool.Get();
             instance.transform.position = position;
 
-            var context = new EnemyContext(instance, _config);
+            var targetSystem = new TargetSystem<CarView>(_gameConfig.PlayerLayerMask, 1);
+            
+            var context = new EnemyContext(instance, _enemyConfig, targetSystem);
 
             return context;
         }

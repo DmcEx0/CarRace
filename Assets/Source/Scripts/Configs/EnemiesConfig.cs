@@ -1,5 +1,4 @@
 using Animancer;
-using CarRace.Views;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
@@ -8,7 +7,6 @@ namespace CarRace.Configs
     [CreateAssetMenu(fileName = "EnemiesConfig", menuName = "Configs/Enemies Config")]
     public class EnemiesConfig : ScriptableObject
     {
-        [field: SerializeField] public EnemyView Prefab { get; private set; }
         [field: SerializeField] public AssetReference Reference { get; private set; }
         [field: SerializeField] public float Speed { get; private set; }
         [field: SerializeField] public float FollowRadius { get; private set; }
