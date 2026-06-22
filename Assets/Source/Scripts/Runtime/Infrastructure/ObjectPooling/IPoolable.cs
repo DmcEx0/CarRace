@@ -1,0 +1,11 @@
+using System;
+using UnityEngine;
+
+namespace CarRace.Infrastructure.ObjectPooling
+{
+    public interface IPoolable<T>
+    {
+        public Transform ViewTransform { get; }
+        public Action<T> Despawned { get; set; }
+    }
+}
