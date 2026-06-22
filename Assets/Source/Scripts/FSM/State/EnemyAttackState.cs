@@ -14,7 +14,7 @@ namespace CarRace.FSM
 
         public override void OnUpdate()
         {
-            var hasTarget = Context.TargetSystem.TryGetNearest(out var target, Context.View.transform.position, _radius);
+            var hasTarget = Context.TargetSystem.TryGetNearest(Context.View.transform.position, _radius, out var target);
 
             if(hasTarget)
             {

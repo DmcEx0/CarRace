@@ -80,7 +80,7 @@ namespace CarRace.Test
         private bool TryFindTarget()
         {
             var hasTarget =
-                _targetSystem.TryGetNearest(out var target, transform.position, _radius);
+                _targetSystem.TryGetNearest(transform.position, _radius, out var target);
 
             if (hasTarget == false)
             {

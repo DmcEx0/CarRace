@@ -85,7 +85,7 @@ namespace CarRace.Placeholders
             while (true)
             {
                 var hasTarget =
-                    _targetSystem.TryGetNearest(out var target, instance.transform.position, data.BaseRange);
+                    _targetSystem.TryGetNearest(instance.transform.position, data.BaseRange, out var target);
                 
                 if (hasTarget)
                 {

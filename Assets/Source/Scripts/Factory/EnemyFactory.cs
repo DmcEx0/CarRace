@@ -39,10 +39,13 @@ namespace CarRace.Factory
         public EnemyContext Get(Vector3 position)
         {
             var instance = _pool.Get();
+            
             instance.transform.position = position;
+            
+            instance.Agent.speed = _enemyConfig.Speed;
+            instance.Agent.angularSpeed = _enemyConfig.AngularSpeed;
 
             var targetSystem = new TargetSystem<CarView>(_gameConfig.PlayerLayerMask, 1);
-            
             var context = new EnemyContext(instance, _enemyConfig, targetSystem);
 
             return context;
