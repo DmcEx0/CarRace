@@ -813,7 +813,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.GameLifetimeScope
   parentReference:
-    TypeName: CarRace.Scopes.TestLifetimeScope
+    TypeName: CarRace.Composition.LifetimeScopes.TestLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   _weaponsConfig: {fileID: 11400000, guid: 0cdc60fa50d494b4fb3ddba9773ddacd, type: 2}

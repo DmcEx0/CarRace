@@ -1647,7 +1647,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.Scopes.HubLifetimeScope
   parentReference:
-    TypeName: CarRace.Scopes.GameLifetimeScope
+    TypeName: CarRace.Composition.LifetimeScopes.GameLifetimeScope
   autoRun: 1
   autoInjectGameObjects: []
   _levelGate: {fileID: 904987560}
