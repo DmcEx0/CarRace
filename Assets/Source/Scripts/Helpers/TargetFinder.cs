@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace CarRace.Helpers
 {
-    public class TargetSystem<T>
+    public class TargetFinder<T>
     {
         private readonly LayerMask _layerMask;
         private readonly Collider[] _findingTargets;
 
-        public TargetSystem(LayerMask layerMask, int maxCount)
+        public TargetFinder(LayerMask layerMask, int maxCount)
         {
             _layerMask = layerMask;
             _findingTargets = new Collider[maxCount];

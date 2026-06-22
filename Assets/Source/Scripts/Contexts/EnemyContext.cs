@@ -15,17 +15,17 @@ namespace CarRace.Contexts
         public float FollowRadius => _config.FollowRadius;
         public float AttackRadius => _config.AttackRadius;
         
-        public TargetSystem<CarView> TargetSystem { get; private set; }
+        public TargetFinder<CarView> TargetFinder { get; private set; }
         
         public ClipTransition IdleAnimation => _config.IdleAnimation;
         public ClipTransition FollowAnimation => _config.FollowAnimation;
         
-        public EnemyContext(EnemyView view, EnemiesConfig config, TargetSystem<CarView> targetSystem)
+        public EnemyContext(EnemyView view, EnemiesConfig config, TargetFinder<CarView> targetFinder)
         {
             View = view;
             _config = config;
             
-            TargetSystem = targetSystem;
+            TargetFinder = targetFinder;
         }
     }
 }

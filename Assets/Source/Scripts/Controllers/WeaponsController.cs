@@ -21,7 +21,7 @@ namespace CarRace.Controllers
         private readonly WeaponsProvider _weaponsProvider;
         private readonly CarView _view;
 
-        private TargetSystem<EnemyView> _targetSystem;
+        private TargetFinder<EnemyView> _targetFinder;
         private List<BaseProjectileBehaviour> _projectiles;
 
         private CancellationTokenSource _cts;
@@ -38,8 +38,8 @@ namespace CarRace.Controllers
 
         public void Initialize()
         {
-            _targetSystem =
-                new TargetSystem<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
+            _targetFinder =
+                new TargetFinder<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
 
             _projectiles = new List<BaseProjectileBehaviour>();
             
@@ -79,7 +79,7 @@ namespace CarRace.Controllers
             while (_canFire)
             {
                 var hasTarget =
-                    _targetSystem.TryGetNearest(_view.transform.position, weaponContext.BaseRange, out var target);
+                    _targetFinder.TryGetNearest(_view.transform.position, weaponContext.BaseRange, out var target);
 
                 if (hasTarget)
                 {

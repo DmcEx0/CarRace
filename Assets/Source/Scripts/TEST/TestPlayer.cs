@@ -20,7 +20,7 @@ namespace CarRace.Test
         private WeaponsConfig _weaponsConfig;
         private ProjectilesFactory _projectilesFactory;
 
-        private TargetSystem<EnemyView> _targetSystem;
+        private TargetFinder<EnemyView> _targetFinder;
 
         private EnemyView _target;
 
@@ -41,7 +41,7 @@ namespace CarRace.Test
         private void Start()
         {
             _projectiles = new List<BaseProjectileBehaviour>();
-            _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
+            _targetFinder = new TargetFinder<EnemyView>(_enemyLayer, 10);
             _currentWeaponIndex = _weaponIndex;
         }
 
@@ -80,7 +80,7 @@ namespace CarRace.Test
         private bool TryFindTarget()
         {
             var hasTarget =
-                _targetSystem.TryGetNearest(transform.position, _radius, out var target);
+                _targetFinder.TryGetNearest(transform.position, _radius, out var target);
 
             if (hasTarget == false)
             {

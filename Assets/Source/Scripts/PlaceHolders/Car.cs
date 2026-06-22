@@ -22,7 +22,7 @@ namespace CarRace.Placeholders
         private ProjectilesFactory _projectilesFactory;
         
         private List<BaseProjectileBehaviour> _projectiles;
-        private TargetSystem<EnemyView> _targetSystem;
+        private TargetFinder<EnemyView> _targetFinder;
 
         [Inject]
         public void Construct(ProjectilesFactory projectilesFactory, WeaponsConfig weaponsConfig)
@@ -43,7 +43,7 @@ namespace CarRace.Placeholders
             }
             
             _projectiles = new List<BaseProjectileBehaviour>();
-            _targetSystem = new TargetSystem<EnemyView>(_enemyLayer, 10);
+            _targetFinder = new TargetFinder<EnemyView>(_enemyLayer, 10);
             
             foreach (var weapon in _instancedWeapons)
             {
@@ -85,7 +85,7 @@ namespace CarRace.Placeholders
             while (true)
             {
                 var hasTarget =
-                    _targetSystem.TryGetNearest(instance.transform.position, data.BaseRange, out var target);
+                    _targetFinder.TryGetNearest(instance.transform.position, data.BaseRange, out var target);
                 
                 if (hasTarget)
                 {
