@@ -79,7 +79,7 @@ namespace CarRace.Controllers
             while (_canFire)
             {
                 var hasTarget =
-                    _targetSystem.TryGetNearest(out var target, _view.transform.position, weaponContext.BaseRange);
+                    _targetSystem.TryGetNearest(_view.transform.position, weaponContext.BaseRange, out var target);
 
                 if (hasTarget)
                 {
