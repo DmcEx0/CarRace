@@ -1,4 +1,3 @@
-using CarRace.Gameplay.Enemies;
 using CarRace.Gameplay.FSM;
 
 namespace CarRace.Gameplay.Enemies.States

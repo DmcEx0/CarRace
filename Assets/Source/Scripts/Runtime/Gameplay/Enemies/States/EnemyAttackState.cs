@@ -1,6 +1,4 @@
-using CarRace.Gameplay.Enemies;
 using CarRace.Gameplay.FSM;
-using CarRace.Gameplay.Targeting;
 
 namespace CarRace.Gameplay.Enemies.States
 {
@@ -16,7 +14,7 @@ namespace CarRace.Gameplay.Enemies.States
 
         public override void OnUpdate()
         {
-            var hasTarget = Context.TargetFinder.TryGetNearest(Context.View.transform.position, _radius, out var target);
+            var hasTarget = Context.SphereTargetFinder.TryGetNearest(Context.View.transform.position, _radius, out var target);
 
             if(hasTarget)
             {

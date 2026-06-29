@@ -48,7 +48,7 @@ namespace CarRace.Infrastructure.Factories
             instance.Agent.speed = _enemyConfig.Speed;
             instance.Agent.angularSpeed = _enemyConfig.AngularSpeed;
 
-            var targetSystem = new TargetFinder<CarView>(_gameConfig.PlayerLayerMask, 1);
+            var targetSystem = new SphereTargetFinder<CarView>(_gameConfig.PlayerLayerMask, 1);
             var context = new EnemyContext(instance, _enemyConfig, targetSystem);
 
             return context;

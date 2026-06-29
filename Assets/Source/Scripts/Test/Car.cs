@@ -24,7 +24,7 @@ namespace CarRace.Dev.Prototypes
         private ProjectilesFactory _projectilesFactory;
         
         private List<BaseProjectileBehaviour> _projectiles;
-        private TargetFinder<EnemyView> _targetFinder;
+        private SphereTargetFinder<EnemyView> _sphereTargetFinder;
 
         [Inject]
         public void Construct(ProjectilesFactory projectilesFactory, WeaponsConfig weaponsConfig)
@@ -45,7 +45,7 @@ namespace CarRace.Dev.Prototypes
             }
             
             _projectiles = new List<BaseProjectileBehaviour>();
-            _targetFinder = new TargetFinder<EnemyView>(_enemyLayer, 10);
+            _sphereTargetFinder = new SphereTargetFinder<EnemyView>(_enemyLayer, 10);
             
             foreach (var weapon in _instancedWeapons)
             {
@@ -87,7 +87,7 @@ namespace CarRace.Dev.Prototypes
             while (true)
             {
                 var hasTarget =
-                    _targetFinder.TryGetNearest(instance.transform.position, data.BaseRange, out var target);
+                    _sphereTargetFinder.TryGetNearest(instance.transform.position, data.BaseRange, out var target);
                 
                 if (hasTarget)
                 {

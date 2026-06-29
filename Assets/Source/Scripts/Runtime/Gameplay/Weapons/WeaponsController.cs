@@ -23,7 +23,7 @@ namespace CarRace.Gameplay.Weapons
         private readonly WeaponsProvider _weaponsProvider;
         private readonly CarView _view;
 
-        private TargetFinder<EnemyView> _targetFinder;
+        private SphereTargetFinder<EnemyView> _sphereTargetFinder;
         private List<BaseProjectileBehaviour> _projectiles;
 
         private CancellationTokenSource _cts;
@@ -40,8 +40,8 @@ namespace CarRace.Gameplay.Weapons
 
         public void Initialize()
         {
-            _targetFinder =
-                new TargetFinder<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
+            _sphereTargetFinder =
+                new SphereTargetFinder<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
 
             _projectiles = new List<BaseProjectileBehaviour>();
             
@@ -81,7 +81,7 @@ namespace CarRace.Gameplay.Weapons
             while (_canFire)
             {
                 var hasTarget =
-                    _targetFinder.TryGetNearest(_view.transform.position, weaponContext.BaseRange, out var target);
+                    _sphereTargetFinder.TryGetNearest(_view.transform.position, weaponContext.BaseRange, out var target);
 
                 if (hasTarget)
                 {

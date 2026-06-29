@@ -2,20 +2,20 @@ using UnityEngine;
 
 namespace CarRace.Gameplay.Targeting
 {
-    public class TargetFinder<T>
+    public class SphereTargetFinder<T> : ITargetFinder<T>
     {
         private readonly LayerMask _layerMask;
         private readonly Collider[] _findingTargets;
 
-        public TargetFinder(LayerMask layerMask, int maxCount)
+        public SphereTargetFinder(LayerMask layerMask, int maxCount)
         {
             _layerMask = layerMask;
             _findingTargets = new Collider[maxCount];
         }
 
-        public bool TryGetNearest(Vector3 position, float radius, out T target)
+        public bool TryGetNearest(Vector3 position, float minDistance, out T target) //TODO: рефактор для update
         {
-            var count = Physics.OverlapSphereNonAlloc(position, radius, _findingTargets, _layerMask);
+            var count = Physics.OverlapSphereNonAlloc(position, minDistance, _findingTargets, _layerMask);
 
             var hasTarget = false;
             var bestDistance = float.PositiveInfinity;
