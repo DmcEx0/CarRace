@@ -15,12 +15,12 @@ namespace CarRace.Gameplay.Enemies
         public float FollowRadius => _config.FollowRadius;
         public float AttackRadius => _config.AttackRadius;
         
-        public SphereTargetFinder<CarView> SphereTargetFinder { get; private set; }
+        public DistanceTargetFinder<CarView> SphereTargetFinder { get; private set; }
         
         public ClipTransition IdleAnimation => _config.IdleAnimation;
         public ClipTransition FollowAnimation => _config.FollowAnimation;
         
-        public EnemyContext(EnemyView view, EnemiesConfig config, SphereTargetFinder<CarView> sphereTargetFinder)
+        public EnemyContext(EnemyView view, EnemiesConfig config, DistanceTargetFinder<CarView> sphereTargetFinder)
         {
             View = view;
             _config = config;

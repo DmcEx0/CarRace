@@ -39,7 +39,7 @@ namespace CarRace.Infrastructure.Factories
             }
         }
 
-        public EnemyContext Get(Vector3 position)
+        public EnemyContext Get(Vector3 position, CarView target)
         {
             var instance = _pool.Get();
             
@@ -48,7 +48,7 @@ namespace CarRace.Infrastructure.Factories
             instance.Agent.speed = _enemyConfig.Speed;
             instance.Agent.angularSpeed = _enemyConfig.AngularSpeed;
 
-            var targetSystem = new SphereTargetFinder<CarView>(_gameConfig.PlayerLayerMask, 1);
+            var targetSystem = new DistanceTargetFinder<CarView>(target);
             var context = new EnemyContext(instance, _enemyConfig, targetSystem);
 
             return context;

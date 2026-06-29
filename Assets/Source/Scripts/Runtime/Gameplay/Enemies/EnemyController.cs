@@ -6,6 +6,7 @@ using UnityEngine;
 using VContainer.Unity;
 
 using CarRace.Composition.SceneContexts;
+using CarRace.Gameplay.Car;
 using CarRace.Gameplay.Enemies.States;
 using CarRace.Gameplay.FSM;
 using CarRace.Infrastructure.Factories;
@@ -17,14 +18,17 @@ namespace CarRace.Gameplay.Enemies
         private readonly EnemyFactory _enemyFactory;
         private readonly Transform _spawnPointsContainer;
         
+        private readonly PlayerCarModel _playerCarModel;
+        
         private List<StateMachine> _stateMachines;
         
         private CancellationTokenSource _cts;
 
-        public EnemyController(EnemyFactory enemyFactory, LevelSceneContext levelSceneContext)
+        public EnemyController(EnemyFactory enemyFactory, LevelSceneContext levelSceneContext, PlayerCarModel playerCarModel)
         {
             _enemyFactory = enemyFactory;
             _spawnPointsContainer = levelSceneContext.EnemySpawnPointsContainer;
+            _playerCarModel = playerCarModel;
         }
 
         public void Initialize()
@@ -43,6 +47,8 @@ namespace CarRace.Gameplay.Enemies
         public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
         {
             await _enemyFactory.PrepareAsync(25, _cts.Token);
+
+            await UniTask.WaitWhile(() => _playerCarModel.View == null, cancellationToken: cancellation);
             
             SpawnEnemies();
         }
@@ -76,7 +82,7 @@ namespace CarRace.Gameplay.Enemies
                     continue;
                 }
                 
-                var context = _enemyFactory.Get(childTransform.position);
+                var context = _enemyFactory.Get(childTransform.position, _playerCarModel.View);
 
                 var stateMachine = new StateMachine();
             

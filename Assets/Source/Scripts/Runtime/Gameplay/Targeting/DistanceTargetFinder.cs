@@ -2,26 +2,26 @@
 
 namespace CarRace.Gameplay.Targeting
 {
-    public class DistanceTargetFinder<T> : ITargetFinder<T>
+    public class DistanceTargetFinder<T> : ITargetFinder<T> where T : Component
     {
-        private readonly Transform _target;
+        private readonly T _target;
 
-        public DistanceTargetFinder(Transform target)
+        public DistanceTargetFinder(T target)
         {
             _target = target;
         }
 
         public bool TryGetNearest(Vector3 position, float minDistance, out T target)
         {
-            var distance = (_target.position - position).sqrMagnitude;
+            var distance = (_target.transform.position - position).sqrMagnitude;
 
             if (distance < minDistance)
             {
-                target = _target.GetComponent<T>();
+                target = _target;
                 return true;
             }
             
-            target = default;
+            target = _target;
             return false;
         }
     }

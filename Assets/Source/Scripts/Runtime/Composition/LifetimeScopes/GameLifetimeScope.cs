@@ -46,6 +46,8 @@ namespace CarRace.Composition.LifetimeScopes
             // builder.Register<ProjectilesFactory>(Lifetime.Singleton);
             // builder.Register<EnemyFactory>(Lifetime.Singleton).WithParameter(_enemyPoolContainer);
             
+            builder.Register<PlayerCarModel>(Lifetime.Singleton);
+            
             builder.Register<WeaponsProvider>(Lifetime.Singleton);
             
             builder.Register<WeaponInventorySystem>(Lifetime.Singleton);
@@ -55,7 +57,7 @@ namespace CarRace.Composition.LifetimeScopes
             // builder.RegisterEntryPoint<EnemyController>().WithParameter(_enemySpawnPointContainer);
             builder.RegisterEntryPoint<GameInitializeService>();
             
-            builder.RegisterEntryPoint<CarController>();
+            builder.RegisterEntryPoint<PlayerCarController>();
             builder.RegisterEntryPoint<WeaponsController>();
             builder.RegisterEntryPoint<UIController>();
         }

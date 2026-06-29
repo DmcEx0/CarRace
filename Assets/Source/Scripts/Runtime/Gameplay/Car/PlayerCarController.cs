@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Cinemachine;
 using UnityEngine;
 using VContainer.Unity;
-
 using CarRace.Composition.SceneContexts;
 using CarRace.Gameplay.Configs.Test;
 using CarRace.Gameplay.Inventory;
@@ -14,21 +12,24 @@ using CarRace.Infrastructure.Factories;
 
 namespace CarRace.Gameplay.Car
 {
-    public class CarController : IAsyncStartable, ITickable, IDisposable
+    public class PlayerCarController : IAsyncStartable, ITickable, IDisposable
     {
         private readonly WeaponInventorySystem _weaponInventorySystem;
         private readonly WeaponsProvider _weaponsProvider;
 
         private readonly WeaponFactory _weaponFactory;
         private readonly CarFactory _carFactory;
-        
+
+        private readonly PlayerCarModel _model;
+
         private readonly TestConfig _testConfig;
         private readonly BootstrapSceneContext _bootstrapSceneContext;
-        
+
         private readonly CancellationTokenSource _cts;
 
-        public CarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory, CarFactory carFactory,
-            WeaponsProvider weaponsProvider, TestConfig testConfig, BootstrapSceneContext bootstrapSceneContext)
+        public PlayerCarController(WeaponInventorySystem weaponInventorySystem, WeaponFactory weaponFactory,
+            CarFactory carFactory, PlayerCarModel model, WeaponsProvider weaponsProvider, TestConfig testConfig,
+            BootstrapSceneContext bootstrapSceneContext)
         {
             _weaponInventorySystem = weaponInventorySystem;
             _weaponsProvider = weaponsProvider;
@@ -36,9 +37,11 @@ namespace CarRace.Gameplay.Car
             _weaponFactory = weaponFactory;
             _carFactory = carFactory;
             
+            _model = model;
+
             _testConfig = testConfig;
             _bootstrapSceneContext = bootstrapSceneContext;
-            
+
             _cts = new CancellationTokenSource();
         }
 
@@ -83,16 +86,20 @@ namespace CarRace.Gameplay.Car
 
             return weaponContext;
         }
-        
+
         private async UniTask CreateCarAsync()
         {
             var view = await _carFactory.GetAsync(_testConfig.CarReference, _cts.Token);
 
-            CameraTarget target = new CameraTarget();
-            target.TrackingTarget = view.transform;
+            _model.SetView(view);
             
+            CameraTarget target = new CameraTarget
+            {
+                TrackingTarget = view.transform
+            };
+
             _bootstrapSceneContext.Camera.Target = target;
-            
+
             _weaponsProvider.InitWeaponsSlots(view.WeaponsSlotsTransform);
         }
     }
