@@ -11,17 +11,16 @@ using CarRace.Gameplay.Configs;
 using CarRace.Gameplay.Enemies;
 using CarRace.Gameplay.Targeting;
 using CarRace.Gameplay.Weapons.Projectiles;
-using CarRace.Infrastructure.Factories;
 
 namespace CarRace.Gameplay.Weapons
 {
-    public class WeaponsController : IInitializable, IStartable, IFixedTickable, IDisposable
+    public class WeaponsController : IInitializable, IAsyncStartable, IFixedTickable, IDisposable
     {
         private const int ProjectilesCount = 15; //ForTest
 
         private readonly GameConfig _gameConfig;
         private readonly WeaponsProvider _weaponsProvider;
-        private readonly CarView _view;
+        private readonly PlayerCarModel _carModel;
 
         private SphereTargetFinder<EnemyView> _sphereTargetFinder;
         private List<BaseProjectileBehaviour> _projectiles;
@@ -31,23 +30,17 @@ namespace CarRace.Gameplay.Weapons
 
         private bool _canFire;
 
-        public WeaponsController(WeaponsProvider weaponsProvider, GameConfig gameConfig/*, CarView view*/)
+        public WeaponsController(WeaponsProvider weaponsProvider, GameConfig gameConfig, PlayerCarModel carModel)
         {
             _weaponsProvider = weaponsProvider;
             _gameConfig = gameConfig;
-            // _view = view;
+            _carModel = carModel;
         }
 
         public void Initialize()
         {
-            _sphereTargetFinder =
-                new SphereTargetFinder<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
-
             _projectiles = new List<BaseProjectileBehaviour>();
-            
             _cts = new CancellationTokenSource();
-            
-            _canFire = true;
         }
 
         public void Dispose()
@@ -59,17 +52,29 @@ namespace CarRace.Gameplay.Weapons
 
             _canFire = false;
         }
-
-        public void Start()
+        
+        public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
         {
+            await UniTask.WaitUntil(() => _weaponsProvider.IsInitialized, cancellationToken: cancellation);
+            
             foreach (var weaponSlot in _weaponsProvider.WeaponsSlots)
             {
                 weaponSlot.WeaponContext.Subscribe(OnWeaponContextChanged).AddTo(_cts.Token);
             }
+            
+            _sphereTargetFinder =
+                new SphereTargetFinder<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
+            
+            _canFire = true;
         }
 
         public void FixedTick()
         {
+            if(_canFire == false)
+            {
+                return;
+            }
+            
             for (int i = _projectiles.Count - 1; i >= 0; i--)
             {
                 _projectiles[i].OnMove(Time.fixedDeltaTime);
@@ -81,7 +86,7 @@ namespace CarRace.Gameplay.Weapons
             while (_canFire)
             {
                 var hasTarget =
-                    _sphereTargetFinder.TryGetNearest(_view.transform.position, weaponContext.BaseRange, out var target);
+                    _sphereTargetFinder.TryGetNearest(_carModel.Context.View.transform.position, weaponContext.BaseRange, out var target);
 
                 if (hasTarget)
                 {

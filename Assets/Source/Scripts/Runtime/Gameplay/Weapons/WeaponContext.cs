@@ -1,5 +1,5 @@
+using CarRace.Composition.SceneContexts;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 using CarRace.Gameplay.Configs;
 using CarRace.Gameplay.Weapons.Projectiles.Settings;
@@ -14,7 +14,6 @@ namespace CarRace.Gameplay.Weapons
         public WeaponView View { get; private set; }
         
         public ProjectilesFactory ProjectilesFactory {get; private set;}
-        public SpawnResult<WeaponView> SpawnResult {get; private set;}
 
         public WeaponType Type => _data.Type;
         public int Level => _data.Level;
@@ -24,13 +23,12 @@ namespace CarRace.Gameplay.Weapons
         public AssetReference ProjectileReference => _data.ProjectileReference;
         public ProjectileSettings ProjectileSettings => _data.ProjectileSettings;
 
-        public WeaponContext(WeaponData data, WeaponView view, SpawnResult<WeaponView> spawnResult)
+        public WeaponContext(WeaponData data, WeaponView view, BootstrapSceneContext sceneContext)
         {
             _data = data;
             View = view;
-            SpawnResult = spawnResult;
 
-            ProjectilesFactory = new ProjectilesFactory(null);
+            ProjectilesFactory = new ProjectilesFactory(sceneContext);
         }
     }
 }

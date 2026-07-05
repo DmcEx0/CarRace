@@ -8,6 +8,8 @@ namespace CarRace.Gameplay.Weapons
         private readonly List<WeaponSlot> _weaponsSlots;
         
         public IReadOnlyList<WeaponSlot>  WeaponsSlots => _weaponsSlots;
+        
+        public bool IsInitialized {get; private set;}
 
         public WeaponsProvider()
         {
@@ -21,6 +23,8 @@ namespace CarRace.Gameplay.Weapons
                 var weaponPlace = new WeaponSlot(transformsSlots[i], i);
                 _weaponsSlots.Add(weaponPlace);
             }
+
+            IsInitialized = true;
         }
     }
 }

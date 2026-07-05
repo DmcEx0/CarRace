@@ -6,7 +6,6 @@ using UnityEngine;
 using CarRace.Composition.SceneContexts;
 using CarRace.Gameplay.Weapons;
 using CarRace.Gameplay.Weapons.Projectiles;
-using CarRace.Gameplay.Weapons.Projectiles.Settings;
 using CarRace.Infrastructure.ObjectPooling;
 
 namespace CarRace.Infrastructure.Factories
@@ -55,7 +54,6 @@ namespace CarRace.Infrastructure.Factories
         public BaseProjectileBehaviour Get(Vector3 targetPosition, Vector3 position)
         {
             var instance = _pool.Get();
-
             instance.Init(targetPosition);
 
             return instance;

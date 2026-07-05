@@ -31,13 +31,12 @@ namespace CarRace.Gameplay.Weapons
 
         public void Remove()
         {
-            if (WeaponContext.Value == null)
+            if (_weaponContext.Value == null)
             {
                 return;
             }
             
             _weaponContext.Value.ProjectilesFactory.Dispose();
-            _weaponContext.Value.SpawnResult.Release();
             
             Object.Destroy(_weaponContext.Value.View);
             

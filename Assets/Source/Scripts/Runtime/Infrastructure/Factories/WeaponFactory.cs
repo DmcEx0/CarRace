@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Threading;
+using CarRace.Composition.SceneContexts;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -14,10 +15,12 @@ namespace CarRace.Infrastructure.Factories
     public class WeaponFactory : GameObjectFactory
     {
         private readonly WeaponsConfig _weaponsConfig;
+        private readonly BootstrapSceneContext _sceneContext;
 
-        public WeaponFactory(WeaponsConfig weaponsConfig)
+        public WeaponFactory(WeaponsConfig weaponsConfig, BootstrapSceneContext sceneContext)
         {
             _weaponsConfig = weaponsConfig;
+            _sceneContext = sceneContext;
         }
 
         public async UniTask<WeaponContext> GetAsync(WeaponInventoryCell inventoryCell, Transform parent,
@@ -38,7 +41,7 @@ namespace CarRace.Infrastructure.Factories
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localRotation = Quaternion.identity;
 
-            var context = new WeaponContext(data, instance, spawnResult);
+            var context = new WeaponContext(data, instance, _sceneContext);
 
             return context;
         }
