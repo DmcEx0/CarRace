@@ -48,7 +48,7 @@ namespace CarRace.Gameplay.Enemies
         {
             await _enemyFactory.PrepareAsync(25, _cts.Token);
 
-            await UniTask.WaitWhile(() => _playerCarModel.View == null, cancellationToken: cancellation);
+            await UniTask.WaitWhile(() => _playerCarModel.Context == null, cancellationToken: cancellation);
             
             SpawnEnemies();
         }
@@ -82,7 +82,7 @@ namespace CarRace.Gameplay.Enemies
                     continue;
                 }
                 
-                var context = _enemyFactory.Get(childTransform.position, _playerCarModel.View);
+                var context = _enemyFactory.Get(childTransform.position, _playerCarModel.Context.View);
 
                 var stateMachine = new StateMachine();
             

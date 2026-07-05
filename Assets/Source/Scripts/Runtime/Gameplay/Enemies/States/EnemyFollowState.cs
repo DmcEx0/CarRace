@@ -1,4 +1,3 @@
-using UnityEngine;
 using CarRace.Gameplay.FSM;
 
 namespace CarRace.Gameplay.Enemies.States
@@ -16,14 +15,13 @@ namespace CarRace.Gameplay.Enemies.States
         {
             var hasTarget = Context.SphereTargetFinder.TryGetNearest(Context.View.transform.position, Context.FollowRadius, out var target);
 
-            var transform = Context.View.transform;
+            var agent = Context.View.Agent;
 
             if (hasTarget)
             {
-                transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Context.Speed * Time.deltaTime);
-                transform.rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+                agent.SetDestination(target.transform.position);
 
-                if ((target.transform.position - transform.position).magnitude < Context.AttackRadius)
+                if ((target.transform.position - agent.transform.position).magnitude < Context.AttackRadius)
                 {
                     ChangeState(typeof(EnemyAttackState));
                 }
@@ -32,6 +30,11 @@ namespace CarRace.Gameplay.Enemies.States
             {
                 ChangeState(typeof(EnemyIdleState));
             }
+        }
+
+        public override void OnExit()
+        {
+            Context.View.Agent.SetDestination(Context.View.transform.position);
         }
     }
 }

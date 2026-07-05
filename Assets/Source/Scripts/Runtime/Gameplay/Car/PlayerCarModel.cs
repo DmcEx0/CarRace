@@ -2,11 +2,11 @@
 {
     public class PlayerCarModel
     {
-        public CarView View { get; private set; }
+        public PlayerCarContext Context { get; private set; }
         
-        public void SetView(CarView view)
+        public void SetContext(PlayerCarContext context)
         {
-            View = view;
+            Context = context;
         }
     }
 }

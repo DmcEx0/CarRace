@@ -7,12 +7,12 @@ namespace CarRace.Gameplay.Enemies.States
         public EnemyIdleState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
         {
         }
-
+        
         public override void OnEnter()
         {
             Context.View.Animancer.Play(Context.IdleAnimation);
         }
-
+        
         public override void OnUpdate()
         {
             var hasTarget = Context.SphereTargetFinder.TryGetNearest(Context.View.transform.position, Context.FollowRadius,

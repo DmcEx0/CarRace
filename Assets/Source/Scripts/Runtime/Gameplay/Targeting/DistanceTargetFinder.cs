@@ -14,14 +14,13 @@ namespace CarRace.Gameplay.Targeting
         public bool TryGetNearest(Vector3 position, float minDistance, out T target)
         {
             var distance = (_target.transform.position - position).sqrMagnitude;
+            target = _target;
 
             if (distance < minDistance)
             {
-                target = _target;
                 return true;
             }
-            
-            target = _target;
+
             return false;
         }
     }

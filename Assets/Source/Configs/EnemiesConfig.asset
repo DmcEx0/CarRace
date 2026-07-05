@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609e6c787099dfe4aaca6e3d75fc1e87, type: 3}
   m_Name: EnemiesConfig
   m_EditorClassIdentifier: Assembly-CSharp::CarRace.EnemiesConfig
-  <Prefab>k__BackingField: {fileID: 8071094588617318258, guid: 7c7bb0f846ee2df42b4ce292c9ad0045, type: 3}
   <Reference>k__BackingField:
     m_AssetGUID: 7c7bb0f846ee2df42b4ce292c9ad0045
     m_SubObjectName: 
@@ -20,6 +19,7 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_EditorAssetChanged: 0
   <Speed>k__BackingField: 1.63
+  <AngularSpeed>k__BackingField: 500
   <FollowRadius>k__BackingField: 70.5
   <AttackRadius>k__BackingField: 1
   <IdleAnimation>k__BackingField:

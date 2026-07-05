@@ -70,8 +70,7 @@ namespace CarRace.Gameplay.Car
             }
         }
 
-        private async UniTask
-            CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) //TODO: Для теста, удалить
+        private async UniTask CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) //TODO: Для теста, удалить
         {
             var slot = _weaponsProvider.WeaponsSlots[slotIndex];
 
@@ -90,8 +89,9 @@ namespace CarRace.Gameplay.Car
         private async UniTask CreateCarAsync()
         {
             var view = await _carFactory.GetAsync(_testConfig.CarReference, _cts.Token);
+            var context = new PlayerCarContext(view);
 
-            _model.SetView(view);
+            _model.SetContext(context);
             
             CameraTarget target = new CameraTarget
             {

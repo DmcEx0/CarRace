@@ -6,7 +6,9 @@ namespace CarRace.Gameplay.Enemies.States
     {
         private float _radius = 10;
 
-        public EnemyAttackState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context) { }
+        public EnemyAttackState(IStateChanger stateChanger, EnemyContext context) : base(stateChanger, context)
+        {
+        }
 
         public override void OnEnter()
         {
@@ -14,15 +16,22 @@ namespace CarRace.Gameplay.Enemies.States
 
         public override void OnUpdate()
         {
-            var hasTarget = Context.SphereTargetFinder.TryGetNearest(Context.View.transform.position, _radius, out var target);
+            var hasTarget =
+                Context.SphereTargetFinder.TryGetNearest(Context.View.transform.position, _radius, out var target);
 
-            if(hasTarget)
+            if (hasTarget == false)
             {
-                if((target.transform.position - Context.View.transform.position).magnitude < 10)
-                {
-                    ChangeState(typeof(EnemyFollowState));
-                }
+                ChangeState(typeof(EnemyFollowState));
+
+                // if ((target.transform.position - Context.View.transform.position).magnitude < _radius)
+                // {
+                //     ChangeState(typeof(EnemyFollowState));
+                // }
             }
+        }
+
+        public override void OnExit()
+        {
         }
     }
 }
