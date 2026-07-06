@@ -5,7 +5,6 @@ using Cysharp.Threading.Tasks;
 using Cysharp.Threading.Tasks.Linq;
 using UnityEngine;
 using VContainer.Unity;
-
 using CarRace.Gameplay.Car;
 using CarRace.Gameplay.Configs;
 using CarRace.Gameplay.Enemies;
@@ -25,8 +24,9 @@ namespace CarRace.Gameplay.Weapons
         private SphereTargetFinder<EnemyView> _sphereTargetFinder;
         private List<BaseProjectileBehaviour> _projectiles;
 
+        private Dictionary<WeaponSlot, CancellationTokenSource> _fireCtsBySlot;
+
         private CancellationTokenSource _cts;
-        private CancellationTokenSource _weaponFireCts;
 
         private bool _canFire;
 
@@ -40,6 +40,8 @@ namespace CarRace.Gameplay.Weapons
         public void Initialize()
         {
             _projectiles = new List<BaseProjectileBehaviour>();
+
+            _fireCtsBySlot = new Dictionary<WeaponSlot, CancellationTokenSource>();
             _cts = new CancellationTokenSource();
         }
 
@@ -48,33 +50,32 @@ namespace CarRace.Gameplay.Weapons
             _cts?.Cancel();
             _cts?.Dispose();
 
-            DisposeWeaponFireCts();
-
             _canFire = false;
         }
-        
+
         public async UniTask StartAsync(CancellationToken cancellation = new CancellationToken())
         {
             await UniTask.WaitUntil(() => _weaponsProvider.IsInitialized, cancellationToken: cancellation);
-            
+
             foreach (var weaponSlot in _weaponsProvider.WeaponsSlots)
             {
-                weaponSlot.WeaponContext.Subscribe(OnWeaponContextChanged).AddTo(_cts.Token);
+                weaponSlot.WeaponContext
+                    .SubscribeAwait(context => OnWeaponContextChanged(weaponSlot, context)).AddTo(_cts.Token);
             }
-            
+
             _sphereTargetFinder =
                 new SphereTargetFinder<EnemyView>(_gameConfig.EnemyLayerMask, _gameConfig.MaxTargetsCountForPlayer);
-            
+
             _canFire = true;
         }
 
         public void FixedTick()
         {
-            if(_canFire == false)
+            if (_canFire == false)
             {
                 return;
             }
-            
+
             for (int i = _projectiles.Count - 1; i >= 0; i--)
             {
                 _projectiles[i].OnMove(Time.fixedDeltaTime);
@@ -83,18 +84,15 @@ namespace CarRace.Gameplay.Weapons
 
         private async UniTask WeaponFireAsync(WeaponContext weaponContext, CancellationToken token)
         {
-            while (_canFire)
+            while (token.IsCancellationRequested == false)
             {
-                var hasTarget =
-                    _sphereTargetFinder.TryGetNearest(_carModel.Context.View.transform.position, weaponContext.BaseRange, out var target);
-
-                if (hasTarget)
+                if (_sphereTargetFinder.TryGetNearest(_carModel.Context.View.transform.position,
+                        weaponContext.BaseRange, out var target))
                 {
                     var projectileBehaviour = weaponContext.ProjectilesFactory.Get(target.ViewTransform.position,
                         weaponContext.View.FirePoints[0].position);
 
                     projectileBehaviour.DetectedEnemy += OnProjectileEnemyDetected;
-
                     _projectiles.Add(projectileBehaviour);
                 }
 
@@ -107,48 +105,43 @@ namespace CarRace.Gameplay.Weapons
             _projectiles.Remove(projectileBehaviour);
             projectileBehaviour.DetectedEnemy -= OnProjectileEnemyDetected;
         }
-        
-        private void RemoveProjectiles()
+
+        private void RemoveProjectiles() //TODO: чистит все прожектайлы, а не конкретного слота
         {
             foreach (var projectileBehaviour in _projectiles)
             {
                 projectileBehaviour.DetectedEnemy -= OnProjectileEnemyDetected;
             }
-            
+
             _projectiles.Clear();
         }
 
-        private void OnWeaponContextChanged(WeaponContext weaponContext)
+        private async UniTask OnWeaponContextChanged(WeaponSlot slot, WeaponContext weaponContext)
         {
+            StopFireForSlot(slot);
+
             if (weaponContext == null)
             {
                 return;
             }
-            
-            DisposeWeaponFireCts();
-            
-            _weaponFireCts = new CancellationTokenSource();
-            
-            _canFire = false;
-            
+
             RemoveProjectiles();
-            
-            ConfigureWeaponAsync(weaponContext).Forget();
-        }
 
-        private async UniTask ConfigureWeaponAsync(WeaponContext weaponContext)
-        {
+            var cts = new CancellationTokenSource();
+            _fireCtsBySlot[slot] = cts;
+
             await weaponContext.ProjectilesFactory.PrepareAsync(weaponContext, ProjectilesCount, _cts.Token);
-         
-            _canFire = true;
-            
-            WeaponFireAsync(weaponContext, _weaponFireCts.Token).Forget();
-        }
 
-        private void DisposeWeaponFireCts()
+            WeaponFireAsync(weaponContext, cts.Token).Forget();
+        }
+        
+        private void StopFireForSlot(WeaponSlot slot)
         {
-            _weaponFireCts?.Cancel();
-            _weaponFireCts?.Dispose();
+            if (_fireCtsBySlot.Remove(slot, out var oldCts))
+            {
+                oldCts.Cancel();
+                oldCts.Dispose();
+            }
         }
     }
 }
