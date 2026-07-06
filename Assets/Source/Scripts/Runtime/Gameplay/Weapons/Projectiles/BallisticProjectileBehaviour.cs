@@ -7,7 +7,7 @@ namespace CarRace.Gameplay.Weapons.Projectiles
 {
     public sealed class BallisticProjectileBehaviour : BaseProjectileBehaviour
     {
-        private BallisticProjectileSettings _ballisticSettings;
+        private readonly BallisticProjectileSettings _ballisticSettings;
 
         private Vector3 _startPosition;
 

@@ -40,6 +40,8 @@ namespace CarRace.Gameplay.Enemies
 
         public void Dispose()
         {
+            _stateMachines.Clear();
+            
             _cts?.Cancel();
             _cts?.Dispose();
         }
