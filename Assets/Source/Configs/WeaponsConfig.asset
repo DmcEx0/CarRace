@@ -29,7 +29,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     <ProjectileSettings>k__BackingField:
-      rid: 3406934092146278400
+      rid: 7613771822472626355
     <Type>k__BackingField: 1
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 1
@@ -51,7 +51,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     <ProjectileSettings>k__BackingField:
-      rid: 3406934086495502419
+      rid: 7613771822472626356
     <Type>k__BackingField: 2
     <Level>k__BackingField: 0
     <BaseDamage>k__BackingField: 10
@@ -73,7 +73,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     <ProjectileSettings>k__BackingField:
-      rid: 3406934185804038226
+      rid: 7613771822472626357
     <Type>k__BackingField: 2
     <Level>k__BackingField: 1
     <BaseDamage>k__BackingField: 10
@@ -95,7 +95,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_EditorAssetChanged: 0
     <ProjectileSettings>k__BackingField:
-      rid: 3406934185804038227
+      rid: 7613771822472626358
     <Type>k__BackingField: 1
     <Level>k__BackingField: 1
     <BaseDamage>k__BackingField: 1.32
@@ -104,26 +104,21 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 3406934086495502419
-      type: {class: BallisticProjectileSettings, ns: CarRace, asm: Assembly-CSharp}
+    - rid: 7613771822472626355
+      type: {class: ForwardProjectileSettings, ns: CarRace.Gameplay.Weapons.Projectiles.Settings, asm: Assembly-CSharp}
       data:
-        <Speed>k__BackingField: 10
-        <ArcHeight>k__BackingField: 7
+        <Speed>k__BackingField: 16.32
+    - rid: 7613771822472626356
+      type: {class: BallisticProjectileSettings, ns: CarRace.Gameplay.Weapons.Projectiles.Settings, asm: Assembly-CSharp}
+      data:
+        <Speed>k__BackingField: 3.8
+        <ArcHeight>k__BackingField: 2
         <HeightByProgress>k__BackingField:
           serializedVersion: 2
           m_Curve:
           - serializedVersion: 3
             time: 0
             value: 0
-            inSlope: 3.5720894
-            outSlope: 3.5720894
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.06349201
-          - serializedVersion: 3
-            time: 0.5815096
-            value: 1.0023537
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -131,78 +126,8 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.77794445
-            value: 0.7656499
-            inSlope: -2.5407956
-            outSlope: -2.5407956
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.88643014
-            value: 0.4477984
-            inSlope: -3.341692
-            outSlope: -3.341692
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.9457265
-            value: 0.25588354
-            inSlope: -3.7662516
-            outSlope: -3.7662516
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.9535855
-          - serializedVersion: 3
-            time: 0.9763427
-            value: 0.12164038
-            inSlope: -3.644965
-            outSlope: -3.644965
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.74047595
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 1
-            value: 0
-            inSlope: -5.1413918
-            outSlope: -5.1413918
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 1
-            outWeight: 0
-          m_PreInfinity: 2
-          m_PostInfinity: 2
-          m_RotationOrder: 4
-        <RotateAlongVelocity>k__BackingField: 1
-    - rid: 3406934092146278400
-      type: {class: ForwardProjectileSettings, ns: CarRace, asm: Assembly-CSharp}
-      data:
-        <Speed>k__BackingField: 10
-    - rid: 3406934185804038226
-      type: {class: BallisticProjectileSettings, ns: CarRace, asm: Assembly-CSharp}
-      data:
-        <Speed>k__BackingField: 10
-        <ArcHeight>k__BackingField: 7
-        <HeightByProgress>k__BackingField:
-          serializedVersion: 2
-          m_Curve:
-          - serializedVersion: 3
-            time: 0
-            value: 0
-            inSlope: 3.5720894
-            outSlope: 3.5720894
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0.06349201
-          - serializedVersion: 3
-            time: 0.5815096
-            value: 1.0023537
+            time: 0.5
+            value: 1
             inSlope: 0
             outSlope: 0
             tangentMode: 0
@@ -210,55 +135,58 @@ MonoBehaviour:
             inWeight: 0
             outWeight: 0
           - serializedVersion: 3
-            time: 0.77794445
-            value: 0.7656499
-            inSlope: -2.5407956
-            outSlope: -2.5407956
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.88643014
-            value: 0.4477984
-            inSlope: -3.341692
-            outSlope: -3.341692
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.33333334
-          - serializedVersion: 3
-            time: 0.9457265
-            value: 0.25588354
-            inSlope: -3.7662516
-            outSlope: -3.7662516
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.33333334
-            outWeight: 0.9535855
-          - serializedVersion: 3
-            time: 0.9763427
-            value: 0.12164038
-            inSlope: -3.644965
-            outSlope: -3.644965
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0.74047595
-            outWeight: 0.33333334
-          - serializedVersion: 3
             time: 1
             value: 0
-            inSlope: -5.1413918
-            outSlope: -5.1413918
+            inSlope: 0
+            outSlope: 0
             tangentMode: 0
             weightedMode: 0
-            inWeight: 1
+            inWeight: 0
             outWeight: 0
           m_PreInfinity: 2
           m_PostInfinity: 2
           m_RotationOrder: 4
         <RotateAlongVelocity>k__BackingField: 1
-    - rid: 3406934185804038227
-      type: {class: ForwardProjectileSettings, ns: CarRace, asm: Assembly-CSharp}
+    - rid: 7613771822472626357
+      type: {class: BallisticProjectileSettings, ns: CarRace.Gameplay.Weapons.Projectiles.Settings, asm: Assembly-CSharp}
       data:
-        <Speed>k__BackingField: 10
+        <Speed>k__BackingField: 3
+        <ArcHeight>k__BackingField: 2
+        <HeightByProgress>k__BackingField:
+          serializedVersion: 2
+          m_Curve:
+          - serializedVersion: 3
+            time: 0
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 0.5
+            value: 1
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          - serializedVersion: 3
+            time: 1
+            value: 0
+            inSlope: 0
+            outSlope: 0
+            tangentMode: 0
+            weightedMode: 0
+            inWeight: 0
+            outWeight: 0
+          m_PreInfinity: 2
+          m_PostInfinity: 2
+          m_RotationOrder: 4
+        <RotateAlongVelocity>k__BackingField: 1
+    - rid: 7613771822472626358
+      type: {class: ForwardProjectileSettings, ns: CarRace.Gameplay.Weapons.Projectiles.Settings, asm: Assembly-CSharp}
+      data:
+        <Speed>k__BackingField: 10.11

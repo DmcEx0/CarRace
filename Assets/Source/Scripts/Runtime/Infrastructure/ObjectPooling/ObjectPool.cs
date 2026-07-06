@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
- 
+using Object = UnityEngine.Object;
+
 namespace CarRace.Infrastructure.ObjectPooling
 {
     public class ObjectPool<T> : IDisposable where T : class, IPoolable<T>
@@ -20,6 +21,7 @@ namespace CarRace.Infrastructure.ObjectPooling
             foreach (var instance in _pool)
             {
                 instance.Despawned -= OnDespawned;
+                Object.Destroy(instance.ViewTransform.gameObject);
             }
             
             _pool.Clear();

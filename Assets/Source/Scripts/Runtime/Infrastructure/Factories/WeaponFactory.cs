@@ -4,7 +4,6 @@ using System.Threading;
 using CarRace.Composition.SceneContexts;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Object = UnityEngine.Object;
 using CarRace.Gameplay.Configs;
 using CarRace.Gameplay.Inventory;
 using CarRace.Gameplay.Weapons;
