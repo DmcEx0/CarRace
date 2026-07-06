@@ -72,6 +72,8 @@ namespace CarRace.Gameplay.Car
 
         private async UniTask CreateWeaponAsync(WeaponInventoryCell inventoryCell, int slotIndex) //TODO: Для теста, удалить
         {
+            _weaponFactory.Dispose();
+            
             var slot = _weaponsProvider.WeaponsSlots[slotIndex];
 
             var weaponContext = await GetCreatedWeaponAsync(inventoryCell, slot.ParentTransform);

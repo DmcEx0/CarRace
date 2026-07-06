@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-using CarRace.Infrastructure.Factories;
-
 namespace CarRace.Gameplay.Weapons
 {
     public class WeaponSlot
@@ -38,7 +36,7 @@ namespace CarRace.Gameplay.Weapons
             
             _weaponContext.Value.ProjectilesFactory.Dispose();
             
-            Object.Destroy(_weaponContext.Value.View);
+            Object.Destroy(_weaponContext.Value.View.gameObject);
             
             _weaponContext.Value =  null;
         }

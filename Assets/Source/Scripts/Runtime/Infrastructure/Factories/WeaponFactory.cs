@@ -5,17 +5,18 @@ using CarRace.Composition.SceneContexts;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
-
 using CarRace.Gameplay.Configs;
 using CarRace.Gameplay.Inventory;
 using CarRace.Gameplay.Weapons;
 
 namespace CarRace.Infrastructure.Factories
 {
-    public class WeaponFactory : GameObjectFactory
+    public class WeaponFactory : GameObjectFactory, IDisposable
     {
         private readonly WeaponsConfig _weaponsConfig;
         private readonly BootstrapSceneContext _sceneContext;
+
+        private SpawnResult<WeaponView> _spawnResult;
 
         public WeaponFactory(WeaponsConfig weaponsConfig, BootstrapSceneContext sceneContext)
         {
@@ -34,9 +35,9 @@ namespace CarRace.Infrastructure.Factories
                 throw new Exception($"Weapon type: {inventoryCell.Type}, lvl: {inventoryCell.Level} not found");
             }
 
-            var spawnResult = await CreateWithAddressAsync<WeaponView>(data.WeaponReference, token);
-            
-            var instance = Create(spawnResult.Prefab, parent);
+            _spawnResult = await CreateWithAddressAsync<WeaponView>(data.WeaponReference, token);
+
+            var instance = Create(_spawnResult.Prefab, parent);
 
             instance.transform.localPosition = Vector3.zero;
             instance.transform.localRotation = Quaternion.identity;
@@ -44,6 +45,14 @@ namespace CarRace.Infrastructure.Factories
             var context = new WeaponContext(data, instance, _sceneContext);
 
             return context;
+        }
+
+        public void Dispose()
+        {
+            if (_spawnResult != null)
+            {
+                _spawnResult.Release();
+            }
         }
     }
 }

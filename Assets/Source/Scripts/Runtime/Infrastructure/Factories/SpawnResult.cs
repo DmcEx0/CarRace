@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace CarRace.Infrastructure.Factories
@@ -19,7 +20,7 @@ namespace CarRace.Infrastructure.Factories
         {
             if(_handle.IsValid())
             {
-                _handle.Release();
+                Addressables.Release(_handle);
                 _handle = default;
             }
         }

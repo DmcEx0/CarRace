@@ -41,7 +41,7 @@ namespace CarRace.Infrastructure.Factories
             CancellationToken token)
             where T : Object
         {
-            var loadOp = reference.LoadAssetAsync<GameObject>();
+            var loadOp = Addressables.LoadAssetAsync<GameObject>(reference);
             var obj = await loadOp.WithCancellation(token);
 
             if (obj.TryGetComponent(out T component) == false)
