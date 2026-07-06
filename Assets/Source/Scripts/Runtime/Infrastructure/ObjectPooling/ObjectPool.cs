@@ -8,7 +8,7 @@ namespace CarRace.Infrastructure.ObjectPooling
     public class ObjectPool<T> : IDisposable where T : class, IPoolable<T>
     {
         private readonly Queue<T> _pool;
-        private readonly Queue<T> _freeInstances;
+        private readonly Queue<T> _freeInstances; //TODO: убрать, т.к. вохможно, объекты должны будут долететь до таргета, а потом исчезнуть
 
         private Transform _container;
 
