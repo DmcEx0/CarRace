@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Gameplay.Track
 {
     public class PartTrack : MonoBehaviour
     {

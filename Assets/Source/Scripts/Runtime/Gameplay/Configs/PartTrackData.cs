@@ -1,8 +1,9 @@
 using System;
 using Alchemy.Inspector;
+using CarRace.Gameplay.Track;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Gameplay.Configs
 {
     [Serializable]
     public class PartTrackData
@@ -22,17 +23,5 @@ namespace CarRace
         public PartTrackType Include => _include;
         public bool UseExclude => _useExclude;
         public PartTrackType Exclude => _exclude;
-        
-        // [field: SerializeField] public PartTrack Prefab { get; private set; }
-        //
-        // [field: SerializeField] public PartTrackType Type { get; private set; }
-        //
-        // [field: SerializeField] public bool UseInclude { get; private set; }
-        // [field: SerializeField, ShowIf("UseInclude")]
-        // public PartTrackType Include { get; private set; }
-        //
-        // [field: SerializeField] public bool UseExclude { get; private set; }
-        // [field: SerializeField, ShowIf("UseExclude")]
-        // public PartTrackType Exclude { get; private set; }
     }
 }

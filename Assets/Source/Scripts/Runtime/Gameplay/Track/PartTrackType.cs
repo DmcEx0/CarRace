@@ -1,6 +1,6 @@
 using System;
 
-namespace CarRace
+namespace CarRace.Gameplay.Track
 {
     [Flags]
     public enum PartTrackType

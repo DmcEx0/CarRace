@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace CarRace
+namespace CarRace.Gameplay.Configs
 {
     [CreateAssetMenu(fileName = "PartTracksConfig", menuName = "Tracks/Part Tracks Config")]
     public class PartTracksConfig : ScriptableObject

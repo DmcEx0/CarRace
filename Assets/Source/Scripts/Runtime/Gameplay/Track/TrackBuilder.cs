@@ -1,12 +1,12 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Alchemy.Inspector;
+using CarRace.Gameplay.Configs;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace CarRace
+namespace CarRace.Gameplay.Track
 {
     public class TrackBuilder : MonoBehaviour
     {
