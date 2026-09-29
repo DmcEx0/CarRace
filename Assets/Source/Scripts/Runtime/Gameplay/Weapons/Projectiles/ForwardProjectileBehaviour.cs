@@ -1,3 +1,4 @@
+using CarRace.Common;
 using UnityEngine;
 
 using CarRace.Gameplay.Weapons.Projectiles.Settings;
@@ -12,7 +13,7 @@ namespace CarRace.Gameplay.Weapons.Projectiles
         {
             if(View == null)
             {
-                Debug.LogWarning("ForwardProjectileBehaviour.OnMove called without View");
+                GameDebug.LogWarning("ForwardProjectileBehaviour.OnMove called without View");
                 return;
             }
             

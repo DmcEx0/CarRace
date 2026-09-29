@@ -22,11 +22,6 @@ namespace CarRace.Gameplay.Enemies.States
             if (hasTarget == false)
             {
                 ChangeState(typeof(EnemyFollowState));
-
-                // if ((target.transform.position - Context.View.transform.position).magnitude < _radius)
-                // {
-                //     ChangeState(typeof(EnemyFollowState));
-                // }
             }
         }
 

@@ -21,22 +21,6 @@ namespace CarRace.Infrastructure.Factories
             return instance;
         }
 
-        // protected async UniTask<SpawnResult<T>> CreateWithAddressAsync<T>(AssetReference reference,
-        //     CancellationToken token)
-        //     where T : Object
-        // {
-        //     var loadOp = reference.InstantiateAsync();
-        //     var obj = await loadOp.WithCancellation(token);
-        //
-        //     if (obj.TryGetComponent(out T instance) == false)
-        //     {
-        //         Release1(loadOp);
-        //         throw new Exception($"Can't get component {typeof(T)} from {obj}");
-        //     }
-        //
-        //     return new SpawnResult<T>(instance, loadOp);
-        // }
-        
         protected async UniTask<SpawnResult<T>> CreateWithAddressAsync<T>(AssetReference reference,
             CancellationToken token)
             where T : Object

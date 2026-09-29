@@ -43,7 +43,6 @@ namespace CarRace.Infrastructure.Rendering
 
         private void OnDisable()
         {
-            // Выключаем эффект, чтобы материалы не остались "залипшими" в скрытом состоянии.
             Shader.SetGlobalVector(PlayerId, new Vector4(0f, 0f, 0f, 0f));
         }
 
@@ -57,9 +56,7 @@ namespace CarRace.Infrastructure.Rendering
             }
 
             Vector3 sp = cam.WorldToScreenPoint(_player.position + _playerWorldOffset);
-
-            // sp.z — расстояние от камеры вдоль её forward (мир. ед.), оно же eye-depth.
-            // sp.z <= 0 -> игрок за камерой, эффект выключаем.
+            
             float enable = sp.z > 0f ? 1f : 0f;
             float uvx = sp.x / cam.pixelWidth;
             float uvy = sp.y / cam.pixelHeight;
